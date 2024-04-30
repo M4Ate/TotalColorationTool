@@ -55,6 +55,14 @@ public class RandomGeneratorView implements FxmlView<RandomGeneratorViewModel> {
         );
         setUpParameterHBox(barabasiConnectionsNodesHBox, GeneratorModel.BARABASI_ALBERT);
 
+        ParameterHBox maxDegHBox = new ParameterHBox(
+                "Max degree", viewModel.maxDegProperty(),
+                0, 2, 2, Double.POSITIVE_INFINITY
+        );
+
+        setUpParameterHBox(maxDegHBox, GeneratorModel.MAX_DEG);
+
+
         ParameterHBox minDistHBox = new SwitchableParameterHBox(
                 "Minimum distance", viewModel.minNodeDistProperty(), viewModel.withMinDistProperty(),
                 2, 0.05, 0.0, 1.0

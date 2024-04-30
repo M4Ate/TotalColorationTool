@@ -6,7 +6,7 @@ public enum GeneratorModel {
     GEOMETRIC_RANDOMIZED("Geometric Randomized"),
     ERDOS_RENYI("Erdős–Rényi model"),
     BARABASI_ALBERT("Barabási–Albert model"),
-    TEST("Test generator");
+    MAX_DEG("Maximum degree generator");
 
     private final String name;
 

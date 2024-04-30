@@ -12,7 +12,7 @@ import com.todense.viewmodel.random.arrangement.generators.RandomSquarePointGene
 import com.todense.viewmodel.random.generators.BarabasiAlbertGenerator;
 import com.todense.viewmodel.random.generators.ErdosRenyiGenerator;
 import com.todense.viewmodel.random.generators.GeometricGenerator;
-import com.todense.viewmodel.random.generators.TestGenerator;
+import com.todense.viewmodel.random.generators.MaxDegGenerator;
 import com.todense.viewmodel.scope.CanvasScope;
 import de.saxsys.mvvmfx.InjectScope;
 import de.saxsys.mvvmfx.ViewModel;
@@ -35,6 +35,7 @@ public class RandomGeneratorViewModel implements ViewModel {
     private final DoubleProperty edgeThresholdProperty = new SimpleDoubleProperty(0.2);
     private final IntegerProperty barabasiInitialNodesProperty = new SimpleIntegerProperty(2);
     private final IntegerProperty barabasiConnectionsProperty = new SimpleIntegerProperty(2);
+    private final IntegerProperty maxDegProperty = new SimpleIntegerProperty(2);
 
 
     private final BooleanProperty withMinDistProperty = new SimpleBooleanProperty(true);
@@ -96,8 +97,9 @@ public class RandomGeneratorViewModel implements ViewModel {
                         barabasiInitialNodesProperty.get(),
                         barabasiConnectionsProperty.get());
                 break;
-            case TEST:
-                edgeGenerator = new TestGenerator(0.1);
+            case MAX_DEG:
+                edgeGenerator = new MaxDegGenerator(
+                        maxDegProperty.get());
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + generatorProperty.get());
@@ -178,5 +180,13 @@ public class RandomGeneratorViewModel implements ViewModel {
 
     public DoubleProperty minNodeDistProperty() {
         return minNodeDistProperty;
+    }
+
+    public int getMaxDeg() {
+        return maxDegProperty.get();
+    }
+
+    public IntegerProperty maxDegProperty() {
+        return maxDegProperty;
     }
 }
