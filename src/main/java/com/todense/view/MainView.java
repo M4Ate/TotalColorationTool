@@ -86,8 +86,6 @@ public class MainView implements FxmlView<MainViewModel> {
             eventTextArea.deselect();
         });
 
-        stopButton.disableProperty().bind(viewModel.algorithmRunningProperty().not());
-
         viewModel.workingProperty().addListener((obs, oldVal, newVal) -> Platform.runLater(()->{
             if(newVal) {
                 progressIndicator.setProgress(-1);
@@ -99,11 +97,6 @@ public class MainView implements FxmlView<MainViewModel> {
             }
         }));
 
-        lockToggleButton.setOnAction(actionEvent ->
-                viewModel.manualEditLockProperty().set(!viewModel.isManualEditLockOn()));
-
-        lockToggleButton.disableProperty().bind(viewModel.workingProperty());
-
         viewModel.editLockedProperty().addListener((obs, oldVal, newVal) -> {
             if(newVal){
                 lockIcon.setIconLiteral("fa-lock");
@@ -112,10 +105,6 @@ public class MainView implements FxmlView<MainViewModel> {
                 lockIcon.setIconLiteral("fa-unlock");
             }
         });
-
-
-        autoLayoutToggleButton.selectedProperty().bindBidirectional(viewModel.continuousLayoutOnProperty());
-
 
         var nonLayoutAlgorithmRunning = Bindings.createBooleanBinding(
                 () -> viewModel.algorithmRunningProperty().get() && viewModel.layoutRunningProperty().not().get(),
@@ -128,12 +117,6 @@ public class MainView implements FxmlView<MainViewModel> {
                 viewModel.algorithmRunningProperty(),
                 viewModel.continuousLayoutOnProperty()
         );
-
-        layoutMenuHBox.disableProperty().bind(nonLayoutAlgorithmRunning);
-        autoLayoutToggleButton.disableProperty().bind(nonContinuousLayoutAlgorithmRunning);
-
-        eraseModeToggleButton.selectedProperty().bindBidirectional(viewModel.eraseModeOnProperty());
-        eraseModeToggleButton.disableProperty().bind(lockToggleButton.selectedProperty());
 
         setScrollSpeed(0.005, leftSideMenuContentScrollPane);
         setScrollSpeed(0.005, rightSideMenuContentScrollPane);
@@ -263,13 +246,6 @@ public class MainView implements FxmlView<MainViewModel> {
         layoutStepTimeHBox.getLabel().alignmentProperty().set(Pos.CENTER_RIGHT);
         layoutStepTimeHBox.setLabelWidth(130);
 
-        layoutMenuHBox.getChildren().add(layoutStepTimeHBox);
-
-
-        pauseButton.selectedProperty().bindBidirectional(viewModel.pausedProperty());
-        animationHBox.disableProperty().bind(animationToggleButton.selectedProperty().not());
-        animationToggleButton.selectedProperty().bindBidirectional(viewModel.animatedProperty());
-
         var stepTimeHBox = new ParameterHBox("Step time (ms)", viewModel.stepTimeProperty(),
                 0, 100, 0 , Double.POSITIVE_INFINITY
         );
@@ -277,9 +253,6 @@ public class MainView implements FxmlView<MainViewModel> {
         stepTimeHBox.getLabel().alignmentProperty().set(Pos.CENTER_RIGHT);
         stepTimeHBox.getTextField().setPrefHeight(22);
         stepTimeHBox.getTextField().setPrefWidth(70);
-
-        animationHBox.getChildren().add(stepTimeHBox);
-        animationHBox.disableProperty().bind(viewModel.layoutRunningProperty());
 
         initAnalysisStage();
 
