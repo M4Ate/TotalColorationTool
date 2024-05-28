@@ -141,15 +141,7 @@ public class MainView implements FxmlView<MainViewModel> {
                 graphAppearanceMenuButton, operationsMenuButton, propertiesMenuButton, generateGraphMenuButton
         );
 
-        setUpSideMenuButton(basicAlgorithmsMenuButton, "Basic Algorithms",
-                false, basicAlgorithmsView);
-        setUpSideMenuButton(tspMenuButton, "Travelling Salesman Problem",
-                false, tspView);
-        setUpSideMenuButton(layoutMenuButton, "Layout",
-                false, layoutView);
-
         ToggleGroup rightSideMenuButtons = new ToggleGroup();
-        rightSideMenuButtons.getToggles().addAll(basicAlgorithmsMenuButton, tspMenuButton, layoutMenuButton);
 
         leftSideMenuButtons.selectedToggleProperty().addListener(new ChangeListener<>() {
             double lastWidth = 250;
