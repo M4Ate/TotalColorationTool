@@ -13,7 +13,8 @@ import java.util.List;
 
 
 public class CompareLogic {
-
+    @Inject
+    static NotificationCenter notificationCenter;
 
     public static Color GREY_COLOR = Color.rgb(105, 105, 105);
 
@@ -26,9 +27,10 @@ public class CompareLogic {
      * @param compareEdges list of edges of the graph to compare with
      */
     public static void compareAndUncolor(List<Node> currentNodes, EdgeList currentEdges, List<Node> compareNodes, EdgeList compareEdges) {
-
         compareAndUncolorNodes(currentNodes, new ArrayList<Node>(compareNodes));
         compareAndUncolorEdges(currentNodes, currentEdges, compareEdges);
+
+        notificationCenter.publish(CanvasViewModel.REPAINT_REQUEST);
     }
 
     /**

@@ -326,6 +326,39 @@ public class MainViewModel implements ViewModel {
         }
     }
 
+    public void openCompareGraph(File file) {
+
+        if(algorithmTaskScope.getAlgorithmTask() != null && algorithmTaskScope.getAlgorithmTask().isRunning())
+            return;
+
+        String extension = FilenameUtils.getExtension(file.getAbsolutePath());
+        GraphReader graphReader = null;
+
+        switch (extension){
+            case "ogr": graphReader = new OgrReader(); break;
+            case "tsp": graphReader = new TspReader(); break;
+            case "graphml" : graphReader = new GraphMLReader(); break;
+            case "mtx": graphReader = new MtxReader(canvasScope.getCanvasHeight() * 0.9); break;
+        }
+        assert graphReader != null;
+        Graph openedGraph = null;
+        try{
+            openedGraph = graphReader.readGraph(file);
+        } catch (RuntimeException e){
+            if (e.getMessage() != null){
+                notificationCenter.publish(MainViewModel.WRITE,"ERROR: "+e.getMessage());
+            }else{
+                notificationCenter.publish(MainViewModel.WRITE, "Error: File is corrupted");
+            }
+
+            e.printStackTrace();
+        }
+        if(openedGraph != null){
+            notificationCenter.publish(GraphViewModel.NEW_GRAPH_REQUEST, openedGraph);
+            writeEvent("Graph comparison done");
+        }
+    }
+
     public void stopCurrentAlgorithm() {
         algorithmTaskScope.stopAlgorithmTask();
     }

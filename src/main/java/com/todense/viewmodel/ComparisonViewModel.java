@@ -20,6 +20,8 @@ import java.util.List;
  */
 
 public class ComparisonViewModel implements ViewModel {
+
+    public final static String COMPARE_GRAPH_REQUEST = "COMPARE_GRAPH_REQUEST";
     @InjectScope
     GraphScope graphScope;
     @Inject
@@ -32,6 +34,7 @@ public class ComparisonViewModel implements ViewModel {
     public void initialize() {
         ogrReader = new OgrReader();
         graphManager = graphScope.getGraphManager();
+        notificationCenter.subscribe(RandomGeneratorViewModel.RANDOM_GRAPH_REQUEST, (key, payload) -> generate());
     }
 
     public void doComparison(File file) {
