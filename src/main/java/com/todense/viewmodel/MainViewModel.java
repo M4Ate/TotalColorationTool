@@ -2,6 +2,7 @@ package com.todense.viewmodel;
 
 import com.todense.model.graph.Graph;
 import com.todense.viewmodel.algorithm.AlgorithmTask;
+import com.todense.viewmodel.comparison.CompareLogic;
 import com.todense.viewmodel.file.GraphReader;
 import com.todense.viewmodel.file.format.graphml.GraphMLReader;
 import com.todense.viewmodel.file.format.mtx.MtxReader;
@@ -323,6 +324,42 @@ public class MainViewModel implements ViewModel {
             notificationCenter.publish(GraphViewModel.NEW_GRAPH_REQUEST, openedGraph);
             notificationCenter.publish(CanvasViewModel.REPAINT_REQUEST);
             writeEvent("Graph opened");
+        }
+    }
+
+    public void openCompareGraph(File file) {
+
+        if(algorithmTaskScope.getAlgorithmTask() != null && algorithmTaskScope.getAlgorithmTask().isRunning())
+            return;
+
+        String extension = FilenameUtils.getExtension(file.getAbsolutePath());
+        GraphReader graphReader = null;
+
+        switch (extension){
+            case "ogr": graphReader = new OgrReader(); break;
+            case "tsp": graphReader = new TspReader(); break;
+            case "graphml" : graphReader = new GraphMLReader(); break;
+            case "mtx": graphReader = new MtxReader(canvasScope.getCanvasHeight() * 0.9); break;
+        }
+        assert graphReader != null;
+        Graph openedGraph = null;
+        try{
+            openedGraph = graphReader.readGraph(file);
+        } catch (RuntimeException e){
+            if (e.getMessage() != null){
+                notificationCenter.publish(MainViewModel.WRITE,"ERROR: "+e.getMessage());
+            }else{
+                notificationCenter.publish(MainViewModel.WRITE, "Error: File is corrupted");
+            }
+
+            e.printStackTrace();
+        }
+        if(openedGraph != null){
+            CompareLogic.compareAndUncolor(
+                    graphManager.getGraph().getNodes(), graphManager.getGraph().getEdges(),
+                    openedGraph.getNodes(), openedGraph.getEdges());
+            notificationCenter.publish(CanvasViewModel.REPAINT_REQUEST);
+            writeEvent("Compare Graph opened");
         }
     }
 

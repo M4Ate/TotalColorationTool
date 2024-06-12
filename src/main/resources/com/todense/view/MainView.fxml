@@ -103,6 +103,13 @@
                   </graphic>
                </MenuItem>
             </Menu>
+            <Menu mnemonicParsing="false" text="Compare to">
+               <MenuItem mnemonicParsing="false" onAction="#openCompareGraphAction" text="Open...">
+                  <graphic>
+                     <FontIcon iconColor="#d0d0d0" iconLiteral="fas-folder-open" iconSize="15" />
+                  </graphic>
+               </MenuItem>
+            </Menu>
          </MenuBar>
          <HBox HBox.hgrow="ALWAYS" />
          <ColorPicker fx:id="appColorPicker" prefHeight="22.0" prefWidth="31.0" styleClass="app-color-picker">

@@ -388,6 +388,24 @@ public class MainView implements FxmlView<MainViewModel> {
     }
 
     @FXML
+    private void openCompareGraphAction() {
+        FileChooser.ExtensionFilter fileExtensions =
+                new FileChooser.ExtensionFilter(
+                        "Graph Files", "*.ogr");
+        FileChooser fileChooser = new FileChooser();
+        String initialDirectory = viewModel.getFileScope().getInitialDirectory();
+        if(!initialDirectory.isEmpty())
+            fileChooser.setInitialDirectory(new File(initialDirectory));
+
+        fileChooser.getExtensionFilters().add(fileExtensions);
+        File file = fileChooser.showOpenDialog(mainStage);
+        if(file != null){
+            viewModel.openCompareGraph(file);
+            viewModel.getFileScope().setInitialDirectory(file.getParent());
+        }
+    }
+
+    @FXML
     private void resetAction() {
         viewModel.resetGraph();
     }
