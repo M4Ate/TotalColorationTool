@@ -3,18 +3,13 @@ package com.todense.viewmodel.comparison;
 import com.todense.model.EdgeList;
 import com.todense.model.graph.Edge;
 import com.todense.model.graph.Node;
-import com.todense.viewmodel.CanvasViewModel;
-import de.saxsys.mvvmfx.utils.notifications.NotificationCenter;
 import javafx.scene.paint.Color;
 
-import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class CompareLogic {
-    @Inject
-    static NotificationCenter notificationCenter;
 
     public static Color GREY_COLOR = Color.rgb(105, 105, 105);
 
@@ -29,8 +24,6 @@ public class CompareLogic {
     public static void compareAndUncolor(List<Node> currentNodes, EdgeList currentEdges, List<Node> compareNodes, EdgeList compareEdges) {
         compareAndUncolorNodes(currentNodes, new ArrayList<Node>(compareNodes));
         compareAndUncolorEdges(currentNodes, currentEdges, compareEdges);
-
-        notificationCenter.publish(CanvasViewModel.REPAINT_REQUEST);
     }
 
     /**

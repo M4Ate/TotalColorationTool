@@ -2,6 +2,7 @@ package com.todense.viewmodel;
 
 import com.todense.model.graph.Graph;
 import com.todense.viewmodel.algorithm.AlgorithmTask;
+import com.todense.viewmodel.comparison.CompareLogic;
 import com.todense.viewmodel.file.GraphReader;
 import com.todense.viewmodel.file.format.graphml.GraphMLReader;
 import com.todense.viewmodel.file.format.mtx.MtxReader;
@@ -354,8 +355,11 @@ public class MainViewModel implements ViewModel {
             e.printStackTrace();
         }
         if(openedGraph != null){
-            notificationCenter.publish(GraphViewModel.NEW_GRAPH_REQUEST, openedGraph);
-            writeEvent("Graph comparison done");
+            CompareLogic.compareAndUncolor(
+                    graphManager.getGraph().getNodes(), graphManager.getGraph().getEdges(),
+                    openedGraph.getNodes(), openedGraph.getEdges());
+            notificationCenter.publish(CanvasViewModel.REPAINT_REQUEST);
+            writeEvent("Compare Graph opened");
         }
     }
 
