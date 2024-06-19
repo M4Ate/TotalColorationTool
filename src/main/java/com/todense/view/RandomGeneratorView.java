@@ -83,8 +83,8 @@ public class RandomGeneratorView implements FxmlView<RandomGeneratorViewModel> {
         generatorChoiceBox.getItems().addAll(GeneratorModel.values());
         generatorChoiceBox.valueProperty().bindBidirectional(viewModel.generatorProperty());
 
-        arrangementChoiceBox.valueProperty().setValue(NodeArrangement.RANDOM_CIRCLE);
-        generatorChoiceBox.valueProperty().setValue(GeneratorModel.GEOMETRIC);
+        arrangementChoiceBox.valueProperty().setValue(NodeArrangement.CIRCULAR);
+        generatorChoiceBox.valueProperty().setValue(GeneratorModel.MAX_DEG);
     }
 
     private void setUpParameterHBox(ParameterHBox hBox, GeneratorModel... models){
