@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9dc8a254-2f10-4963-91e1-94254594d08b" name="Changes" comment="Implement Custom graph generator MaxDegGenerator">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/todense/view/SolverView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/todense/view/MainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/todense/view/MainView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/todense/view/SolverView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/todense/view/SolverView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/todense/viewmodel/SolverViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/todense/viewmodel/SolverViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/todense/view/MainView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/todense/view/MainView.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="9dc8a254-2f10-4963-91e1-94254594d08b" name="Changes" comment="Add left side button and change solverView as well as the SolverViewModel." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -154,7 +147,7 @@
       <workItem from="1719328758398" duration="47000" />
       <workItem from="1719329506956" duration="155000" />
       <workItem from="1719332452357" duration="785000" />
-      <workItem from="1719390255122" duration="1024000" />
+      <workItem from="1719390255122" duration="1140000" />
     </task>
     <task id="LOCAL-00001" summary="Added own Generator">
       <option name="closed" value="true" />
@@ -180,7 +173,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714459690378</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Add left side button and change solverView as well as the SolverViewModel.">
+      <option name="closed" value="true" />
+      <created>1719391375503</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1719391375503</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -201,7 +202,8 @@
     <MESSAGE value="Added own Generator" />
     <MESSAGE value="Added OmniGraph" />
     <MESSAGE value="Implement Custom graph generator MaxDegGenerator" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implement Custom graph generator MaxDegGenerator" />
+    <MESSAGE value="Add left side button and change solverView as well as the SolverViewModel." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add left side button and change solverView as well as the SolverViewModel." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
