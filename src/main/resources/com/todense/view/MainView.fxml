@@ -156,7 +156,7 @@
             </Separator>
             <ToggleButton fx:id="solveGraphMenuButton" layoutX="17.0" layoutY="253.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="sidemenu-button">
                <graphic>
-                  <FontIcon iconColor="#d0d0d0" iconLiteral="ci-development" iconSize="23" />
+                  <FontIcon iconColor="#d0d0d0" iconLiteral="fa-paint-brush" iconSize="23" />
                </graphic>
                <font>
                   <Font size="6.0" />

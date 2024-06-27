@@ -4,7 +4,6 @@ import com.todense.viewmodel.SolverViewModel;
 import de.saxsys.mvvmfx.FxmlView;
 import de.saxsys.mvvmfx.InjectViewModel;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
 
 /*
  * View for the ILP Solver.
@@ -18,5 +17,15 @@ public class SolverView implements FxmlView<SolverViewModel> {
 
     public void initialize(){
 
+
+
+    }
+
+    @FXML
+    private void ilpAction() {
+    }
+
+    @FXML
+    private void stopAction(){
     }
 }
