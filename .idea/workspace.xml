@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9dc8a254-2f10-4963-91e1-94254594d08b" name="Changes" comment="Merging with remote status.">
+    <list default="true" id="9dc8a254-2f10-4963-91e1-94254594d08b" name="Changes" comment="Change ILP icon, Create proper ILP input Box similar to the Mockup and create method body for ILP Solver.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/todense/view/SolverView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/todense/view/SolverView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/todense/view/MainView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/todense/view/MainView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/todense/view/SolverView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/todense/view/SolverView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/todense/viewmodel/SolverViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/todense/viewmodel/SolverViewModel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +28,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -154,7 +154,10 @@
       <workItem from="1719332452357" duration="785000" />
       <workItem from="1719390255122" duration="1140000" />
       <workItem from="1719421329062" duration="301000" />
-      <workItem from="1719464056761" duration="1920000" />
+      <workItem from="1719464056761" duration="2013000" />
+      <workItem from="1719467172484" duration="295000" />
+      <workItem from="1719470293040" duration="595000" />
+      <workItem from="1719550707479" duration="592000" />
     </task>
     <task id="LOCAL-00001" summary="Added own Generator">
       <option name="closed" value="true" />
@@ -204,24 +207,62 @@
       <option name="project" value="LOCAL" />
       <updated>1719421560526</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Change ILP icon, Create proper ILP input Box similar to the Mockup and create method body for ILP Solver.">
+      <option name="closed" value="true" />
+      <created>1719466003895</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1719466003895</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/main" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="main" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/Comparison_View_Implementation" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
             <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
               <option name="FILTERS">
                 <map>
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="New-Classes" />
+                        <option value="origin/New-Classes" />
                       </list>
                     </value>
                   </entry>
@@ -239,7 +280,8 @@
     <MESSAGE value="Implement Custom graph generator MaxDegGenerator" />
     <MESSAGE value="Add left side button and change solverView as well as the SolverViewModel." />
     <MESSAGE value="Merging with remote status." />
-    <option name="LAST_COMMIT_MESSAGE" value="Merging with remote status." />
+    <MESSAGE value="Change ILP icon, Create proper ILP input Box similar to the Mockup and create method body for ILP Solver." />
+    <option name="LAST_COMMIT_MESSAGE" value="Change ILP icon, Create proper ILP input Box similar to the Mockup and create method body for ILP Solver." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

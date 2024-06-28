@@ -6,6 +6,7 @@ import com.todense.viewmodel.scope.GraphScope;
 import com.todense.viewmodel.solver.JsonBuilder;
 import de.saxsys.mvvmfx.InjectScope;
 import de.saxsys.mvvmfx.ViewModel;
+import javafx.scene.paint.Color;
 
 /*
  * ViewModel for the ILP Solver.
@@ -19,6 +20,14 @@ public class SolverViewModel implements ViewModel {
 
     public void initialize() {
         graphManager = graphScope.getGraphManager();
+    }
+
+
+    public void start(Boolean preferColor, Color preferredColor, Boolean brightColoring, Boolean currentColorsToggle){
+        System.out.println(preferColor);
+        System.out.println(preferredColor);
+        System.out.println(brightColoring);
+        System.out.println(currentColorsToggle);
     }
 
     /**
