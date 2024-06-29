@@ -327,6 +327,13 @@ public class MainViewModel implements ViewModel {
         }
     }
 
+    /**
+     * Opens graph and compares it with current graph
+     * This method contains 25 lines of duplicate code,
+     * which was not refactored to a separate method in order to keep the project easily updatable.
+     *
+     * @param file file containing the compare graph
+     */
     public void openCompareGraph(File file) {
 
         if(algorithmTaskScope.getAlgorithmTask() != null && algorithmTaskScope.getAlgorithmTask().isRunning())
@@ -355,9 +362,7 @@ public class MainViewModel implements ViewModel {
             e.printStackTrace();
         }
         if(openedGraph != null){
-            CompareLogic.compareAndUncolor(
-                    graphManager.getGraph().getNodes(), graphManager.getGraph().getEdges(),
-                    openedGraph.getNodes(), openedGraph.getEdges());
+            CompareLogic.compareAndUncolor(graphManager.getGraph(), openedGraph);
             notificationCenter.publish(CanvasViewModel.REPAINT_REQUEST);
             writeEvent("Compare Graph opened");
         }
