@@ -1,6 +1,10 @@
 package com.todense.viewmodel.solver.ilpGeneration;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 public class ILPProblem {
@@ -69,8 +73,24 @@ public class ILPProblem {
      * @return JSON as a String
      */
     public String getILPAsJsonString() {
-        // to be implemented
-        return "";
+        String[] variables = new String[this.variables.size()];
+        String[] constraints = new String[this.constraints.size()];
+        String optimizationFunction = optfunction.getAsString();
+        boolean minimize = optfunction.isMinimize();
+        for (int i = 0; i < variables.length; i++) {
+            variables[i] = this.variables.get(i).getAsString();
+        }
+        for (int i = 0; i < constraints.length; i++) {
+            constraints[i] = this.constraints.get(i).getAsString();
+        }
+        LinkedHashMap<String,Object> jsonMap = new LinkedHashMap<String,Object>();
+        jsonMap.put("variables", variables);
+        jsonMap.put("constraints", constraints);
+        jsonMap.put("optimizationFunction", optimizationFunction);
+        jsonMap.put("minimize", minimize);
+        Gson gson = new Gson();
+        String jsonString = gson.toJson(jsonMap); // "=" is just saved as \u003d here
+        return jsonString.replace("\\u003d", "="); // replacing \u003d with =
     }
 
 }
