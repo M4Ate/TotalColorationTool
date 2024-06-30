@@ -20,6 +20,7 @@ public class ILPProblem {
 
     /**
      * adds a Constraint to the ILP-Problem
+     *
      * @param constraint the constraint that is added
      */
     public void addConstraint(Constraint constraint) {
@@ -28,6 +29,7 @@ public class ILPProblem {
 
     /**
      * adds a Variable to the ILP-Problem
+     *
      * @param var the variable that is added
      */
     public void addVariable(Variable var) {
@@ -36,6 +38,7 @@ public class ILPProblem {
 
     /**
      * sets the optimization function (there can always be just 1 optimization function for a given ILP-Problem
+     *
      * @param opt optimization function
      */
     public void setOptfunction(Optfunction opt) {
@@ -44,6 +47,7 @@ public class ILPProblem {
 
     /**
      * gets the List of current variables
+     *
      * @return list of variables
      */
     public List<Variable> getVarList() {
@@ -51,7 +55,8 @@ public class ILPProblem {
     }
 
     /**
-     * returns the current list of constraints
+     * gets the current list of constraints
+     *
      * @return list of constraints
      */
     public List<Constraint> getConstraintList() {
@@ -59,7 +64,8 @@ public class ILPProblem {
     }
 
     /**
-     * returns the entire ILP-Problem formatted as a JSON in a String
+     * gets the entire ILP-Problem formatted as a JSON in a String
+     *
      * @return JSON as a String
      */
     public String getILPAsJsonString() {
