@@ -22,6 +22,14 @@ public class SimilarGenerator extends RandomEdgeGenerator{
         graph = graphScope.getGraphManager().getGraph();
     }
 
+
+    @Override
+    protected void generate() {
+
+    }
+
+    /*
+    TODO delete this after alternative is constructed
     @Override
     protected void generate() {
         for(int i = 0; i < graph.getNodes().size(); i++){
@@ -32,4 +40,6 @@ public class SimilarGenerator extends RandomEdgeGenerator{
             }
         }
     }
+
+     */
 }
