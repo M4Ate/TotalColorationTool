@@ -2,13 +2,13 @@ package com.todense.viewmodel.random;
 
 public enum GeneratorModel {
 
-    SIMILAR_GRAPH("similar graph generator"),
-    MAX_DEG("Maximum degree generator"),
-    MIN_DIST("Minimum distance generator"),
+    BARABASI_ALBERT("Barabási–Albert model"),
+    ERDOS_RENYI("Erdős–Rényi model"),
     GEOMETRIC("Geometric"),
     GEOMETRIC_RANDOMIZED("Geometric Randomized"),
-    ERDOS_RENYI("Erdős–Rényi model"),
-    BARABASI_ALBERT("Barabási–Albert model"),
+    MAX_DEG("Maximum degree "),
+    MIN_DIST("Minimum distance"),
+    SIMILAR_GRAPH("Similar graph"),
     ;
 
     private final String name;
