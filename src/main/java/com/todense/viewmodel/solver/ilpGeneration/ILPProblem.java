@@ -89,8 +89,11 @@ public class ILPProblem {
         jsonMap.put("optimizationFunction", optimizationFunction);
         jsonMap.put("minimize", minimize);
         Gson gson = new Gson();
-        String jsonString = gson.toJson(jsonMap); // "=" is just saved as \u003d here
-        return jsonString.replace("\\u003d", "="); // replacing \u003d with =
+        String jsonString = gson.toJson(jsonMap); // "=" is just saved as \u003d and "<" as \u003c here
+
+        jsonString = jsonString.replace("\\u003d", "="); // replacing \u003d with =
+        jsonString = jsonString.replace("\\u003c", "<"); // replacing \u003c with <
+        return jsonString;
     }
 
 }

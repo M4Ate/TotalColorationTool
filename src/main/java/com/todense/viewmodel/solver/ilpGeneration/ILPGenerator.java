@@ -59,7 +59,7 @@ public class ILPGenerator {
                 ilp.addVariable(vertexColors[vNum][cNum]);
             }
         }
-        for (int eNum = 0; eNum < maxNodeNumber; eNum++) {
+        for (int eNum = 0; eNum < maxEdgeNumber; eNum++) {
             for (int cNum = 0; cNum < maxColorNumber; cNum++) {
                 edgeColors[eNum][cNum] = new EdgeColorVar("y_e" + eNum + "_c" +cNum, edges.get(eNum).getId());
                 ilp.addVariable(edgeColors[eNum][cNum]);
@@ -124,14 +124,16 @@ public class ILPGenerator {
         SetColorConstraint[] cc = new SetColorConstraint[(maxEdgeNumber + maxNodeNumber) * maxColorNumber];
         for (int vNum = 0; vNum < maxNodeNumber; vNum++) {
             for (int cNum = 0; cNum < maxColorNumber; cNum++) {
-                String constraint = vertexColors[vNum][cNum] + " - " + colors[cNum] + " <= 0";
+                String constraint = vertexColors[vNum][cNum].getAsString() + " - "
+                        + colors[cNum].getAsString() + " <= 0";
                 cc[vNum * maxColorNumber + cNum] = new SetColorConstraint(constraint);
                 ilp.addConstraint(cc[vNum * maxColorNumber + cNum]);
             }
         }
         for (int eNum = 0; eNum < maxEdgeNumber; eNum++) {
             for (int cNum = 0; cNum < maxColorNumber; cNum++) {
-                String constraint = edgeColors[eNum][cNum] + " - " + colors[cNum] + " <= 0";
+                String constraint = edgeColors[eNum][cNum].getAsString() + " - "
+                        + colors[cNum].getAsString() + " <= 0";
                 int index = eNum * maxColorNumber + cNum + (maxNodeNumber * maxColorNumber);
                 cc[index]
                         = new SetColorConstraint(constraint);
