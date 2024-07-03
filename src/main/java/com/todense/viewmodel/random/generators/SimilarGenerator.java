@@ -4,28 +4,28 @@ import com.todense.model.graph.Graph;
 import com.todense.viewmodel.random.RandomEdgeGenerator;
 import com.todense.viewmodel.scope.GraphScope;
 import de.saxsys.mvvmfx.InjectScope;
+import de.saxsys.mvvmfx.utils.notifications.NotificationCenter;
 
+import javax.inject.Inject;
 
 /**
  * Generates a graph similar to the already loaded one.
+ * TODO add a definiton what a simla Graph is
  */
 public class SimilarGenerator extends RandomEdgeGenerator{
 
-    @InjectScope
-    GraphScope graphScope;
+    private final Graph currentGraph;
 
-    private final Graph graph;
-
-
-    public SimilarGenerator(){
+    public SimilarGenerator(Graph currentGraph){
         super();
-        graph = graphScope.getGraphManager().getGraph();
+        this.currentGraph = currentGraph;
     }
-
 
     @Override
     protected void generate() {
 
+        //validate if a Graph is already loaded
+        System.out.println("SimilarGenerator called");
     }
 
     /*

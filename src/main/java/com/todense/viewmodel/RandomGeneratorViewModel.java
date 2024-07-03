@@ -9,11 +9,9 @@ import com.todense.viewmodel.random.arrangement.NodeArrangement;
 import com.todense.viewmodel.random.arrangement.generators.CircularPointGenerator;
 import com.todense.viewmodel.random.arrangement.generators.RandomCirclePointGenerator;
 import com.todense.viewmodel.random.arrangement.generators.RandomSquarePointGenerator;
-import com.todense.viewmodel.random.generators.BarabasiAlbertGenerator;
-import com.todense.viewmodel.random.generators.ErdosRenyiGenerator;
-import com.todense.viewmodel.random.generators.GeometricGenerator;
-import com.todense.viewmodel.random.generators.MaxDegGenerator;
+import com.todense.viewmodel.random.generators.*;
 import com.todense.viewmodel.scope.CanvasScope;
+import com.todense.viewmodel.scope.GraphScope;
 import de.saxsys.mvvmfx.InjectScope;
 import de.saxsys.mvvmfx.ViewModel;
 import de.saxsys.mvvmfx.utils.notifications.NotificationCenter;
@@ -45,6 +43,9 @@ public class RandomGeneratorViewModel implements ViewModel {
 
     @InjectScope
     CanvasScope canvasScope;
+
+    @InjectScope
+    GraphScope graphScope;
 
     public void initialize(){
         notificationCenter.subscribe(RandomGeneratorViewModel.RANDOM_GRAPH_REQUEST, (key, payload) -> generate());
@@ -101,6 +102,18 @@ public class RandomGeneratorViewModel implements ViewModel {
                 edgeGenerator = new MaxDegGenerator(
                         maxDegProperty.get());
                 break;
+
+            case SIMILAR_GRAPH:
+                //Case to call the similar graph generator
+                if(graphScope.getGraphManager().getGraph().getOrder() == 0) {
+                    notificationCenter.publish(MainViewModel.TASK_FINISHED, "A Graph needs to be loaded to" +
+                            " perform this action");
+                    throw new IllegalStateException("No graph found");
+                } else {
+                    edgeGenerator = new SimilarGenerator(graphScope.getGraphManager().getGraph());
+                }
+                break;
+
             default:
                 throw new IllegalStateException("Unexpected value: " + generatorProperty.get());
         }

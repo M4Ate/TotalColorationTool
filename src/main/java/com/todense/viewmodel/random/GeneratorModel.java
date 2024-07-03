@@ -2,6 +2,7 @@ package com.todense.viewmodel.random;
 
 public enum GeneratorModel {
 
+    SIMILAR_GRAPH("similar graph generator"),
     MAX_DEG("Maximum degree generator"),
     MIN_DIST("Minimum distance generator"),
     GEOMETRIC("Geometric"),
