@@ -25,8 +25,8 @@ class ILPProblemTest {
         Optfunction opt = new Optfunction(vars, "z_c0 + z_c1", true);
         ilpp.setOptfunction(opt);
 
-        NodeColorConstraint ncc = new NodeColorConstraint(vars, "x_v0_c0 + x_v1_c0 = 1");
-        SetColorConstraint scc = new SetColorConstraint(vars, "xv0_c0 = 1");
+        NodeColorConstraint ncc = new NodeColorConstraint("x_v0_c0 + x_v1_c0 = 1");
+        SetColorConstraint scc = new SetColorConstraint("xv0_c0 = 1");
         ilpp.addConstraint(ncc);
         ilpp.addConstraint(scc);
 

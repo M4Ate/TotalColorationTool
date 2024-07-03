@@ -4,7 +4,6 @@ import java.util.List;
 
 public abstract class Constraint {
 
-    protected List<Variable> varList;
     protected String constraint;
 
     /**
@@ -14,11 +13,5 @@ public abstract class Constraint {
      */
     public abstract String getAsString();
 
-    /**
-     * gets the variable list of used variables in this constraint
-     *
-     * @return variable list
-     */
-    public abstract List<Variable> getVariableList();
 
 }

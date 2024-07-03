@@ -4,8 +4,7 @@ import java.util.List;
 
 public class NodeColorConstraint extends Constraint{
 
-    public NodeColorConstraint(List<Variable> varList, String constraint) {
-        super.varList = varList;
+    public NodeColorConstraint(String constraint) {
         super.constraint = constraint;
     }
 
@@ -19,13 +18,4 @@ public class NodeColorConstraint extends Constraint{
         return constraint;
     }
 
-    /**
-     * gets the variable list of used variables in this constraint
-     *
-     * @return variable list
-     */
-    @Override
-    public List<Variable> getVariableList() {
-        return varList;
-    }
 }
