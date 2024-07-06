@@ -57,4 +57,8 @@ public class EdgeList extends ArrayList<Edge> {
     public boolean isEdgeBetween(Node n, Node m){
         return n.getNeighbours().contains(m);
     }
+
+    public HashMap<String, Edge> getEdges() {
+        return edgeMap;
+    }
 }
