@@ -23,69 +23,42 @@ public class CompareLogic {
      * @param compareGraph the graph to compare with
      */
     public static void compareAndUncolor(Graph currentGraph, Graph compareGraph) {
-        List<Node> currentNodes = currentGraph.getNodes();
-        List<Node> compareNodes = compareGraph.getNodes();
-        EdgeList compareEdges = compareGraph.getEdges();
-
-        compareAndUncolorNodes(currentNodes, new ArrayList<Node>(compareNodes));
-        compareAndUncolorEdges(currentGraph, compareEdges);
+        compareAndUncolorNodes(currentGraph, compareGraph);
+        compareAndUncolorEdges(currentGraph, compareGraph);
     }
 
     /**
      * Nodes need to be done at this point. Such that new Nodes from the compare Graph are already added to the currentNodes.
      *
      * @param currentGraph the current graph
-     * @param compareEdges list of edges of the graph to compare with
+     * @param comparisonGraph the graph to compare with
      */
-    private static void compareAndUncolorEdges(Graph currentGraph, EdgeList compareEdges) {
-        List<Node> currentNodes = currentGraph.getNodes();
-        EdgeList currentEdges = currentGraph.getEdges();
-
-        for (Node node: currentNodes) {
-            for (Node neighbor: node.getNeighbours()) {
-                if (node.getID() > neighbor.getID()) continue;
-                Edge currentEdge = currentEdges.getEdge(node, neighbor);
-                Edge compareEdge = compareEdges.getEdge(node, neighbor);
-
-                // Case: Edge doesn't exist in either Graphs -> leave it as is
-                if (currentEdge == null && compareEdge == null) continue;
-
-                // Case: Edge exists in both Graphs -> compare color
-                if (currentEdge != null && compareEdge != null) {
-                    if (currentEdge.getColor().equals(compareEdge.getColor())){
-                        currentEdge.setColor(GREY_COLOR);
-                    }
-                    continue;
-                }
-
-                // Case: Edge only exists in current Graph -> leave it as is
-                if (currentEdge != null) continue;
-
-                // Case: Edge only exists in compare Graph -> Add Edge to currentEdges
-                if (compareEdge != null) {
-                    Edge newEdge = currentGraph.addEdge(node, neighbor);
-                    newEdge.setColor(compareEdge.getColor());
-                    newEdge.setWeight(compareEdge.getWeight());
-                    newEdge.setStatus(compareEdge.getStatus());
-                }
+    private static void compareAndUncolorEdges(Graph currentGraph, Graph comparisonGraph) {
+        for (Edge compEdge : comparisonGraph.getEdges().getEdges().values()) {
+            Node node1Current = currentGraph.getNodeById(compEdge.getN1().getID());
+            Node node2Current = currentGraph.getNodeById(compEdge.getN2().getID());
+            Edge currentEdge = currentGraph.getEdges().getEdge(node1Current, node2Current);
+            if (currentEdge == null) {
+                currentGraph.addEdge(node1Current, node2Current, compEdge.getColor());
+                node1Current.getNeighbours().add(node2Current);
+                node2Current.getNeighbours().add(node1Current);
+            } else if (currentEdge.getColor().equals(compEdge.getColor())) {
+                currentEdge.setColor(GREY_COLOR);
             }
         }
     }
 
-    private static void compareAndUncolorNodes(List<Node> currentNodes, List<Node> compareNodes) {
-        for (Node node: currentNodes) {
-            Node compareNode = getNodeWithID(node.getID(), compareNodes);
-
-            if (compareNode != null && node.getColor().equals(compareNode.getColor())) {
-                node.setColor(GREY_COLOR);
-            }
-        }
-
-        // Add all remaining nodes from compareNodes to currentNodes and add them as neighbors
-        for (Node node: compareNodes) {
-            currentNodes.add(node);
-            for (Node neighbor: node.getNeighbours()) {
-                neighbor.getNeighbours().add(node);
+    private static void compareAndUncolorNodes(Graph currentGraph, Graph comparisonGraph) {
+        for (Node compNode : comparisonGraph.getNodes()) {
+            Node currentNode = currentGraph.getNodeById(compNode.getID());
+            if (currentNode == null) {
+                Node node = currentGraph.addNode(compNode.getPos() ,compNode.getID());
+                node.setColor(compNode.getColor());
+            } else {
+                // Set color to gray if colors are the same
+                if (currentNode.getColor().equals(compNode.getColor())) {
+                    currentNode.setColor(GREY_COLOR);
+                }
             }
         }
     }
@@ -93,7 +66,6 @@ public class CompareLogic {
     private static Node getNodeWithID(int id, List<Node> nodes) {
         for (Node node: nodes) {
             if (node.getID() == id) {
-                nodes.remove(node);
                 return node;
             }
         }
