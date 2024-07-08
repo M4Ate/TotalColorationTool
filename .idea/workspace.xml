@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="9dc8a254-2f10-4963-91e1-94254594d08b" name="Changes" comment="bypass unknown code">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/todense/viewmodel/random/GeneratorModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/todense/viewmodel/random/GeneratorModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/todense/viewmodel/RandomGeneratorViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/todense/viewmodel/RandomGeneratorViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/todense/viewmodel/random/generators/SimilarGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/todense/viewmodel/random/generators/SimilarGenerator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,6 +143,10 @@
       <workItem from="1717602435284" duration="844000" />
       <workItem from="1717655395244" duration="669000" />
       <workItem from="1720020609557" duration="181000" />
+      <workItem from="1720100491523" duration="33000" />
+      <workItem from="1720452243992" duration="1960000" />
+      <workItem from="1720456242714" duration="1268000" />
+      <workItem from="1720457543162" duration="134000" />
     </task>
     <task id="LOCAL-00001" summary="Added own Generator">
       <option name="closed" value="true" />
@@ -178,7 +183,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/Similar-Graph-Generator" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -201,6 +218,11 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/todense/viewmodel/RandomGeneratorViewModel.java</url>
           <line>77</line>
           <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/todense/viewmodel/RandomGeneratorViewModel.java</url>
+          <line>105</line>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

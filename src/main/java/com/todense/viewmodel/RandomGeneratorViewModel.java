@@ -111,6 +111,8 @@ public class RandomGeneratorViewModel implements ViewModel {
                     throw new IllegalStateException("No graph found");
                 } else {
                     edgeGenerator = new SimilarGenerator(graphScope.getGraphManager().getGraph());
+                    //TODO add a proxy Point generator so no new Nodes get generated and only edges get changed
+                    //TODO adjust UI to similar graph gen
                 }
                 break;
 

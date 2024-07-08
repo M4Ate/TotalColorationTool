@@ -4,6 +4,7 @@ import com.todense.model.graph.Edge;
 import com.todense.model.graph.Graph;
 import com.todense.model.graph.Node;
 import com.todense.viewmodel.random.RandomEdgeGenerator;
+import javafx.scene.paint.Color;
 
 /**
  * Generates a graph similar to the already loaded one.
@@ -31,10 +32,14 @@ public class SimilarGenerator extends RandomEdgeGenerator{
             edgeTow = currentGraph.getEdges().get(randomEdgeId);
         } while (edgeOne.getN1() == edgeTow.getN1() && edgeOne.getN2() == edgeTow.getN2());
 
+        Color greyColor = Color.rgb(105, 105, 105);
+        edgeOne.setColor(greyColor);
+        edgeTow.setColor(greyColor);
+
         //switch the ends of the edges
         
         //validate if a Graph is already loaded
-        System.out.println("Current graph size: " + size);
+        System.out.println("generate called");
     }
 
     /*
