@@ -1,12 +1,9 @@
 package com.todense.viewmodel.random.generators;
 
+import com.todense.model.graph.Edge;
 import com.todense.model.graph.Graph;
+import com.todense.model.graph.Node;
 import com.todense.viewmodel.random.RandomEdgeGenerator;
-import com.todense.viewmodel.scope.GraphScope;
-import de.saxsys.mvvmfx.InjectScope;
-import de.saxsys.mvvmfx.utils.notifications.NotificationCenter;
-
-import javax.inject.Inject;
 
 /**
  * Generates a graph similar to the already loaded one.
@@ -23,9 +20,21 @@ public class SimilarGenerator extends RandomEdgeGenerator{
 
     @Override
     protected void generate() {
+        //get a random node
+        int randomEdgeId = super.rnd.nextInt(this.currentGraph.getEdges().size());
+        Edge edgeOne = currentGraph.getEdges().get(randomEdgeId);
 
+        //get a second random node with different end nodes
+        Edge edgeTow;
+        do {
+            randomEdgeId = super.rnd.nextInt(this.currentGraph.getEdges().size());
+            edgeTow = currentGraph.getEdges().get(randomEdgeId);
+        } while (edgeOne.getN1() == edgeTow.getN1() && edgeOne.getN2() == edgeTow.getN2());
+
+        //switch the ends of the edges
+        
         //validate if a Graph is already loaded
-        System.out.println("SimilarGenerator called");
+        System.out.println("Current graph size: " + size);
     }
 
     /*
