@@ -58,7 +58,9 @@ class ILPGeneratorTest {
         graph.addNode();
         graph.addNode();
         graph.addEdge(graph.getNodes().get(0), graph.getNodes().get(1));
-        ILPProblem ilp = ILPGenerator.generateILP(graph, ILPType.WITHLOWCOLORS);
+        ILPType type = ILPType.WITHLOWCOLORS;
+        type.setMaximizeColor(Color.web("0xFF0000"));
+        ILPProblem ilp = ILPGenerator.generateILP(graph, type);
         String jsonString = ilp.getILPAsJsonString();
         String expected = "{\"variables\":[\"x_v0_c0\",\"x_v0_c1\",\"x_v0_c2\",\"x_v1_c0\",\"x_v1_c1\",\"x_v1_c2\"," +
                 "\"y_e0_c0\",\"y_e0_c1\",\"y_e0_c2\",\"z_c0\",\"z_c1\",\"z_c2\"],\"constraints\":" +
