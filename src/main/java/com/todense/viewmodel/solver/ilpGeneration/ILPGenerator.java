@@ -74,8 +74,72 @@ public class ILPGenerator {
     }
 
     private static ILPProblem similarColors(Graph graph) {
-        //To be Implemented
-        return null;
+        // max amount of different colors
+        int maxColorNumber = getMaxDegree(graph) + 2; // resulting from total coloring conjecture assumed to be true
+        ILPProblem ilp = new ILPProblem();
+        HashMap<Color, Integer> colorMapping = new HashMap<Color, Integer>();
+
+        List<Node> nodes = graph.getNodes();
+        EdgeList edges = graph.getEdges();
+
+        int colorSimilarIndex = 0;
+        for (int i = 0; i < nodes.size(); i++) {
+            if (!nodes.get(i).getColor().equals(Node.DEFAULT_COLOR)) {
+                if (!colorMapping.containsKey(nodes.get(i).getColor())){
+                    colorMapping.put(nodes.get(i).getColor(), colorSimilarIndex);
+                    colorSimilarIndex++;
+                }
+            }
+        }
+        for (int i = 0; i < edges.size(); i++) {
+            if (!edges.get(i).getColor().equals(Edge.DEFAULT_COLOR)) {
+                if (!colorMapping.containsKey(edges.get(i).getColor())){
+                    if (colorSimilarIndex < maxColorNumber) {
+                        colorMapping.put(edges.get(i).getColor(), colorSimilarIndex);
+                        colorSimilarIndex++;
+                    }
+                }
+            }
+        }
+
+        //create Variables;
+        VertexColorVar[][] vertexColors = getAndSetVertexColorVars(ilp, maxColorNumber, nodes);
+        EdgeColorVar[][] edgeColors = getAndSetEdgeColorVars(ilp, maxColorNumber, edges);
+        ColorVar[] colors = getAndSetColorVars(ilp, maxColorNumber);
+
+        //create Constraints
+        setNodeColorConstraint(ilp, vertexColors, nodes, null);
+        setEdgeColorConstraint(ilp, edgeColors, edges, null);
+        setConnectedVertexConstraint(ilp, vertexColors, nodes, edges, maxColorNumber);
+        setAdjacentEdgeConstraint(ilp, vertexColors, edgeColors, nodes, edges, maxColorNumber);
+        setSetColorConstraint(ilp, vertexColors, edgeColors, colors);
+
+        //create opt Function
+        int bigConstant = nodes.size() + edges.size() + 1;
+        String optFunc = bigConstant + " * " + colors[0].getAsString(); //this entry exists, because maxColorNumber >= 2
+        for (int cNum = 1; cNum < maxColorNumber; cNum++) {
+            optFunc += " + " + bigConstant + " * " + colors[cNum].getAsString();
+        }
+
+        //maximize use of current Colors
+        for (int vNum = 0; vNum < vertexColors.length; vNum++) {
+            if(colorMapping.containsKey(nodes.get(vNum).getColor())) {
+                int usedColor = colorMapping.get(nodes.get(vNum).getColor());
+                optFunc += " - " + vertexColors[vNum][usedColor].getAsString();
+            }
+        }
+        for (int eNum = 0; eNum < edgeColors.length; eNum++) {
+            if(colorMapping.containsKey(edges.get(eNum).getColor())) {
+                int usedColor = colorMapping.get(edges.get(eNum).getColor());
+                optFunc += " - " + edgeColors[eNum][usedColor].getAsString();
+            }
+        }
+
+        Optfunction opt = new Optfunction(Arrays.asList(colors), optFunc, true);
+        ilp.setOptfunction(opt);
+
+        return ilp;
+
     }
 
     private static ILPProblem withSetColors(Graph graph) {
@@ -158,10 +222,10 @@ public class ILPGenerator {
         }
         //maximize color 0;
         for (int vNum = 0; vNum < vertexColors.length; vNum++) {
-            optFunc += " + " + vertexColors[vNum][0].getAsString();
+            optFunc += " - " + vertexColors[vNum][0].getAsString();
         }
         for (int eNum = 0; eNum < edgeColors.length; eNum++) {
-            optFunc += " + " + edgeColors[eNum][0].getAsString();
+            optFunc += " - " + edgeColors[eNum][0].getAsString();
         }
         Optfunction opt = new Optfunction(Arrays.asList(colors), optFunc, true);
         ilp.setOptfunction(opt);
@@ -220,10 +284,10 @@ public class ILPGenerator {
         }
         //maximize color 0;
         for (int vNum = 0; vNum < vertexColors.length; vNum++) {
-            optFunc += " + " + vertexColors[vNum][0].getAsString();
+            optFunc += " - " + vertexColors[vNum][0].getAsString();
         }
         for (int eNum = 0; eNum < edgeColors.length; eNum++) {
-            optFunc += " + " + edgeColors[eNum][0].getAsString();
+            optFunc += " - " + edgeColors[eNum][0].getAsString();
         }
         Optfunction opt = new Optfunction(Arrays.asList(colors), optFunc, true);
         ilp.setOptfunction(opt);
