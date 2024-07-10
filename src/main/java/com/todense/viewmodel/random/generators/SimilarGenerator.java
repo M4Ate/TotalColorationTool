@@ -26,34 +26,33 @@ public class SimilarGenerator extends RandomEdgeGenerator{
         Edge edgeOne = currentGraph.getEdges().get(randomEdgeId);
 
         //get a second random node with different end nodes
-        Edge edgeTow;
+        Edge edgeTwo;
         do {
             randomEdgeId = super.rnd.nextInt(this.currentGraph.getEdges().size());
-            edgeTow = currentGraph.getEdges().get(randomEdgeId);
-        } while (edgeOne.getN1() == edgeTow.getN1() && edgeOne.getN2() == edgeTow.getN2());
+            edgeTwo = currentGraph.getEdges().get(randomEdgeId);
+        } while (edgeOne.getN1().getIndex() == edgeTwo.getN2().getIndex()
+                | edgeTwo.getN1().getIndex() == edgeOne.getN2().getIndex());
 
         Color greyColor = Color.rgb(105, 105, 105);
-        edgeOne.setColor(greyColor);
-        edgeTow.setColor(greyColor);
 
-        //switch the ends of the edges
-        
+        currentGraph.removeEdge(edgeOne);
+        currentGraph.removeEdge(edgeTwo);
+
+        System.out.println("add edge from " + edgeOne.getN1() + " to " + edgeTwo.getN2());
+        currentGraph.addEdge(edgeOne.getN1(), edgeTwo.getN2(), greyColor);
+
+        System.out.println("add edge from " + edgeTwo.getN1() + " to " + edgeOne.getN2());
+        currentGraph.addEdge(edgeTwo.getN1(), edgeOne.getN2(), greyColor);
         //validate if a Graph is already loaded
         System.out.println("generate called");
     }
 
-    /*
-    TODO delete this after alternative is constructed
-    @Override
-    protected void generate() {
-        for(int i = 0; i < graph.getNodes().size(); i++){
-            for(int j = i+1; j < graph.getNodes().size(); j++){
-                if(graph.getEdge(i, j) != null){
-                    super.addEdge(i, j);
-                }
-            }
-        }
+    private boolean nodesDifferent (Edge edgeOne, Edge edgeTwo){
+        if(edgeOne.getN1().getIndex() != edgeTwo.getN1().getIndex()
+                && edgeOne.getN2().getIndex() != edgeTwo.getN2().getIndex()){}
+        return true;
     }
 
-     */
 }
+
+

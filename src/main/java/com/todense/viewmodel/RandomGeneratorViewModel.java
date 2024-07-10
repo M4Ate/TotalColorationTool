@@ -106,15 +106,20 @@ public class RandomGeneratorViewModel implements ViewModel {
             case SIMILAR_GRAPH:
                 //Case to call the similar graph generator
                 if(graphScope.getGraphManager().getGraph().getOrder() == 0) {
-                    notificationCenter.publish(MainViewModel.TASK_FINISHED, "A Graph needs to be loaded to" +
+                    notificationCenter.publish(MainViewModel.RESET, "A Graph needs to be loaded to" +
                             " perform this action");
                     throw new IllegalStateException("No graph found");
                 } else {
-                    edgeGenerator = new SimilarGenerator(graphScope.getGraphManager().getGraph());
-                    //TODO add a proxy Point generator so no new Nodes get generated and only edges get changed
-                    //TODO adjust UI to similar graph gen
-                }
-                break;
+                    Graph graph = graphScope.getGraphManager().getGraph();
+                    SimilarGenerator similarGenerator = new SimilarGenerator(graph);
+                    edgeGenerator = similarGenerator;
+                    similarGenerator.generateConnections();
+
+                    notificationCenter.publish(GraphViewModel.NEW_GRAPH_REQUEST, graph);
+                    notificationCenter.publish(MainViewModel.TASK_FINISHED, "Random graph generated");
+
+                    return;
+                 }
 
             default:
                 throw new IllegalStateException("Unexpected value: " + generatorProperty.get());
