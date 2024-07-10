@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="9dc8a254-2f10-4963-91e1-94254594d08b" name="Changes" comment="bypass unknown code">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/todense/viewmodel/RandomGeneratorViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/todense/viewmodel/RandomGeneratorViewModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/todense/viewmodel/random/generators/SimilarGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/todense/viewmodel/random/generators/SimilarGenerator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -149,6 +148,7 @@
       <workItem from="1720457543162" duration="221000" />
       <workItem from="1720508437370" duration="29000" />
       <workItem from="1720525420487" duration="6967000" />
+      <workItem from="1720594681898" duration="1859000" />
     </task>
     <task id="LOCAL-00001" summary="Added own Generator">
       <option name="closed" value="true" />
