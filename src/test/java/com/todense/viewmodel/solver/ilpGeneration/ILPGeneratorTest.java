@@ -14,7 +14,7 @@ class ILPGeneratorTest {
         graph.addNode();
         graph.addNode();
         graph.addEdge(graph.getNodes().get(0), graph.getNodes().get(1));
-        ILPProblem ilp = ILPGenerator.generateILP(graph, ILPType.MINCOLORS);
+        ILPProblem ilp = ILPGenerator.generateILP(graph, ILPType.MINCOLORS, null);
         String jsonString = ilp.getILPAsJsonString();
         String expected = "{\"variables\":[\"x_v0_c0\",\"x_v0_c1\",\"x_v0_c2\",\"x_v1_c0\",\"x_v1_c1\"," +
                 "\"x_v1_c2\",\"y_e0_c0\",\"y_e0_c1\",\"y_e0_c2\",\"z_c0\",\"z_c1\",\"z_c2\"],\"constraints\"" +
@@ -37,7 +37,7 @@ class ILPGeneratorTest {
         graph.addEdge(graph.getNodes().get(0), graph.getNodes().get(1));
         graph.getNodes().get(0).setColor(Color.web("0x00FF00"));
         graph.getEdges().get(0).setColor(Color.web("0x0000FF"));
-        ILPProblem ilp = ILPGenerator.generateILP(graph, ILPType.WITHSETCOLORS);
+        ILPProblem ilp = ILPGenerator.generateILP(graph, ILPType.WITHSETCOLORS, null);
         String jsonString = ilp.getILPAsJsonString();
         String expected = "{\"variables\":[\"x_v0_c0\",\"x_v0_c1\",\"x_v0_c2\",\"x_v1_c0\",\"x_v1_c1\",\"x_v1_c2\"," +
                 "\"y_e0_c0\",\"y_e0_c1\",\"y_e0_c2\",\"z_c0\",\"z_c1\",\"z_c2\"],\"constraints\":" +
@@ -58,7 +58,7 @@ class ILPGeneratorTest {
         graph.addNode();
         graph.addNode();
         graph.addEdge(graph.getNodes().get(0), graph.getNodes().get(1));
-        ILPProblem ilp = ILPGenerator.generateILP(graph, ILPType.WITHLOWCOLORS);
+        ILPProblem ilp = ILPGenerator.generateILP(graph, ILPType.WITHLOWCOLORS, null);
         String jsonString = ilp.getILPAsJsonString();
         String expected = "{\"variables\":[\"x_v0_c0\",\"x_v0_c1\",\"x_v0_c2\",\"x_v1_c0\",\"x_v1_c1\",\"x_v1_c2\"," +
                 "\"y_e0_c0\",\"y_e0_c1\",\"y_e0_c2\",\"z_c0\",\"z_c1\",\"z_c2\"],\"constraints\":" +
