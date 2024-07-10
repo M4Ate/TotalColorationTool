@@ -1,5 +1,7 @@
 package com.todense.viewmodel.solver.ilpGeneration;
 
+import javafx.scene.paint.Color;
+
 /**
  * specifies the type of ILP-Problem
  */
@@ -22,8 +24,30 @@ public enum ILPType {
     WITHLOWCOLORS,
     /**
      * WITHLOWSETCOLORS will try to maximize the use of low number colors, while allowing
-     * set colors, in the total coloring ILP-Problem
+     * set colors, in the total coloring ILP-Problem (has to be set with maximizeColor
      */
-    WITHLOWSETCOLORS
+    WITHLOWSETCOLORS;
+
+    private Color maximizeColor;
+
+    ILPType() {
+        maximizeColor = null;
+    }
+
+    /**
+     * Sets maximizeColor (only necessary for WITHLOWCOLORS
+     * @param maximizeColor
+     */
+    public void setMaximizeColor(Color maximizeColor) {
+        this.maximizeColor = maximizeColor;
+    }
+
+    /**
+     * gives the maximizeColor
+     * @return maximizeColor
+     */
+    public Color getMaximizeColor() {
+        return maximizeColor;
+    }
 
 }

@@ -19,11 +19,9 @@ public class ILPGenerator {
      *
      * @param graph graph to convert into ILP-Problem
      * @param type type of ILP-Problem
-     * @param maximizeColor Color that needs to be maximized, can be null if type is not WITHLOWCOLORS or
-     *                      WITHLOWSETCOLORS
      * @return complete ILPProblem class or null if there are too many Colors used
      */
-    public static ILPProblem generateILP(Graph graph, ILPType type, Color maximizeColor) {
+    public static ILPProblem generateILP(Graph graph, ILPType type) {
         ILPProblem result = null;
         switch (type) {
             case MINCOLORS:
@@ -39,7 +37,7 @@ public class ILPGenerator {
                 result = withLowColors(graph);
                 break;
             case WITHLOWSETCOLORS:
-                result = withLowSetColors(graph);
+                result = withLowSetColors(graph, type.getMaximizeColor());
                 break;
         }
         return result;
@@ -171,9 +169,66 @@ public class ILPGenerator {
         return ilp;
     }
 
-    private static ILPProblem withLowSetColors(Graph graph) {
-        //To be Implemented
-        return null;
+    private static ILPProblem withLowSetColors(Graph graph, Color maximizeColor) {
+        // max amount of different colors
+        int maxColorNumber = getMaxDegree(graph) + 2; // resulting from total coloring conjecture assumed to be true
+        ILPProblem ilp = new ILPProblem();
+        HashMap<Color, Integer> colorMapping = new HashMap<Color, Integer>();
+
+        List<Node> nodes = graph.getNodes();
+        EdgeList edges = graph.getEdges();
+
+        colorMapping.put(maximizeColor, 0);
+        int colorIndex = 1;
+        for (int i = 0; i < nodes.size(); i++) {
+            if (!nodes.get(i).getColor().equals(Node.DEFAULT_COLOR)) {
+                if (!colorMapping.containsKey(nodes.get(i).getColor())){
+                    colorMapping.put(nodes.get(i).getColor(), colorIndex);
+                    colorIndex++;
+                }
+            }
+        }
+        for (int i = 0; i < edges.size(); i++) {
+            if (!edges.get(i).getColor().equals(Edge.DEFAULT_COLOR)) {
+                if (!colorMapping.containsKey(edges.get(i).getColor())){
+                    colorMapping.put(edges.get(i).getColor(), colorIndex);
+                    colorIndex++;
+                }
+            }
+        }
+        if (colorIndex >= maxColorNumber) {
+            return null;
+        }
+
+        //create Variables;
+        VertexColorVar[][] vertexColors = getAndSetVertexColorVars(ilp, maxColorNumber, nodes);
+        EdgeColorVar[][] edgeColors = getAndSetEdgeColorVars(ilp, maxColorNumber, edges);
+        ColorVar[] colors = getAndSetColorVars(ilp, maxColorNumber);
+
+        //create Constraints
+        setNodeColorConstraint(ilp, vertexColors, nodes, colorMapping);
+        setEdgeColorConstraint(ilp, edgeColors, edges, colorMapping);
+        setConnectedVertexConstraint(ilp, vertexColors, nodes, edges, maxColorNumber);
+        setAdjacentEdgeConstraint(ilp, vertexColors, edgeColors, nodes, edges, maxColorNumber);
+        setSetColorConstraint(ilp, vertexColors, edgeColors, colors);
+
+        //create opt Function
+        int bigConstant = nodes.size() + edges.size() + 1;
+        String optFunc = bigConstant + " * " + colors[0].getAsString(); //this entry exists, because maxColorNumber >= 2
+        for (int cNum = 1; cNum < maxColorNumber; cNum++) {
+            optFunc += " + " + bigConstant + " * " + colors[cNum].getAsString();
+        }
+        //maximize color 0;
+        for (int vNum = 0; vNum < vertexColors.length; vNum++) {
+            optFunc += " + " + vertexColors[vNum][0].getAsString();
+        }
+        for (int eNum = 0; eNum < edgeColors.length; eNum++) {
+            optFunc += " + " + edgeColors[eNum][0].getAsString();
+        }
+        Optfunction opt = new Optfunction(Arrays.asList(colors), optFunc, true);
+        ilp.setOptfunction(opt);
+
+        return ilp;
     }
 
     private static int getMaxDegree(Graph graph){
