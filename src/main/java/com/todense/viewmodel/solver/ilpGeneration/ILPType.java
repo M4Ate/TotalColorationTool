@@ -24,7 +24,7 @@ public enum ILPType {
     WITHLOWCOLORS,
     /**
      * WITHLOWSETCOLORS will try to maximize the use of low number colors, while allowing
-     * set colors, in the total coloring ILP-Problem (has to be set with maximizeColor
+     * set colors, in the total coloring ILP-Problem (has to be set with maximizeColor)
      */
     WITHLOWSETCOLORS;
 
