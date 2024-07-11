@@ -79,8 +79,10 @@ public class SolverViewModel implements ViewModel {
             array[1] = extract[3];
 
         } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
+            System.out.println("No server config file found.");
+
+        } catch(ArrayIndexOutOfBoundsException e){
+            System.out.println("Couldn't resolve the file. Please check the format.");
         }
 
         return array;
@@ -94,7 +96,7 @@ public class SolverViewModel implements ViewModel {
 
             if (file.createNewFile()) {
                 FileWriter configWriter = new FileWriter(file.getName());
-                configWriter.write("Server_IP:" + IP + " " + "Server_Port" + Port);
+                configWriter.write("Server_IP: " + IP + " " + "Server_Port: " + Port);
                 configWriter.close();
 
             } else {
