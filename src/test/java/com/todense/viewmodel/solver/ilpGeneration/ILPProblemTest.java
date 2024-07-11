@@ -35,7 +35,7 @@ class ILPProblemTest {
         assertEquals("{\"variables\":[\"x_v0_c0\",\"x_v1_c0\",\"z_c0\",\"z_c1\"]," +
                 "\"constraints\":[\"x_v0_c0 + x_v1_c0 = 1\",\"xv0_c0 = 1\"]," +
                 "\"optimizationFunction\":\"z_c0 + z_c1\"," +
-                "\"minimize\":false}", jsonString);
+                "\"minimize\":true}", jsonString);
 
     }
 }

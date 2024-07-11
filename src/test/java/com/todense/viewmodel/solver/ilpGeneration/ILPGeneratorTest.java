@@ -25,7 +25,7 @@ class ILPGeneratorTest {
                 "\"x_v1_c2 + y_e0_c2 <= 1\",\"x_v0_c0 - z_c0 <= 0\",\"x_v0_c1 - z_c1 <= 0\",\"x_v0_c2 - z_c2 <= 0\"," +
                 "\"x_v1_c0 - z_c0 <= 0\",\"x_v1_c1 - z_c1 <= 0\",\"x_v1_c2 - z_c2 <= 0\",\"y_e0_c0 - z_c0 <= 0\"," +
                 "\"y_e0_c1 - z_c1 <= 0\",\"y_e0_c2 - z_c2 <= 0\"],\"optimizationFunction\":\"z_c0 + z_c1 + z_c2\"," +
-                "\"minimize\":false}";
+                "\"minimize\":true}";
         assertEquals(expected, jsonString);
     }
 
@@ -48,7 +48,7 @@ class ILPGeneratorTest {
                 "\"x_v1_c1 + y_e0_c1 <= 1\",\"x_v1_c2 + y_e0_c2 <= 1\",\"x_v0_c0 - z_c0 <= 0\"," +
                 "\"x_v0_c1 - z_c1 <= 0\",\"x_v0_c2 - z_c2 <= 0\",\"x_v1_c0 - z_c0 <= 0\",\"x_v1_c1 - z_c1 <= 0\"," +
                 "\"x_v1_c2 - z_c2 <= 0\",\"y_e0_c0 - z_c0 <= 0\",\"y_e0_c1 - z_c1 <= 0\",\"y_e0_c2 - z_c2 <= 0\"]," +
-                "\"optimizationFunction\":\"z_c0 + z_c1 + z_c2\",\"minimize\":false}";
+                "\"optimizationFunction\":\"z_c0 + z_c1 + z_c2\",\"minimize\":true}";
         assertEquals(expected, jsonString);
     }
 
@@ -71,7 +71,7 @@ class ILPGeneratorTest {
                 "\"x_v1_c2 + y_e0_c2 <= 1\",\"x_v0_c0 - z_c0 <= 0\",\"x_v0_c1 - z_c1 <= 0\",\"x_v0_c2 - z_c2 <= 0\"," +
                 "\"x_v1_c0 - z_c0 <= 0\",\"x_v1_c1 - z_c1 <= 0\",\"x_v1_c2 - z_c2 <= 0\",\"y_e0_c0 - z_c0 <= 0\"," +
                 "\"y_e0_c1 - z_c1 <= 0\",\"y_e0_c2 - z_c2 <= 0\"],\"optimizationFunction\":" +
-                "\"4 * z_c0 + 4 * z_c1 + 4 * z_c2 - x_v0_c0 - x_v1_c0 - y_e0_c0\",\"minimize\":false}";
+                "\"4 * z_c0 + 4 * z_c1 + 4 * z_c2 - x_v0_c0 - x_v1_c0 - y_e0_c0\",\"minimize\":true}";
         assertEquals(expected, jsonString);
     }
 
@@ -97,7 +97,7 @@ class ILPGeneratorTest {
                 "\"x_v0_c1 - z_c1 <= 0\",\"x_v0_c2 - z_c2 <= 0\",\"x_v1_c0 - z_c0 <= 0\",\"x_v1_c1 - z_c1 <= 0\"," +
                 "\"x_v1_c2 - z_c2 <= 0\",\"y_e0_c0 - z_c0 <= 0\",\"y_e0_c1 - z_c1 <= 0\",\"y_e0_c2 - z_c2 <= 0\"]," +
                 "\"optimizationFunction\":\"4 * z_c0 + 4 * z_c1 + 4 * z_c2 - x_v0_c0 - x_v1_c0 - y_e0_c0\"," +
-                "\"minimize\":false}";
+                "\"minimize\":true}";
         assertEquals(expected, jsonString);
     }
 
@@ -120,7 +120,7 @@ class ILPGeneratorTest {
                 "\"x_v1_c2 + y_e0_c2 <= 1\",\"x_v0_c0 - z_c0 <= 0\",\"x_v0_c1 - z_c1 <= 0\",\"x_v0_c2 - z_c2 <= 0\"," +
                 "\"x_v1_c0 - z_c0 <= 0\",\"x_v1_c1 - z_c1 <= 0\",\"x_v1_c2 - z_c2 <= 0\",\"y_e0_c0 - z_c0 <= 0\"," +
                 "\"y_e0_c1 - z_c1 <= 0\",\"y_e0_c2 - z_c2 <= 0\"],\"optimizationFunction\":" +
-                "\"4 * z_c0 + 4 * z_c1 + 4 * z_c2 - x_v0_c0 - y_e0_c1\",\"minimize\":false}";
+                "\"4 * z_c0 + 4 * z_c1 + 4 * z_c2 - x_v0_c0 - y_e0_c1\",\"minimize\":true}";
         assertEquals(expected, jsonString);
     }
 }

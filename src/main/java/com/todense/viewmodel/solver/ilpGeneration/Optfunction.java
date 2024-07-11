@@ -18,6 +18,7 @@ public class Optfunction {
     public Optfunction(List<Variable> vars, String optfunction, boolean isMinimize) {
         this.varlist = vars;
         this.optfunction = optfunction;
+        this.isMinimize = isMinimize;
     }
 
     /**
