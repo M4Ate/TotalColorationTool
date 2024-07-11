@@ -24,6 +24,7 @@ public class ILPProblem {
         variables = new ArrayList<Variable>();
         constraints = new ArrayList<Constraint>();
         optfunction = null;
+        colorMapping = null;
     }
 
     /**
@@ -86,6 +87,9 @@ public class ILPProblem {
      * @return Hashmap from Integer to Color
      */
     public HashMap<Integer, Color> getReverseColorMapping() {
+        if (colorMapping == null) {
+            return new HashMap<Integer, Color>();
+        }
         HashMap<Integer, Color> reverseMap = new HashMap<>();
         colorMapping.keySet();
         for (Color c : colorMapping.keySet()) {

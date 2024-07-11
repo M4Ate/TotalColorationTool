@@ -34,7 +34,7 @@ public class ILPGenerator {
                 result = withSetColors(graph);
                 break;
             case WITHLOWCOLORS:
-                result = withLowColors(graph);
+                result = withLowColors(graph, type.getMaximizeColor());
                 break;
             case WITHLOWSETCOLORS:
                 result = withLowSetColors(graph, type.getMaximizeColor());
@@ -101,6 +101,8 @@ public class ILPGenerator {
                 }
             }
         }
+
+        ilp.setColorMapping(colorMapping);
 
         //create Variables;
         VertexColorVar[][] vertexColors = getAndSetVertexColorVars(ilp, maxColorNumber, nodes);
@@ -172,6 +174,8 @@ public class ILPGenerator {
             return null;
         }
 
+        ilp.setColorMapping(colorMapping);
+
         //create Variables;
         VertexColorVar[][] vertexColors = getAndSetVertexColorVars(ilp, maxColorNumber, nodes);
         EdgeColorVar[][] edgeColors = getAndSetEdgeColorVars(ilp, maxColorNumber, edges);
@@ -195,12 +199,16 @@ public class ILPGenerator {
         return ilp;
     }
 
-    private static ILPProblem withLowColors(Graph graph) {
+    private static ILPProblem withLowColors(Graph graph, Color maximizeColor) {
         int maxColorNumber = getMaxDegree(graph) + 2; // resulting from total coloring conjecture assumed to be true
         ILPProblem ilp = new ILPProblem();
+        HashMap<Color, Integer> colorMapping = new HashMap<Color, Integer>();
 
         List<Node> nodes = graph.getNodes();
         EdgeList edges = graph.getEdges();
+
+        colorMapping.put(maximizeColor, 0);
+        ilp.setColorMapping(colorMapping);
 
         //create Variables;
         VertexColorVar[][] vertexColors = getAndSetVertexColorVars(ilp, maxColorNumber, nodes);
@@ -263,6 +271,8 @@ public class ILPGenerator {
         if (colorIndex >= maxColorNumber) {
             return null;
         }
+
+        ilp.setColorMapping(colorMapping);
 
         //create Variables;
         VertexColorVar[][] vertexColors = getAndSetVertexColorVars(ilp, maxColorNumber, nodes);
