@@ -4,16 +4,18 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.todense.model.EdgeList;
+import com.todense.model.graph.Edge;
 import com.todense.model.graph.Graph;
-import com.todense.viewmodel.solver.ilpGeneration.EdgeColorVar;
-import com.todense.viewmodel.solver.ilpGeneration.ILPType;
-import com.todense.viewmodel.solver.ilpGeneration.Variable;
-import com.todense.viewmodel.solver.ilpGeneration.VertexColorVar;
+import com.todense.model.graph.Node;
+import com.todense.viewmodel.solver.ilpGeneration.*;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class GraphColorer {
 
@@ -26,7 +28,8 @@ public class GraphColorer {
      * @param type the type of Problem
      * @return the colored Graph or null if the jsonResponse has an error
      */
-    public static Graph getColoredGraph(Graph graph, List<Variable> varList, String jsonResponse, ILPType type) {
+    public static Graph getColoredGraph(Graph graph, ILPProblem ilp, String jsonResponse) {
+
         // unpack jsonResponse
         JsonObject responseObject = JsonParser.parseString(jsonResponse).getAsJsonObject();
         boolean error = responseObject.get("error").getAsBoolean();
@@ -42,6 +45,7 @@ public class GraphColorer {
             resultMap.put(varName, value);
         }
         // extract VertexColorVars and EdgeColorVars
+        List<Variable> varList = ilp.getVarList();
         ArrayList<VertexColorVar> vertexVars = new ArrayList<>();
         ArrayList<EdgeColorVar> edgeVars = new ArrayList<>();
         for (Variable var : varList) {
@@ -52,24 +56,63 @@ public class GraphColorer {
             }
         }
         //color Graph
-        if (type == ILPType.MINCOLORS || type == ILPType.WITHSETCOLORS) {
-            return standartColor(graph, vertexVars, edgeVars, resultMap);
-        } else if (type == ILPType.WITHLOWCOLORS || type == ILPType.WITHLOWSETCOLORS) {
-            return colorWithPreferredColor(graph, vertexVars, edgeVars, type.getMaximizeColor(), resultMap);
+        HashMap<Integer, Color> colorMap;
+        colorMap = ilp.getReverseColorMapping();
+        return minColorsColorer(graph, vertexVars, edgeVars, resultMap, colorMap);
+    }
+
+    private static Graph minColorsColorer(Graph graph, ArrayList<VertexColorVar> vertexVars,
+                                          ArrayList<EdgeColorVar> edgeVars, HashMap<String, Integer> resultMap,
+                                          HashMap<Integer, Color> colorMap) {
+        //configure ColorGenerator
+        ColorGenerator cg = new ColorGenerator();
+        cg.addUsedColor(Node.DEFAULT_COLOR);
+        cg.addUsedColor(Edge.DEFAULT_COLOR);
+        for (Color c : colorMap.values()) {
+            cg.addUsedColor(c);
         }
-
-        return null;
+        //color Nodes
+        for (VertexColorVar vertexVar : vertexVars) {
+            int value = resultMap.get(vertexVar.getAsString());
+            if (value == 1) {
+                int colorNumber = getColorNumber(vertexVar.getAsString());
+                if (!colorMap.containsKey(colorNumber)) {
+                    colorMap.put(colorNumber, cg.getUniqueColor());
+                }
+                Color color = colorMap.get(colorNumber);
+                graph.getNodeById(vertexVar.getVertexId()).setColor(color);
+            }
+        }
+        //color Edges
+        EdgeList edges = graph.getEdges();
+        for (EdgeColorVar edgeVar: edgeVars) {
+            int value = resultMap.get(edgeVar.getAsString());
+            if (value == 1) {
+                int colorNumber = getColorNumber(edgeVar.getAsString());
+                if (!colorMap.containsKey(colorNumber)) {
+                    colorMap.put(colorNumber, cg.getUniqueColor());
+                }
+                Color color = colorMap.get(colorNumber);
+                String edgeId = edgeVar.getEdgeId();
+                for (Edge edge : edges) {
+                    if (edge.getId().equals(edgeId)) {
+                        edge.setColor(color);
+                    }
+                }
+            }
+        }
+        return graph;
     }
 
-    private static Graph standartColor(Graph graph, ArrayList<VertexColorVar> vertexVars,
-                                       ArrayList<EdgeColorVar> edgeVars, HashMap<String, Integer> resultMap) {
-
-        return null;
-    }
-    private static Graph colorWithPreferredColor(Graph graph, ArrayList<VertexColorVar> vertexVars,
-                                                 ArrayList<EdgeColorVar> edgeVars, Color c,
-                                                 HashMap<String, Integer> resultMap) {
-        return null;
+    private static int getColorNumber(String varName) {
+        //pattern that matches the last integer of the String, which is the Color number
+        Pattern pattern = Pattern.compile("(\\d+)$");
+        Matcher matcher = pattern.matcher(varName);
+        if (matcher.find()) {
+            return Integer.parseInt(matcher.group(1));
+        } else {
+            return -1;
+        }
     }
 
 
