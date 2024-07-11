@@ -2,8 +2,10 @@ package com.todense.viewmodel.solver.ilpGeneration;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -12,6 +14,8 @@ public class ILPProblem {
     private List<Variable> variables;
     private List<Constraint> constraints;
     private Optfunction optfunction;
+
+    private HashMap<Color, Integer> colorMapping;
 
     /**
      * creates a new empty ILP-Problem
@@ -65,6 +69,29 @@ public class ILPProblem {
      */
     public List<Constraint> getConstraintList() {
         return constraints;
+    }
+
+    /**
+     * Sets a mapping of already used Colors to the corresponding Color Number of the ILP
+     *
+     * @param colorMapping Hashmap from Color to Integer
+     */
+    public void setColorMapping(HashMap<Color, Integer> colorMapping){
+        this.colorMapping = colorMapping;
+    }
+
+    /**
+     * Returns a mapping from the Color number to the actual used Color
+     *
+     * @return Hashmap from Integer to Color
+     */
+    public HashMap<Integer, Color> getReverseColorMapping() {
+        HashMap<Integer, Color> reverseMap = new HashMap<>();
+        colorMapping.keySet();
+        for (Color c : colorMapping.keySet()) {
+            reverseMap.put(colorMapping.get(c), c);
+        }
+        return  reverseMap;
     }
 
     /**
