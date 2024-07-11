@@ -100,8 +100,6 @@ public class SolverViewModel implements ViewModel {
                 configWriter.close();
 
             } else {
-                System.out.println("File already exists.");
-
                 FileWriter configWriter = new FileWriter(file.getName());
                 configWriter.write("");
                 configWriter.write("Server_IP: " + IP + " " + "Server_Port: " + Port);
