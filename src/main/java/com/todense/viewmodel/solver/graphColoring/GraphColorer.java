@@ -23,9 +23,8 @@ public class GraphColorer {
      * Colors the graph with the jsonResponse
      *
      * @param graph graph that will be colored
-     * @param varList list of the Variables so json Variables can be matched with the corresponding edges and nodes
+     * @param ilp the corresponding ILPProblem
      * @param jsonResponse the String of the json Response
-     * @param type the type of Problem
      * @return the colored Graph or null if the jsonResponse has an error
      */
     public static Graph getColoredGraph(Graph graph, ILPProblem ilp, String jsonResponse) {
