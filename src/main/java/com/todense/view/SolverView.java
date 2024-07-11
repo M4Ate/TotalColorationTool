@@ -7,10 +7,7 @@ import de.saxsys.mvvmfx.FxmlView;
 import de.saxsys.mvvmfx.InjectViewModel;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -26,9 +23,8 @@ import java.util.List;
 public class SolverView implements FxmlView<SolverViewModel> {
 
     @FXML private ToggleSwitch preferColorToggleSwitch, brightColoringToggleSwitch, currentColorsToggleSwitch, useServerToggleSwitch;
-
     @FXML private ColorPicker preferColorPicker;
-
+    @FXML private Button saveServerButton;
     @FXML private TextField serverIP, serverPort;
     @FXML private Label serverIPLabel, serverPortLabel;
     @FXML private ChoiceBox<String> serverSelect;
@@ -64,10 +60,10 @@ public class SolverView implements FxmlView<SolverViewModel> {
         serverPort.disableProperty().bind(useServerToggleSwitch.selectedProperty().not());
         serverPortLabel.disableProperty().bind(useServerToggleSwitch.selectedProperty().not());
 
+        String[] savedValues = viewModel.loadSavedServerValues();
 
-        //serverSelect.getItems().addAll(getSavedServers());
-        //serverSelect.getItems().add("No Servers");
-
+        serverIP.setText(savedValues[0]);
+        serverPort.setText(savedValues[1]);
     }
 
     @FXML
@@ -82,23 +78,17 @@ public class SolverView implements FxmlView<SolverViewModel> {
         String ipInput = serverIP.getText();
         String portInput = serverPort.getText();
 
-        System.out.println("Server Toggle: " + useServerToggle);
-        System.out.println("IP Input: " + ipInput);
-        System.out.println("Port Input: " + portInput);
-
-        //viewModel.start(preferColor, preferredColor, brightColoring, currentColorsToggle);
-
-    }
-
-    private List<Server> getSavedServers(){
-
-        List<Server> servers = new ArrayList<>();
-
-        return servers;
+        viewModel.start(preferColor, preferredColor, brightColoring, currentColorsToggle, useServerToggle , ipInput, portInput);
 
     }
 
     @FXML
     private void stopAction(){
     }
+
+    @FXML
+    private void saveServer(){
+        viewModel.saveServerConfig(serverIP.getText(), serverPort.getText());
+    }
 }
+

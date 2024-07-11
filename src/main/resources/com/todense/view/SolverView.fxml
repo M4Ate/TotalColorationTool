@@ -104,20 +104,24 @@
       </ToggleSwitch>
 
       <Label fx:id="serverIPLabel" alignment="CENTER" layoutX="16.0" layoutY="10.0" prefHeight="7.0" styleClass="darkLabel" text="Server IP"></Label>
-      <TextField fx:id="serverIP" alignment="CENTER" maxWidth="10000.0" text="127.0.0.1">
+      <TextField fx:id="serverIP" alignment="CENTER" maxWidth="10000.0">
          <font>
             <Font size="16.0" />
          </font>
       </TextField>
 
       <Label fx:id="serverPortLabel" alignment="CENTER" layoutX="16.0" layoutY="10.0" prefHeight="7.0" styleClass="darkLabel" text="Server Port"></Label>
-      <TextField fx:id="serverPort" alignment="CENTER" maxWidth="10000.0" text="80">
+      <TextField fx:id="serverPort" alignment="CENTER" maxWidth="10000.0">
          <font>
             <Font size="16.0" />
          </font>
       </TextField>
 
-      <ChoiceBox fx:id="serverSelect" maxWidth="1.7976931348623157E308" minWidth="-Infinity"/>
+      <Button fx:id="saveServerButton" alignment="CENTER" layoutX="16.0" layoutY="10.0" prefHeight="7.0" styleClass="darkLabel" text="Save Server" onAction="#saveServer">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
 
       <VBox.margin>
          <Insets />
