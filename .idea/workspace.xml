@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9dc8a254-2f10-4963-91e1-94254594d08b" name="Changes" comment="Change ILP icon, Create proper ILP input Box similar to the Mockup and create method body for ILP Solver.">
+    <list default="true" id="9dc8a254-2f10-4963-91e1-94254594d08b" name="Changes" comment="Checking on notificationCenter usage (V.0, inital commit)">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/todense/viewmodel/solver/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/todense/view/SolverView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/todense/view/SolverView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/todense/viewmodel/SolverViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/todense/viewmodel/SolverViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/todense/view/SolverView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/todense/view/SolverView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,7 +158,13 @@
       <workItem from="1719464056761" duration="2013000" />
       <workItem from="1719467172484" duration="295000" />
       <workItem from="1719470293040" duration="595000" />
-      <workItem from="1719550707479" duration="592000" />
+      <workItem from="1719550707479" duration="1018000" />
+      <workItem from="1719987471287" duration="1308000" />
+      <workItem from="1720079447114" duration="1042000" />
+      <workItem from="1720536856867" duration="2316000" />
+      <workItem from="1720548095059" duration="2765000" />
+      <workItem from="1720598433099" duration="87000" />
+      <workItem from="1720687307927" duration="617000" />
     </task>
     <task id="LOCAL-00001" summary="Added own Generator">
       <option name="closed" value="true" />
@@ -215,7 +222,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719466003895</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Retrieve constraint input values.">
+      <option name="closed" value="true" />
+      <created>1719551321820</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1719551321820</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -262,7 +277,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/New-Classes" />
+                        <option value="origin/main" />
                       </list>
                     </value>
                   </entry>
@@ -281,7 +296,8 @@
     <MESSAGE value="Add left side button and change solverView as well as the SolverViewModel." />
     <MESSAGE value="Merging with remote status." />
     <MESSAGE value="Change ILP icon, Create proper ILP input Box similar to the Mockup and create method body for ILP Solver." />
-    <option name="LAST_COMMIT_MESSAGE" value="Change ILP icon, Create proper ILP input Box similar to the Mockup and create method body for ILP Solver." />
+    <MESSAGE value="Retrieve constraint input values." />
+    <option name="LAST_COMMIT_MESSAGE" value="Retrieve constraint input values." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

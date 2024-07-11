@@ -11,6 +11,8 @@
 <?import org.controlsfx.control.ToggleSwitch?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ChoiceBox?>
 <VBox alignment="CENTER" prefWidth="250.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.todense.view.SolverView">
 
    <Label alignment="CENTER" layoutX="16.0" layoutY="10.0" prefHeight="7.0" prefWidth="208.0" styleClass="darkLabel" text="ILP Solver">
@@ -85,4 +87,40 @@
    <padding>
       <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
    </padding>
+   <Label alignment="CENTER" layoutX="16.0" layoutY="10.0" prefHeight="7.0" prefWidth="208.0" styleClass="darkLabel" text="External Server">
+      <VBox.margin>
+         <Insets bottom="2.0" top="7.0" />
+      </VBox.margin></Label>
+   <VBox fx:id="serverOptionsVBox" alignment="CENTER" spacing="5.0" styleClass="subsection">
+
+      <VBox.margin>
+         <Insets />
+      </VBox.margin>
+
+      <ToggleSwitch fx:id="useServerToggleSwitch" alignment="CENTER" maxWidth="10000.0" selected="false" text="Use Server">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </ToggleSwitch>
+
+      <Label fx:id="serverIPLabel" alignment="CENTER" layoutX="16.0" layoutY="10.0" prefHeight="7.0" styleClass="darkLabel" text="Server IP"></Label>
+      <TextField fx:id="serverIP" alignment="CENTER" maxWidth="10000.0" text="127.0.0.1">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+
+      <Label fx:id="serverPortLabel" alignment="CENTER" layoutX="16.0" layoutY="10.0" prefHeight="7.0" styleClass="darkLabel" text="Server Port"></Label>
+      <TextField fx:id="serverPort" alignment="CENTER" maxWidth="10000.0" text="80">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+
+      <ChoiceBox fx:id="serverSelect" maxWidth="1.7976931348623157E308" minWidth="-Infinity"/>
+
+      <VBox.margin>
+         <Insets />
+      </VBox.margin>
+   </VBox>
 </VBox>
