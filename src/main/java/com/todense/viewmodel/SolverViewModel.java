@@ -3,8 +3,12 @@ package com.todense.viewmodel;
 import com.google.inject.Inject;
 import com.todense.model.graph.Graph;
 import com.todense.viewmodel.graph.GraphManager;
+import java.net.http.HttpClient;
 import com.todense.viewmodel.scope.GraphScope;
-import com.todense.viewmodel.solver.JsonBuilder;
+import com.todense.viewmodel.solver.graphColoring.GraphColorer;
+import com.todense.viewmodel.solver.ilpGeneration.ILPGenerator;
+import com.todense.viewmodel.solver.ilpGeneration.ILPProblem;
+import com.todense.viewmodel.solver.ilpGeneration.ILPType;
 import de.saxsys.mvvmfx.InjectScope;
 import de.saxsys.mvvmfx.ViewModel;
 import de.saxsys.mvvmfx.utils.notifications.NotificationCenter;
@@ -12,6 +16,10 @@ import javafx.scene.paint.Color;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.net.http.HttpRequest;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Scanner;
 import java.io.IOException;
 
@@ -33,27 +41,45 @@ public class SolverViewModel implements ViewModel {
     }
 
 
-    public void start(Boolean preferColor, Color preferredColor, Boolean brightColoring, Boolean currentColorsToggle, Boolean useServer, String IP, String Port){
-        System.out.println(preferColor);
-        System.out.println(preferredColor);
-        System.out.println(brightColoring);
-        System.out.println(currentColorsToggle);
-        System.out.println(useServer);
-        System.out.println(IP);
-        System.out.println(Port);
-    }
+    public void start(Boolean preferColor, Color preferredColor, Boolean similarColoring,
+                      Boolean currentColors, Boolean useServer, String IP, String Port){
 
-    /**
-     *  uses an ILP solver to generate a minimal total coloring of the currently displayed graph
-     */
-    public void colorWithILPSolver(){
-        Graph graph = graphManager.getGraph();
-        String jsonRequest = JsonBuilder.generateConstraintsJson(graph);
+        notificationCenter.publish(MainViewModel.TASK_STARTED, "Calculating Coloration");
 
-        //request to server
+        ILPType type = ILPType.MINCOLORS;
 
-        //color graph according to ilp solution
+        if(similarColoring){
+            type = ILPType.SIMILARCOLORS;
+        } else if(preferColor && !currentColors){
+            type = ILPType.WITHLOWCOLORS;
+            type.setMaximizeColor(preferredColor);
+        } else if(preferColor && currentColors){
+            type = ILPType.WITHLOWSETCOLORS;
+            type.setMaximizeColor(preferredColor);
+        } else if(!preferColor && currentColors){
+            type = ILPType.WITHSETCOLORS;
+        }
 
+        Graph currentGraph = graphManager.getGraph().copy();
+
+        ILPProblem problem = ILPGenerator.generateILP(currentGraph, type);
+
+        String jsonString = problem.getILPAsJsonString();
+
+        System.out.println(jsonString);
+
+        //Anfrage an Server machen eventuell anderer Thread oder async
+
+        //Graph newGraph = GraphColorer.getColoredGraph(currentGraph, problem, jsonResponse); //Graph, ILP Problem und Type
+
+        //Hier sollte der Graph mit gesetzt werden als neuer
+        //TODO: currentGraph gegen den newGraph austauschen
+        try{
+            notificationCenter.publish(GraphViewModel.NEW_GRAPH_REQUEST, currentGraph);
+            notificationCenter.publish(MainViewModel.TASK_FINISHED, "Graph colored");
+        } catch (RuntimeException e){
+            notificationCenter.publish(MainViewModel.TASK_FINISHED, e.getMessage());
+        }
     }
 
     public String[] loadSavedServerValues(){

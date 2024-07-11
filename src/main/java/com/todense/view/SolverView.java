@@ -22,12 +22,10 @@ import java.util.List;
 
 public class SolverView implements FxmlView<SolverViewModel> {
 
-    @FXML private ToggleSwitch preferColorToggleSwitch, brightColoringToggleSwitch, currentColorsToggleSwitch, useServerToggleSwitch;
+    @FXML private ToggleSwitch preferColorToggleSwitch, similarColoringToggleSwitch, currentColorsToggleSwitch, useServerToggleSwitch;
     @FXML private ColorPicker preferColorPicker;
-    @FXML private Button saveServerButton;
     @FXML private TextField serverIP, serverPort;
-    @FXML private Label serverIPLabel, serverPortLabel;
-    @FXML private ChoiceBox<String> serverSelect;
+    @FXML private Label serverIPLabel, serverPortLabel, preferredColorLabel;
 
     @InjectViewModel
     SolverViewModel viewModel;
@@ -64,6 +62,12 @@ public class SolverView implements FxmlView<SolverViewModel> {
 
         serverIP.setText(savedValues[0]);
         serverPort.setText(savedValues[1]);
+
+        preferColorToggleSwitch.disableProperty().bind(similarColoringToggleSwitch.selectedProperty());
+        preferColorPicker.disableProperty().bind(similarColoringToggleSwitch.selectedProperty());
+        preferredColorLabel.disableProperty().bind(similarColoringToggleSwitch.selectedProperty());
+        currentColorsToggleSwitch.disableProperty().bind(similarColoringToggleSwitch.selectedProperty());
+
     }
 
     @FXML
@@ -71,14 +75,19 @@ public class SolverView implements FxmlView<SolverViewModel> {
 
         boolean preferColor = preferColorToggleSwitch.isSelected();
         Color preferredColor = preferColorPicker.getValue();
-        boolean brightColoring = brightColoringToggleSwitch.isSelected();
-        boolean currentColorsToggle = currentColorsToggleSwitch.isSelected();
+        boolean similarColoring = similarColoringToggleSwitch.isSelected();
+        boolean currentColors = currentColorsToggleSwitch.isSelected();
 
         boolean useServerToggle = useServerToggleSwitch.isSelected();
         String ipInput = serverIP.getText();
         String portInput = serverPort.getText();
 
-        viewModel.start(preferColor, preferredColor, brightColoring, currentColorsToggle, useServerToggle , ipInput, portInput);
+        if(similarColoring){
+            preferColor = false;
+            currentColors = false;
+        }
+
+        viewModel.start(preferColor, preferredColor, similarColoring, currentColors, useServerToggle , ipInput, portInput);
 
     }
 

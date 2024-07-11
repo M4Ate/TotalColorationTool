@@ -33,7 +33,7 @@
       </ToggleSwitch>
 
       <HBox alignment="CENTER_LEFT" spacing="3.0">
-         <Label prefWidth="100.0" text="Color">
+         <Label fx:id="preferredColorLabel" prefWidth="100.0" text="Color">
             <font>
                <Font size="10.0" />
             </font>
@@ -48,7 +48,7 @@
          </VBox.margin>
       </HBox>
 
-      <ToggleSwitch fx:id="brightColoringToggleSwitch" alignment="CENTER" maxWidth="10000.0" selected="false" text="Bright Coloring">
+      <ToggleSwitch fx:id="similarColoringToggleSwitch" alignment="CENTER" maxWidth="10000.0" selected="false" text="Similiar Coloring">
          <font>
             <Font size="16.0" />
          </font>
