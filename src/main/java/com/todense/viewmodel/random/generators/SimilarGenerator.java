@@ -1,10 +1,14 @@
 package com.todense.viewmodel.random.generators;
 
 import com.todense.model.graph.Edge;
-import com.todense.model.graph.Graph;
 import com.todense.model.graph.Node;
+import com.todense.model.graph.Graph;
 import com.todense.viewmodel.random.RandomEdgeGenerator;
 import javafx.scene.paint.Color;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Generates a graph similar to the already loaded one.
@@ -21,59 +25,57 @@ public class SimilarGenerator extends RandomEdgeGenerator{
 
     @Override
     protected void generate() {
-        //get a random node
+        //get aone random nodes
 
-        Edge[] edges = getRandomEdges();
-        Edge edgeOne = edges[0];
-        Edge edgeTwo = edges[1];
+        Edge edgeOne;
 
+        List<Edge> graphEdgesList = new ArrayList<>(currentGraph.copy().getEdges().getEdgeMap().values());
 
-        
+        //get one edge random
+        int randomEdgeId = super.rnd.nextInt(graphEdgesList.size());
+        edgeOne = graphEdgesList.get(randomEdgeId);
+        graphEdgesList.remove(randomEdgeId);
+
+        //Shuffle the List of Edges
+        Collections.shuffle(graphEdgesList);
+
+        for(Edge edgeTwo : graphEdgesList){
+            if(edgesAreDifferent(edgeOne, edgeTwo)) {
+
+                Node[] array = {edgeOne.getN1(), edgeOne.getN2(), edgeTwo.getN1(), edgeTwo.getN2()};
+
+                if(!currentGraph.getEdges().isEdgeBetween(array[0], array[2])
+                        && !currentGraph.getEdges().isEdgeBetween(array[1], array[3])) {
+
+                    currentGraph.removeEdge(edgeOne);
+                    currentGraph.removeEdge(edgeTwo);
+
+                    addEdges(array[0], array[2], array[1], array[3]);
+                    return;
+
+                } else if(!currentGraph.getEdges().isEdgeBetween(array[0], array[3])
+                    && !currentGraph.getEdges().isEdgeBetween(array[1], array[2])) {
+
+                    currentGraph.removeEdge(edgeOne);
+                    currentGraph.removeEdge(edgeTwo);
+
+                    addEdges(array[0], array[3], array[1], array[2]);
+                    return;
+                }
+            }
+        }
+    }
+
+    private void addEdges(Node node, Node node1, Node node2, Node node3) {
+
         Color greyColor = Color.rgb(105, 105, 105);
 
-        currentGraph.removeEdge(edgeOne);
-        currentGraph.removeEdge(edgeTwo);
-
-        System.out.println("add edge from " + edgeOne.getN1() + " to " + edgeTwo.getN2());
-
-        currentGraph.addEdge(edgeOne.getN1(), edgeTwo.getN2(), greyColor);
-
-        System.out.println("add edge from " + edgeTwo.getN1() + " to " + edgeOne.getN2());
-        currentGraph.addEdge(edgeTwo.getN1(), edgeOne.getN2(), greyColor);
-
-
-        //validate if a Graph is already loaded
-        System.out.println("generate called");
-
+        this.currentGraph.addEdge(node, node1, greyColor);
+        this.currentGraph.addEdge(node1, node3, greyColor);
     }
 
-
-    private boolean nodesDifferent (Edge edgeOne, Edge edgeTwo){
-        if(edgeOne.getN1().getIndex() != edgeTwo.getN1().getIndex()
-                && edgeOne.getN2().getIndex() != edgeTwo.getN2().getIndex()){}
-        return true;
-    }
-
-    private Edge[] getRandomEdges() {
-
-        Edge[] edges = new Edge[2];
-        
-        int randomEdgeId = super.rnd.nextInt(this.currentGraph.getEdges().size());
-        edges[0] = currentGraph.getEdges().get(randomEdgeId);
-
-        System.out.println("selected " + edges[0].getN1() + " and " + edges[0].getN2());
-
-
-        do {
-            randomEdgeId = super.rnd.nextInt(this.currentGraph.getEdges().size());
-            edges[1] = currentGraph.getEdges().get(randomEdgeId);
-        } while (edges[0].getN1().getIndex() == edges[1].getN2().getIndex()
-                | edges[1].getN1().getIndex() == edges[0].getN2().getIndex()
-                | edges[0].getId().equals(edges[1].getId()));
-
-        System.out.println("selected " + edges[1].getN1() + " and " + edges[1].getN2());
-        return edges;
+    private boolean edgesAreDifferent (Edge edgeOne, Edge edgeTwo) {
+        return (edgeOne.getN1() != edgeTwo.getN1() && edgeOne.getN2() != edgeTwo.getN2()
+                && edgeOne.getN1() != edgeTwo.getN2() && edgeOne.getN2() != edgeTwo.getN1());
     }
 }
-
-
