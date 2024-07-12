@@ -3,6 +3,8 @@ package com.todense.viewmodel;
 import com.google.inject.Inject;
 import com.todense.model.graph.Graph;
 import com.todense.viewmodel.graph.GraphManager;
+
+import java.net.URI;
 import java.net.http.HttpClient;
 import com.todense.viewmodel.scope.GraphScope;
 import com.todense.viewmodel.solver.graphColoring.GraphColorer;
@@ -17,6 +19,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -61,6 +64,7 @@ public class SolverViewModel implements ViewModel {
         }
 
         Graph currentGraph = graphManager.getGraph().copy();
+        System.out.println(currentGraph.getNodes());
 
         ILPProblem problem = ILPGenerator.generateILP(currentGraph, type);
 
@@ -69,13 +73,22 @@ public class SolverViewModel implements ViewModel {
         System.out.println(jsonString);
 
         //Anfrage an Server machen eventuell anderer Thread oder async
+        String responseString = "";
 
-        //Graph newGraph = GraphColorer.getColoredGraph(currentGraph, problem, jsonResponse); //Graph, ILP Problem und Type
+        try {
+            responseString = requestServer(IP, Port, jsonString);
+            System.out.println(responseString);
+        } catch (IOException | InterruptedException e) {
+            notificationCenter.publish(MainViewModel.TASK_FINISHED, e.getMessage());
+            return;
+        }
+
+        Graph newGraph = GraphColorer.getColoredGraph(currentGraph, problem, responseString); //Graph, ILP Problem und Type
 
         //Hier sollte der Graph mit gesetzt werden als neuer
         //TODO: currentGraph gegen den newGraph austauschen
         try{
-            notificationCenter.publish(GraphViewModel.NEW_GRAPH_REQUEST, currentGraph);
+            notificationCenter.publish(GraphViewModel.NEW_GRAPH_REQUEST, newGraph);
             notificationCenter.publish(MainViewModel.TASK_FINISHED, "Graph colored");
         } catch (RuntimeException e){
             notificationCenter.publish(MainViewModel.TASK_FINISHED, e.getMessage());
@@ -142,6 +155,16 @@ public class SolverViewModel implements ViewModel {
             }
         }
         return saveSuccess;
+    }
+
+    private String requestServer(String IP, String Port, String jsonString) throws IOException, InterruptedException{
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://" + IP + ":" + Port + "/post"))
+                .POST(HttpRequest.BodyPublishers.ofString(jsonString))
+                .build();
+
+        return client.send(request, HttpResponse.BodyHandlers.ofString()).body();
     }
 
 }
