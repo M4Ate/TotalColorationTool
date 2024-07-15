@@ -21,6 +21,7 @@ public class SimilarGenerator extends RandomEdgeGenerator{
     public SimilarGenerator(Graph currentGraph){
         super();
         this.currentGraph = currentGraph;
+        super.setNodes(currentGraph.getNodes());
     }
 
     @Override
@@ -32,9 +33,9 @@ public class SimilarGenerator extends RandomEdgeGenerator{
         List<Edge> graphEdgesList = new ArrayList<>(currentGraph.copy().getEdges().getEdgeMap().values());
 
         //get one edge random
-        int randomEdgeId = super.rnd.nextInt(graphEdgesList.size());
-        edgeOne = graphEdgesList.get(randomEdgeId);
-        graphEdgesList.remove(randomEdgeId);
+        int randomEdgeIndex = super.rnd.nextInt(graphEdgesList.size());
+        edgeOne = graphEdgesList.get(randomEdgeIndex);
+        graphEdgesList.remove(randomEdgeIndex);
 
         //Shuffle the List of Edges
         Collections.shuffle(graphEdgesList);
@@ -70,8 +71,14 @@ public class SimilarGenerator extends RandomEdgeGenerator{
 
         Color greyColor = Color.rgb(105, 105, 105);
 
+        System.out.println("Edge One: " + node.getID() + " -> " + node1.getID()
+                + " EdgeTwo: " + node2.getID() + " -> " + node3.getID());
+
+        super.addEdge(node.getID(), node1.getID());
+        super.addEdge(node2.getID(), node3.getID());
+
         this.currentGraph.addEdge(node, node1, greyColor);
-        this.currentGraph.addEdge(node1, node3, greyColor);
+        this.currentGraph.addEdge(node2, node3, greyColor);
     }
 
     private boolean edgesAreDifferent (Edge edgeOne, Edge edgeTwo) {

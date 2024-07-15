@@ -110,7 +110,7 @@ public class RandomGeneratorViewModel implements ViewModel {
                             " perform this action");
                     throw new IllegalStateException("No graph found");
                 } else {
-                    Graph graph = graphScope.getGraphManager().getGraph();
+                    Graph graph = graphScope.getGraphManager().getGraph().copy();
                     SimilarGenerator similarGenerator = new SimilarGenerator(graph);
                     edgeGenerator = similarGenerator;
                     similarGenerator.generateConnections();

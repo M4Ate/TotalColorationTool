@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="9dc8a254-2f10-4963-91e1-94254594d08b" name="Changes" comment="bypass unknown code">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/todense/model/EdgeList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/todense/model/EdgeList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/todense/viewmodel/RandomGeneratorViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/todense/viewmodel/RandomGeneratorViewModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/todense/viewmodel/random/generators/SimilarGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/todense/viewmodel/random/generators/SimilarGenerator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -154,7 +154,10 @@
       <workItem from="1720698195525" duration="2121000" />
       <workItem from="1720701394696" duration="1477000" />
       <workItem from="1720704026994" duration="893000" />
-      <workItem from="1720704943405" duration="4144000" />
+      <workItem from="1720704943405" duration="4465000" />
+      <workItem from="1720764221784" duration="331000" />
+      <workItem from="1721027060731" duration="1926000" />
+      <workItem from="1721029772418" duration="67000" />
     </task>
     <task id="LOCAL-00001" summary="Added own Generator">
       <option name="closed" value="true" />
@@ -197,7 +200,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/Similar-Graph-Generator" />
+                        <option value="origin/main" />
                       </list>
                     </value>
                   </entry>
