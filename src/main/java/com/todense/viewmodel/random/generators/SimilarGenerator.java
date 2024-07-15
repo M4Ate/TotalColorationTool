@@ -4,8 +4,8 @@ import com.todense.model.graph.Edge;
 import com.todense.model.graph.Node;
 import com.todense.model.graph.Graph;
 import com.todense.viewmodel.random.RandomEdgeGenerator;
-import javafx.scene.paint.Color;
 
+import com.todense.viewmodel.comparison.CompareLogic;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -70,18 +70,16 @@ public class SimilarGenerator extends RandomEdgeGenerator{
 
     private void addEdges(Node node, Node node1, Node node2, Node node3) {
 
-        Color greyColor = Color.rgb(105, 105, 105);
-
         System.out.println("Edge One: " + node.getID() + " -> " + node1.getID()
                 + " EdgeTwo: " + node2.getID() + " -> " + node3.getID());
 
         super.addEdge(node.getID(), node1.getID());
         super.addEdge(node2.getID(), node3.getID());
 
-        this.currentGraph.addEdge(node, node1, greyColor);
+        this.currentGraph.addEdge(node, node1, CompareLogic.GREY_COLOR);
         printNeighbors(node);
         printNeighbors(node1);
-        this.currentGraph.addEdge(node2, node3, greyColor);
+        this.currentGraph.addEdge(node2, node3, CompareLogic.GREY_COLOR);
         printNeighbors(node2);
         printNeighbors(node3);
     }
