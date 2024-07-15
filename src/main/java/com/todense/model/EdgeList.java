@@ -58,7 +58,8 @@ public class EdgeList extends ArrayList<Edge> {
         return n.getNeighbours().contains(m);
     }
 
-    public HashMap<String, Edge> getEdgeMap() {
+
+    public HashMap<String, Edge> getEdges() {
         return edgeMap;
     }
 }

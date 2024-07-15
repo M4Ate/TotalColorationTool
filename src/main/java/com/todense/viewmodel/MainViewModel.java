@@ -364,7 +364,7 @@ public class MainViewModel implements ViewModel {
         if(openedGraph != null){
             CompareLogic.compareAndUncolor(graphManager.getGraph(), openedGraph);
             notificationCenter.publish(CanvasViewModel.REPAINT_REQUEST);
-            writeEvent("Compare Graph opened");
+            writeEvent("Graph comparison done");
         }
     }
 

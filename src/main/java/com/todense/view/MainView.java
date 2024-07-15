@@ -39,12 +39,12 @@ public class MainView implements FxmlView<MainViewModel> {
     @FXML private ProgressIndicator progressIndicator;
     @FXML private FontIcon lockIcon, fullScreenIcon;
     @FXML private ToggleButton lockToggleButton, autoLayoutToggleButton, graphAppearanceMenuButton,
-                    propertiesMenuButton, operationsMenuButton, generateGraphMenuButton,
+                    propertiesMenuButton, operationsMenuButton, generateGraphMenuButton, solveGraphMenuButton,
                     basicAlgorithmsMenuButton, tspMenuButton, layoutMenuButton, eraseModeToggleButton;
     @FXML private Button stopButton;
     @FXML private VBox leftSideMenuContentBox, rightSideMenuContentBox;
     @FXML private VBox graphAppearanceView, backgroundAppearanceView, propertiesView, operationsView,
-            randomGeneratorView, presetGeneratorView, basicAlgorithmsView, tspView, layoutView;
+            randomGeneratorView, presetGeneratorView, basicAlgorithmsView, tspView, layoutView, solverView;
     @FXML private ScrollPane leftSideMenuContentScrollPane, rightSideMenuContentScrollPane;
     @FXML private AnchorPane mainAnchor;
     @FXML private HBox leftContentHBox, rightContentHBox, layoutMenuHBox;
@@ -133,12 +133,18 @@ public class MainView implements FxmlView<MainViewModel> {
                 true, operationsView);
         setUpSideMenuButton(propertiesMenuButton, "Graph Properties",
                 true, propertiesView);
+
+        //TODO this is the new Button
+        setUpSideMenuButton(solveGraphMenuButton, "Solve Graph",
+                true, solverView);
+
         setUpSideMenuButton(generateGraphMenuButton, "Generate Graph",
                 true, randomGeneratorView, presetGeneratorView);
 
+
         ToggleGroup leftSideMenuButtons = new ToggleGroup();
         leftSideMenuButtons.getToggles().addAll(
-                graphAppearanceMenuButton, operationsMenuButton, propertiesMenuButton, generateGraphMenuButton
+                graphAppearanceMenuButton, operationsMenuButton, propertiesMenuButton, generateGraphMenuButton, solveGraphMenuButton
         );
 
         ToggleGroup rightSideMenuButtons = new ToggleGroup();

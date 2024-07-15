@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9dc8a254-2f10-4963-91e1-94254594d08b" name="Changes" comment="bypass unknown code" />
+    <list default="true" id="9dc8a254-2f10-4963-91e1-94254594d08b" name="Changes" comment="Checking on notificationCenter usage (V.0, inital commit)">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/todense/viewmodel/solver/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/todense/view/SolverView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/todense/view/SolverView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/todense/view/SolverView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/todense/view/SolverView.fxml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,6 +29,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -42,9 +48,6 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
-  </component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -67,7 +70,7 @@
     &quot;git-widget-placeholder&quot;: &quot;Similar-Graph-Generator&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/maxro/Desktop/KIT/S4(SS 24)/PSE/TotalColorationTool&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Maxi/Desktop/PSE/0_PSE github/TotalColorationTool/src/main/resources/com/todense/view&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
@@ -76,6 +79,11 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Maxi\Desktop\PSE\0_PSE github\TotalColorationTool\src\main\resources\com\todense\view" />
+    </key>
+  </component>
   <component name="RunManager" selected="Application.StarterInvoker">
     <configuration name="Starter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.todense.application.Starter" />
@@ -142,24 +150,22 @@
       <workItem from="1717595324035" duration="6548000" />
       <workItem from="1717602435284" duration="844000" />
       <workItem from="1717655395244" duration="669000" />
-      <workItem from="1720020609557" duration="181000" />
-      <workItem from="1720100491523" duration="33000" />
-      <workItem from="1720452243992" duration="1960000" />
-      <workItem from="1720456242714" duration="1268000" />
-      <workItem from="1720457543162" duration="221000" />
-      <workItem from="1720508437370" duration="29000" />
-      <workItem from="1720525420487" duration="6967000" />
-      <workItem from="1720594681898" duration="1859000" />
-      <workItem from="1720690059996" duration="3787000" />
-      <workItem from="1720698195525" duration="2121000" />
-      <workItem from="1720701394696" duration="1477000" />
-      <workItem from="1720704026994" duration="893000" />
-      <workItem from="1720704943405" duration="4465000" />
-      <workItem from="1720764221784" duration="331000" />
-      <workItem from="1721027060731" duration="1926000" />
-      <workItem from="1721029772418" duration="490000" />
-      <workItem from="1721055844569" duration="324000" />
-      <workItem from="1721060545981" duration="2097000" />
+      <workItem from="1719323927117" duration="2287000" />
+      <workItem from="1719328758398" duration="47000" />
+      <workItem from="1719329506956" duration="155000" />
+      <workItem from="1719332452357" duration="785000" />
+      <workItem from="1719390255122" duration="1140000" />
+      <workItem from="1719421329062" duration="301000" />
+      <workItem from="1719464056761" duration="2013000" />
+      <workItem from="1719467172484" duration="295000" />
+      <workItem from="1719470293040" duration="595000" />
+      <workItem from="1719550707479" duration="1018000" />
+      <workItem from="1719987471287" duration="1308000" />
+      <workItem from="1720079447114" duration="1042000" />
+      <workItem from="1720536856867" duration="2316000" />
+      <workItem from="1720548095059" duration="2765000" />
+      <workItem from="1720598433099" duration="87000" />
+      <workItem from="1720687307927" duration="617000" />
     </task>
     <task id="LOCAL-00001" summary="Added own Generator">
       <option name="closed" value="true" />
@@ -185,18 +191,88 @@
       <option name="project" value="LOCAL" />
       <updated>1714459690378</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Add left side button and change solverView as well as the SolverViewModel.">
+      <option name="closed" value="true" />
+      <created>1719391375503</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1719391375503</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Add left side button and change solverView as well as the SolverViewModel.">
+      <option name="closed" value="true" />
+      <created>1719421423235</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1719421423235</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Merging with remote status.">
+      <option name="closed" value="true" />
+      <created>1719421560526</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1719421560526</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Change ILP icon, Create proper ILP input Box similar to the Mockup and create method body for ILP Solver.">
+      <option name="closed" value="true" />
+      <created>1719466003895</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1719466003895</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Retrieve constraint input values.">
+      <option name="closed" value="true" />
+      <created>1719551321820</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1719551321820</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/main" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="main" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/Comparison_View_Implementation" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
             <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
               <option name="FILTERS">
                 <map>
                   <entry key="branch">
@@ -218,7 +294,11 @@
     <MESSAGE value="Added own Generator" />
     <MESSAGE value="Added OmniGraph" />
     <MESSAGE value="Implement Custom graph generator MaxDegGenerator" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implement Custom graph generator MaxDegGenerator" />
+    <MESSAGE value="Add left side button and change solverView as well as the SolverViewModel." />
+    <MESSAGE value="Merging with remote status." />
+    <MESSAGE value="Change ILP icon, Create proper ILP input Box similar to the Mockup and create method body for ILP Solver." />
+    <MESSAGE value="Retrieve constraint input values." />
+    <option name="LAST_COMMIT_MESSAGE" value="Retrieve constraint input values." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
