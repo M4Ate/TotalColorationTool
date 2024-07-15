@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * Generates a graph similar to the already loaded one.
- * TODO add a definiton what a simla Graph is
+ * TODO add a definition what a similar Graph is
  * TODO add a java doc
  */
 public class SimilarGenerator extends RandomEdgeGenerator{
@@ -27,11 +27,11 @@ public class SimilarGenerator extends RandomEdgeGenerator{
 
     @Override
     protected void generate() {
-        //get a one random nodes
+        //get one random nodes
 
         Edge edgeOne;
 
-        List<Edge> graphEdgesList = new ArrayList<>(currentGraph.getEdges().getEdgeMap().values());
+        List<Edge> graphEdgesList = new ArrayList<>(currentGraph.getEdges().getEdges().values());
 
         //get one edge random
         int randomEdgeIndex = super.rnd.nextInt(graphEdgesList.size());

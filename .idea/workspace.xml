@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9dc8a254-2f10-4963-91e1-94254594d08b" name="Changes" comment="Checking on notificationCenter usage (V.0, inital commit)">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/todense/viewmodel/solver/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/todense/view/SolverView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/todense/view/SolverView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/todense/view/SolverView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/todense/view/SolverView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/todense/viewmodel/random/generators/SimilarGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/todense/viewmodel/random/generators/SimilarGenerator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
