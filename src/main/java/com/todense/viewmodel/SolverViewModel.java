@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.todense.model.graph.Graph;
 import com.todense.viewmodel.graph.GraphManager;
 
+import java.io.*;
 import java.net.URI;
 import java.net.http.HttpClient;
 import com.todense.viewmodel.scope.GraphScope;
@@ -15,13 +16,10 @@ import de.saxsys.mvvmfx.InjectScope;
 import de.saxsys.mvvmfx.ViewModel;
 import de.saxsys.mvvmfx.utils.notifications.NotificationCenter;
 import javafx.scene.paint.Color;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
+
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.Scanner;
-import java.io.IOException;
 
 /**
  * ViewModel for the ILP Solver.
@@ -49,8 +47,8 @@ public class SolverViewModel implements ViewModel {
      *
      * @param preferColor - whether the user wants to use a color as often as possible or not.
      * @param preferredColor - the color the user wants to use as often as possible.
-     * @param similarColoring -
-     * @param currentColors -
+     * @param similarColoring - will definitely use the current colors.
+     * @param currentColors - will try to use the current colors.
      * @param useServer - whether the user wants to use an external server or not.
      * @param IP - the IP of the server the user wants to use.
      * @param Port - the port in which the server is waiting for the request.
@@ -85,6 +83,27 @@ public class SolverViewModel implements ViewModel {
 
         //Anfrage an Server machen eventuell anderer Thread oder async
         String responseString = "";
+
+        /*TODO start the server without parameters (do we need in or output)
+        if(!useServer){
+            System.out.println("Using server");
+            try{
+
+                Process startServer = Runtime.getRuntime().exec("java -jar ILP-Solver.jar");
+
+                InputStream input = startServer.getInputStream();
+                InputStream errors = startServer.getErrorStream();
+
+                System.out.println("Started the Server on Localhost");
+
+
+            } catch (FileNotFoundException e){
+                System.out.println(e.getMessage());
+            } catch (IOException e){
+                System.out.println(e.getMessage());
+            }
+
+        } */
 
         try {
             responseString = requestServer(IP, Port, jsonString);

@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9dc8a254-2f10-4963-91e1-94254594d08b" name="Changes" comment="Merge of the Parts of Manuel and Maxi. Writing big parts of the main solver Method. Preparing for finishing the solver request.">
+    <list default="true" id="9dc8a254-2f10-4963-91e1-94254594d08b" name="Changes" comment="JavaDoc and Code Cleanup for the SolverView and SolverViewModel.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/todense/view/SolverView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/todense/view/SolverView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/todense/viewmodel/SolverViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/todense/viewmodel/SolverViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/todense/viewmodel/solver/Server.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +68,7 @@
     &quot;git-widget-placeholder&quot;: &quot;New-Classes&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Maxi/Desktop/PSE/0_PSE github/TotalColorationTool/src/main/resources/com/todense/view&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Maxi/Desktop/Server/ILP-Server&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
@@ -169,7 +169,11 @@
       <workItem from="1720764971360" duration="118000" />
       <workItem from="1720773311861" duration="394000" />
       <workItem from="1721043189760" duration="1537000" />
-      <workItem from="1721049301975" duration="848000" />
+      <workItem from="1721049301975" duration="959000" />
+      <workItem from="1721051211034" duration="1489000" />
+      <workItem from="1721055381297" duration="881000" />
+      <workItem from="1721056672039" duration="349000" />
+      <workItem from="1721057863284" duration="481000" />
     </task>
     <task id="LOCAL-00001" summary="Added own Generator">
       <option name="closed" value="true" />
@@ -243,7 +247,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720707046859</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="JavaDoc and Code Cleanup for the SolverView and SolverViewModel.">
+      <option name="closed" value="true" />
+      <created>1721051108928</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1721051108928</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -311,7 +323,8 @@
     <MESSAGE value="Change ILP icon, Create proper ILP input Box similar to the Mockup and create method body for ILP Solver." />
     <MESSAGE value="Retrieve constraint input values." />
     <MESSAGE value="Merge of the Parts of Manuel and Maxi. Writing big parts of the main solver Method. Preparing for finishing the solver request." />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge of the Parts of Manuel and Maxi. Writing big parts of the main solver Method. Preparing for finishing the solver request." />
+    <MESSAGE value="JavaDoc and Code Cleanup for the SolverView and SolverViewModel." />
+    <option name="LAST_COMMIT_MESSAGE" value="JavaDoc and Code Cleanup for the SolverView and SolverViewModel." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
