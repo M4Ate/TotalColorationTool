@@ -104,6 +104,7 @@ public class RandomGeneratorViewModel implements ViewModel {
                 break;
 
             case SIMILAR_GRAPH:
+                //Describe the changes to the "calssic" pattern
                 //Case to call the similar graph generator
                 if(graphScope.getGraphManager().getGraph().getOrder() == 0) {
                     notificationCenter.publish(MainViewModel.RESET, "A Graph needs to be loaded to" +

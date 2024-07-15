@@ -13,6 +13,7 @@ import java.util.List;
 /**
  * Generates a graph similar to the already loaded one.
  * TODO add a definiton what a simla Graph is
+ * TODO add a java doc
  */
 public class SimilarGenerator extends RandomEdgeGenerator{
 
@@ -26,11 +27,11 @@ public class SimilarGenerator extends RandomEdgeGenerator{
 
     @Override
     protected void generate() {
-        //get aone random nodes
+        //get a one random nodes
 
         Edge edgeOne;
 
-        List<Edge> graphEdgesList = new ArrayList<>(currentGraph.copy().getEdges().getEdgeMap().values());
+        List<Edge> graphEdgesList = new ArrayList<>(currentGraph.getEdges().getEdgeMap().values());
 
         //get one edge random
         int randomEdgeIndex = super.rnd.nextInt(graphEdgesList.size());
@@ -78,11 +79,23 @@ public class SimilarGenerator extends RandomEdgeGenerator{
         super.addEdge(node2.getID(), node3.getID());
 
         this.currentGraph.addEdge(node, node1, greyColor);
+        printNeighbors(node);
+        printNeighbors(node1);
         this.currentGraph.addEdge(node2, node3, greyColor);
+        printNeighbors(node2);
+        printNeighbors(node3);
     }
 
     private boolean edgesAreDifferent (Edge edgeOne, Edge edgeTwo) {
         return (edgeOne.getN1() != edgeTwo.getN1() && edgeOne.getN2() != edgeTwo.getN2()
                 && edgeOne.getN1() != edgeTwo.getN2() && edgeOne.getN2() != edgeTwo.getN1());
+    }
+
+
+    private void printNeighbors(Node node) {
+        System.out.print("Neighbours of " + node.getID() + ": ");
+        for (Node neighbour : node.getNeighbours()) {
+            System.out.print(neighbour.getID() + " ");
+        }
     }
 }
