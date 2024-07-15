@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9dc8a254-2f10-4963-91e1-94254594d08b" name="Changes" comment="Bugfixing for the saved Server Values.">
+    <list default="true" id="9dc8a254-2f10-4963-91e1-94254594d08b" name="Changes" comment="Merge of the Parts of Manuel and Maxi. Writing big parts of the main solver Method. Preparing for finishing the solver request.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/todense/view/SolverView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/todense/view/SolverView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/todense/viewmodel/SolverViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/todense/viewmodel/SolverViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/todense/view/SolverView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/todense/view/SolverView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,26 +57,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.StarterInvoker.executor": "Run",
-    "Maven.OmniGraph-master [clean].executor": "Run",
-    "Maven.OmniGraph-master [package].executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "New-Classes",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Maxi/Desktop/PSE/0_PSE github/TotalColorationTool/src/main/resources/com/todense/view",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.StarterInvoker.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.OmniGraph-master [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.OmniGraph-master [package].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;New-Classes&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Maxi/Desktop/PSE/0_PSE github/TotalColorationTool/src/main/resources/com/todense/view&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Maxi\Desktop\PSE\0_PSE github\TotalColorationTool\src\main\resources\com\todense\view" />
@@ -166,7 +165,11 @@
       <workItem from="1720598433099" duration="87000" />
       <workItem from="1720687307927" duration="617000" />
       <workItem from="1720703617148" duration="2439000" />
-      <workItem from="1720706580740" duration="362000" />
+      <workItem from="1720706580740" duration="850000" />
+      <workItem from="1720764971360" duration="118000" />
+      <workItem from="1720773311861" duration="394000" />
+      <workItem from="1721043189760" duration="1537000" />
+      <workItem from="1721049301975" duration="848000" />
     </task>
     <task id="LOCAL-00001" summary="Added own Generator">
       <option name="closed" value="true" />
@@ -232,7 +235,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719551321820</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Merge of the Parts of Manuel and Maxi. Writing big parts of the main solver Method. Preparing for finishing the solver request.">
+      <option name="closed" value="true" />
+      <created>1720707046859</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1720707046859</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -279,7 +290,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/solver-ILP" />
+                        <option value="origin/New-Classes" />
                       </list>
                     </value>
                   </entry>
@@ -299,7 +310,8 @@
     <MESSAGE value="Merging with remote status." />
     <MESSAGE value="Change ILP icon, Create proper ILP input Box similar to the Mockup and create method body for ILP Solver." />
     <MESSAGE value="Retrieve constraint input values." />
-    <option name="LAST_COMMIT_MESSAGE" value="Retrieve constraint input values." />
+    <MESSAGE value="Merge of the Parts of Manuel and Maxi. Writing big parts of the main solver Method. Preparing for finishing the solver request." />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge of the Parts of Manuel and Maxi. Writing big parts of the main solver Method. Preparing for finishing the solver request." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

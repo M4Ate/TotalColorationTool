@@ -1,8 +1,6 @@
 package com.todense.view;
 
 import com.todense.viewmodel.SolverViewModel;
-import com.todense.viewmodel.random.GeneratorModel;
-import com.todense.viewmodel.solver.Server;
 import de.saxsys.mvvmfx.FxmlView;
 import de.saxsys.mvvmfx.InjectViewModel;
 import javafx.fxml.FXML;
@@ -10,16 +8,12 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
 import org.controlsfx.control.ToggleSwitch;
 import javafx.scene.paint.Color;
 
-import java.util.ArrayList;
-import java.util.List;
-/*
+/**
  * View for the ILP Solver.
  */
-
 public class SolverView implements FxmlView<SolverViewModel> {
 
     @FXML private ToggleSwitch preferColorToggleSwitch, similarColoringToggleSwitch, currentColorsToggleSwitch, useServerToggleSwitch;
@@ -30,6 +24,11 @@ public class SolverView implements FxmlView<SolverViewModel> {
     @InjectViewModel
     SolverViewModel viewModel;
 
+    /**
+     * This method is used to initialize the ILP-Solver View
+     * It provides functionalities for selecting ILP-Constraints as well, as
+     * providing functionality in order to use and save an external server.
+     */
     public void initialize(){
 
         preferColorPicker.valueProperty().set(Color.rgb(50,90,170));
@@ -70,6 +69,10 @@ public class SolverView implements FxmlView<SolverViewModel> {
 
     }
 
+    /**
+     * This method is used when the user wants a colored version with or without the constraints.
+     * It retrieves the parameters and then calls the SolverViewModel.
+     */
     @FXML
     private void ilpAction() {
 
@@ -91,13 +94,22 @@ public class SolverView implements FxmlView<SolverViewModel> {
 
     }
 
+    /**
+     * This method is used in order to exit the solving method directly.
+     */
     @FXML
     private void stopAction(){
     }
 
+    /**
+     * This method is used to save a new value for the server and port.
+     */
     @FXML
     private void saveServer(){
-        viewModel.saveServerConfig(serverIP.getText(), serverPort.getText());
+
+        boolean savedServer = viewModel.saveServerConfig(serverIP.getText(), serverPort.getText());
+
+        System.out.println(savedServer);
     }
 }
 
