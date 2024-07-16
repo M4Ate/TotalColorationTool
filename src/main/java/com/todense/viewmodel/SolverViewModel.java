@@ -100,7 +100,7 @@ public class SolverViewModel implements ViewModel {
         }
 
         //Copy graph so the user can't change it.
-        Graph currentGraph = graphManager.getGraph().copy();
+        Graph currentGraph = graphManager.getGraph();   //.copy()
 
         ILPProblem problem = ILPGenerator.generateILP(currentGraph, type);
         String jsonString = problem.getILPAsJsonString();
