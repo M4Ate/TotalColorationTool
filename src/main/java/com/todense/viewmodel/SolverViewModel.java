@@ -2,6 +2,7 @@ package com.todense.viewmodel;
 
 import com.google.inject.Inject;
 import com.todense.model.graph.Graph;
+import com.todense.util.GraphCopy;
 import com.todense.viewmodel.graph.GraphManager;
 
 import java.io.*;
@@ -112,7 +113,7 @@ public class SolverViewModel implements ViewModel {
         }
 
         //Copy graph so the user can't change it.
-        Graph currentGraph = graphManager.getGraph();   //.copy()
+        Graph currentGraph = GraphCopy.copyGraphWithColorsAndID(graphManager.getGraph());
 
         ILPProblem problem = ILPGenerator.generateILP(currentGraph, type);
         String jsonString = problem.getILPAsJsonString();
