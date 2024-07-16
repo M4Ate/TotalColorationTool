@@ -103,7 +103,7 @@
          </font>
       </ToggleSwitch>
 
-      <Label fx:id="serverIPLabel" alignment="CENTER" layoutX="16.0" layoutY="10.0" prefHeight="7.0" styleClass="darkLabel" text="Server IP"></Label>
+      <Label fx:id="serverIPLabel" alignment="CENTER" layoutX="16.0" layoutY="10.0" prefHeight="7.0" styleClass="darkLabel" text="Server IPv4"></Label>
       <TextField fx:id="serverIP" alignment="CENTER" maxWidth="10000.0">
          <font>
             <Font size="16.0" />

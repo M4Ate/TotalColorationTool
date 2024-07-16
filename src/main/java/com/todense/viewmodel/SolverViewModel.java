@@ -20,6 +20,8 @@ import javafx.scene.paint.Color;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * ViewModel for the ILP Solver.
@@ -39,6 +41,8 @@ public class SolverViewModel implements ViewModel {
     NotificationCenter notificationCenter;
 
     private Thread solverThread = new Thread();
+
+    private final String IPv4_Regex = "^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)\\.?\\b){4}$";
 
     public void initialize() {
         graphManager = graphScope.getGraphManager();
@@ -62,6 +66,15 @@ public class SolverViewModel implements ViewModel {
      */
     public void start(Boolean preferColor, Color preferredColor, Boolean similarColoring,
                       Boolean currentColors, Boolean useServer, String IP, String Port){
+
+        Pattern pattern = Pattern.compile(IPv4_Regex);
+        Matcher matcher = pattern.matcher(IP);
+
+        if(!matcher.matches() && useServer){
+            notificationCenter.publish(MainViewModel.WRITE, "Not a valid IPv4");
+            return;
+        }
+
         if(!solverThread.isAlive()){
             notificationCenter.publish(MainViewModel.TASK_STARTED, "Calculating Coloration");
             solverThread = new Thread(() -> calculateColoration(preferColor, preferredColor, similarColoring, currentColors, useServer, IP, Port));
