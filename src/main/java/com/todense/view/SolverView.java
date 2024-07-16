@@ -1,8 +1,6 @@
 package com.todense.view;
 
 import com.todense.viewmodel.SolverViewModel;
-import com.todense.viewmodel.random.GeneratorModel;
-import com.todense.viewmodel.solver.Server;
 import de.saxsys.mvvmfx.FxmlView;
 import de.saxsys.mvvmfx.InjectViewModel;
 import javafx.fxml.FXML;
@@ -10,28 +8,27 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
 import org.controlsfx.control.ToggleSwitch;
 import javafx.scene.paint.Color;
 
-import java.util.ArrayList;
-import java.util.List;
-/*
+/**
  * View for the ILP Solver.
  */
-
 public class SolverView implements FxmlView<SolverViewModel> {
 
-    @FXML private ToggleSwitch preferColorToggleSwitch, brightColoringToggleSwitch, currentColorsToggleSwitch, useServerToggleSwitch;
+    @FXML private ToggleSwitch preferColorToggleSwitch, similarColoringToggleSwitch, currentColorsToggleSwitch, useServerToggleSwitch;
     @FXML private ColorPicker preferColorPicker;
-    @FXML private Button saveServerButton;
     @FXML private TextField serverIP, serverPort;
-    @FXML private Label serverIPLabel, serverPortLabel;
-    @FXML private ChoiceBox<String> serverSelect;
+    @FXML private Label serverIPLabel, serverPortLabel, preferredColorLabel;
 
     @InjectViewModel
     SolverViewModel viewModel;
 
+    /**
+     * This method is used to initialize the ILP-Solver View
+     * It provides functionalities for selecting ILP-Constraints as well, as
+     * providing functionality in order to use and save an external server.
+     */
     public void initialize(){
 
         preferColorPicker.valueProperty().set(Color.rgb(50,90,170));
@@ -64,31 +61,56 @@ public class SolverView implements FxmlView<SolverViewModel> {
 
         serverIP.setText(savedValues[0]);
         serverPort.setText(savedValues[1]);
+
+        preferColorToggleSwitch.disableProperty().bind(similarColoringToggleSwitch.selectedProperty());
+        preferColorPicker.disableProperty().bind(similarColoringToggleSwitch.selectedProperty());
+        preferredColorLabel.disableProperty().bind(similarColoringToggleSwitch.selectedProperty());
+        currentColorsToggleSwitch.disableProperty().bind(similarColoringToggleSwitch.selectedProperty());
+
     }
 
+    /**
+     * This method is used when the user wants a colored version with or without the constraints.
+     * It retrieves the parameters and then calls the SolverViewModel.
+     */
     @FXML
     private void ilpAction() {
 
         boolean preferColor = preferColorToggleSwitch.isSelected();
         Color preferredColor = preferColorPicker.getValue();
-        boolean brightColoring = brightColoringToggleSwitch.isSelected();
-        boolean currentColorsToggle = currentColorsToggleSwitch.isSelected();
+        boolean similarColoring = similarColoringToggleSwitch.isSelected();
+        boolean currentColors = currentColorsToggleSwitch.isSelected();
 
         boolean useServerToggle = useServerToggleSwitch.isSelected();
         String ipInput = serverIP.getText();
         String portInput = serverPort.getText();
 
-        viewModel.start(preferColor, preferredColor, brightColoring, currentColorsToggle, useServerToggle , ipInput, portInput);
+        if(similarColoring){
+            preferColor = false;
+            currentColors = false;
+        }
+
+        viewModel.start(preferColor, preferredColor, similarColoring, currentColors, useServerToggle , ipInput, portInput);
 
     }
 
+    /**
+     * This method is used in order to exit the solving method directly.
+     */
     @FXML
     private void stopAction(){
+        viewModel.stop();
     }
 
+    /**
+     * This method is used to save a new value for the server and port.
+     */
     @FXML
     private void saveServer(){
-        viewModel.saveServerConfig(serverIP.getText(), serverPort.getText());
+
+        boolean savedServer = viewModel.saveServerConfig(serverIP.getText(), serverPort.getText());
+
+        System.out.println(savedServer);
     }
 }
 

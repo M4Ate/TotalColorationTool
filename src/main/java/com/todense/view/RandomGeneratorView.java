@@ -27,7 +27,7 @@ public class RandomGeneratorView implements FxmlView<RandomGeneratorViewModel> {
 
         ParameterHBox nodeCountHBox = new ParameterHBox(
                 "Nodes", viewModel.nodeCountProperty(),
-                0, 50, 1, Double.POSITIVE_INFINITY
+                0, 5, 1, Double.POSITIVE_INFINITY
         );
         paramVBox.getChildren().add(nodeCountHBox);
 
