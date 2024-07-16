@@ -5,8 +5,6 @@ import com.todense.model.graph.Graph;
 import com.todense.model.graph.Node;
 import javafx.scene.paint.Color;
 
-import java.util.List;
-
 /**
  * This class contains the logic to compare two graphs and uncolor all nodes and edges that are the same in both graphs
  */
@@ -32,7 +30,7 @@ public class CompareLogic {
      * @param comparisonGraph the graph to compare with
      */
     private static void compareAndUncolorEdges(Graph currentGraph, Graph comparisonGraph) {
-        for (Edge compEdge : comparisonGraph.getEdges().getEdges().values()) {
+        for (Edge compEdge : comparisonGraph.getEdges().getEdgeMap().values()) {
             Node node1Current = currentGraph.getNodeById(compEdge.getN1().getID());
             Node node2Current = currentGraph.getNodeById(compEdge.getN2().getID());
             Edge currentEdge = currentGraph.getEdges().getEdge(node1Current, node2Current);
