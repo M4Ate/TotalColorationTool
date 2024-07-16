@@ -19,7 +19,7 @@ public class SimilarGenerator extends RandomEdgeGenerator{
 
     private final Graph currentGraph;
 
-    public SimilarGenerator(Graph currentGraph){
+    public SimilarGenerator(Graph currentGraph) {
         super();
         this.currentGraph = currentGraph;
         super.setNodes(currentGraph.getNodes());
