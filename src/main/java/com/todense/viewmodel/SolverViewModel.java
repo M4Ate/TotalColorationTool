@@ -171,7 +171,7 @@ public class SolverViewModel implements ViewModel {
         String data = "";
 
         try {
-            File readConfig = new File("ServerConfig.txt");
+            File readConfig = new File("ServerConfig.cfg");
             Scanner myReader = new Scanner(readConfig);
             while (myReader.hasNextLine()) {
                 data = myReader.nextLine();
@@ -187,7 +187,7 @@ public class SolverViewModel implements ViewModel {
             System.out.println("No server config file found.");
 
         } catch(ArrayIndexOutOfBoundsException e){
-            System.out.println("Couldn't resolve the file. Please check the format.");
+            System.out.println("Couldn't resolve the file. Please check that it matches the format.");
         }
 
         return array;
@@ -203,7 +203,7 @@ public class SolverViewModel implements ViewModel {
         boolean saveSuccess = true;
 
         try {
-            File file = new File("ServerConfig.txt");
+            File file = new File("ServerConfig.cfg");
 
             if (file.createNewFile()) {
                 FileWriter configWriter = new FileWriter(file.getName());
