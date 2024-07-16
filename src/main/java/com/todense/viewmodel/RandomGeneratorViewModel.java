@@ -114,10 +114,19 @@ public class RandomGeneratorViewModel implements ViewModel {
                     Graph graph = graphScope.getGraphManager().getGraph().copy();
                     SimilarGenerator similarGenerator = new SimilarGenerator(graph);
                     edgeGenerator = similarGenerator;
-                    similarGenerator.generateConnections();
+                    try {
+                        similarGenerator.generateConnections();
+                    } catch (IllegalStateException e){
+                        if(e.getMessage().equals("none isomorphic similar Graph")){
+                            notificationCenter.publish(MainViewModel.TASK_FINISHED,
+                                    "Could not find a none isomorphic similar Graph");
+                            return;
+                        }
+                        throw e;
+                    }
 
                     notificationCenter.publish(GraphViewModel.NEW_GRAPH_REQUEST, graph);
-                    notificationCenter.publish(MainViewModel.TASK_FINISHED, "Random graph generated");
+                    notificationCenter.publish(MainViewModel.TASK_FINISHED, "Similar graph generated");
 
                     return;
                  }
