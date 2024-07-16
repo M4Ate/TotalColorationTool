@@ -42,8 +42,6 @@ public class SolverViewModel implements ViewModel {
 
     private Thread solverThread = new Thread();
 
-    private final String IPv4_Regex = "^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)\\.?\\b){4}$";
-
     public void initialize() {
         graphManager = graphScope.getGraphManager();
     }
@@ -67,6 +65,7 @@ public class SolverViewModel implements ViewModel {
     public void start(Boolean preferColor, Color preferredColor, Boolean similarColoring,
                       Boolean currentColors, Boolean useServer, String IP, String Port){
 
+        String IPv4_Regex = "^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)\\.?\\b){4}$";
         Pattern pattern = Pattern.compile(IPv4_Regex);
         Matcher matcher = pattern.matcher(IP);
 
