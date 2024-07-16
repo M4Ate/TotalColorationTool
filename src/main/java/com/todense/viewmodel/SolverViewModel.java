@@ -26,7 +26,11 @@ import java.util.Scanner;
  */
 public class SolverViewModel implements ViewModel {
 
+    private static final String DEFAULT_IP = "127.0.0.1";
+    private static final String DEFAULT_PORT = "1337";
+
     private GraphManager graphManager;
+
 
     @InjectScope
     GraphScope graphScope;
@@ -83,35 +87,31 @@ public class SolverViewModel implements ViewModel {
         System.out.println(jsonString);
 
         //Anfrage an Server machen eventuell anderer Thread oder async
-        String responseString = "";
+        String responseString;
 
         if(!useServer){
-            System.out.println("Using server");
             try{
 
                 startServer = Runtime.getRuntime().exec("java -jar ILP-Solver.jar");
 
-                System.out.println("Started the Server on Localhost");
+                System.out.println("Started the server on localhost.");
 
 
-            } catch (FileNotFoundException e){
-                System.out.println(e.getMessage());
-            } catch (IOException e){
+            } catch (IOException e) {
                 System.out.println(e.getMessage());
             }
-
         }
 
         try {
-            responseString = requestServer(IP, Port, jsonString);
-            System.out.println(responseString);
-
-            if(!useServer && startServer != null){startServer.destroy();}
+            if (useServer) responseString = requestServer(IP, Port, jsonString);
+            else responseString = requestServer(DEFAULT_IP, DEFAULT_PORT, jsonString);
 
         } catch (IOException | InterruptedException e) {
             notificationCenter.publish(MainViewModel.TASK_FINISHED, e.getMessage());
             return;
         }
+
+        if(!useServer && startServer != null){startServer.destroyForcibly();}
 
         Graph newGraph = GraphColorer.getColoredGraph(currentGraph, problem, responseString); //Graph, ILP Problem und Type
 
@@ -132,8 +132,8 @@ public class SolverViewModel implements ViewModel {
 
         String[] array = new String[2];
 
-        array[0] = "127.0.0.1";
-        array[1] = "1337";
+        array[0] = DEFAULT_IP;
+        array[1] = DEFAULT_PORT;
 
         String data = "";
 
