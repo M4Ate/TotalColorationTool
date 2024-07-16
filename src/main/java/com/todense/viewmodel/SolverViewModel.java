@@ -59,6 +59,7 @@ public class SolverViewModel implements ViewModel {
         notificationCenter.publish(MainViewModel.TASK_STARTED, "Calculating Coloration");
 
         ILPType type = ILPType.MINCOLORS;
+        Process startServer = null;
 
         //Decide on the type of ILP-Problem we have.
         if(similarColoring){
@@ -84,15 +85,11 @@ public class SolverViewModel implements ViewModel {
         //Anfrage an Server machen eventuell anderer Thread oder async
         String responseString = "";
 
-        /*TODO start the server without parameters (do we need in or output)
         if(!useServer){
             System.out.println("Using server");
             try{
 
-                Process startServer = Runtime.getRuntime().exec("java -jar ILP-Solver.jar");
-
-                InputStream input = startServer.getInputStream();
-                InputStream errors = startServer.getErrorStream();
+                startServer = Runtime.getRuntime().exec("java -jar ILP-Solver.jar");
 
                 System.out.println("Started the Server on Localhost");
 
@@ -103,11 +100,14 @@ public class SolverViewModel implements ViewModel {
                 System.out.println(e.getMessage());
             }
 
-        } */
+        }
 
         try {
             responseString = requestServer(IP, Port, jsonString);
             System.out.println(responseString);
+
+            if(!useServer && startServer != null){startServer.destroy();}
+
         } catch (IOException | InterruptedException e) {
             notificationCenter.publish(MainViewModel.TASK_FINISHED, e.getMessage());
             return;
