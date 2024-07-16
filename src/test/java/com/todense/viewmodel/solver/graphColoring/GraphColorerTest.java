@@ -40,10 +40,10 @@ class GraphColorerTest {
                 "\"value\":1},{\"variable\":\"z_c3\",\"value\":0}]}";
         Graph result = GraphColorer.getColoredGraph(graph, ilp, jsonResponse);
         assertEquals("0x00ff00ff", result.getNodes().get(0).getColor().toString());
-        assertEquals("0xff0000ff", result.getNodes().get(1).getColor().toString());
-        assertEquals("0xffe502ff", result.getNodes().get(2).getColor().toString());
-        assertEquals("0xffe502ff", result.getEdges().get(0).getColor().toString());
+        assertEquals("0xffe502ff", result.getNodes().get(1).getColor().toString());
+        assertEquals("0xff00f6ff", result.getNodes().get(2).getColor().toString());
+        assertEquals("0xff00f6ff", result.getEdges().get(0).getColor().toString());
         assertEquals("0x00ff00ff", result.getEdges().get(1).getColor().toString());
-        assertEquals("0xff0000ff", result.getEdges().get(2).getColor().toString());
+        assertEquals("0xffe502ff", result.getEdges().get(2).getColor().toString());
     }
 }
