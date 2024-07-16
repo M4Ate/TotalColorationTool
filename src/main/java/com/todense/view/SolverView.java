@@ -31,7 +31,7 @@ public class SolverView implements FxmlView<SolverViewModel> {
      */
     public void initialize(){
 
-        preferColorPicker.valueProperty().set(Color.rgb(50,90,170));
+        preferColorPicker.valueProperty().set(Color.rgb(230,150,80));
 
         serverIP.setPrefHeight(25);
         serverIP.setPrefWidth(40);
