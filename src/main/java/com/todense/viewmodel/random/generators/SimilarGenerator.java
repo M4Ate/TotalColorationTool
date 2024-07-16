@@ -31,7 +31,7 @@ public class SimilarGenerator extends RandomEdgeGenerator{
 
         Edge edgeOne;
 
-        List<Edge> graphEdgesList = new ArrayList<>(currentGraph.getEdges().getEdges().values());
+        List<Edge> graphEdgesList = new ArrayList<>(currentGraph.getEdges().getEdgeMap().values());
 
         //get one edge random
         int randomEdgeIndex = super.rnd.nextInt(graphEdgesList.size());
@@ -66,6 +66,8 @@ public class SimilarGenerator extends RandomEdgeGenerator{
                 }
             }
         }
+
+        //TODO if the for loop dose not finds a fitting new edge an Error should be printed
     }
 
     private void addEdges(Node node, Node node1, Node node2, Node node3) {

@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="9dc8a254-2f10-4963-91e1-94254594d08b" name="Changes" comment="Checking on notificationCenter usage (V.0, inital commit)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/todense/model/EdgeList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/todense/model/EdgeList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/todense/viewmodel/comparison/CompareLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/todense/viewmodel/comparison/CompareLogic.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/todense/viewmodel/random/generators/SimilarGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/todense/viewmodel/random/generators/SimilarGenerator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -65,7 +67,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Similar-Graph-Generator&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Maxi/Desktop/PSE/0_PSE github/TotalColorationTool/src/main/resources/com/todense/view&quot;,
@@ -164,6 +166,7 @@
       <workItem from="1720548095059" duration="2765000" />
       <workItem from="1720598433099" duration="87000" />
       <workItem from="1720687307927" duration="617000" />
+      <workItem from="1721106210890" duration="475000" />
     </task>
     <task id="LOCAL-00001" summary="Added own Generator">
       <option name="closed" value="true" />

@@ -59,7 +59,7 @@ public class EdgeList extends ArrayList<Edge> {
     }
 
 
-    public HashMap<String, Edge> getEdges() {
+    public HashMap<String, Edge> getEdgeMap() {
         return edgeMap;
     }
 }
