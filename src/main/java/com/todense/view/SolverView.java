@@ -99,6 +99,7 @@ public class SolverView implements FxmlView<SolverViewModel> {
      */
     @FXML
     private void stopAction(){
+        viewModel.stop();
     }
 
     /**

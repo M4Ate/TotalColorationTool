@@ -38,9 +38,12 @@ public class SolverViewModel implements ViewModel {
     @Inject
     NotificationCenter notificationCenter;
 
+    private Thread solverThread = new Thread();
+
     public void initialize() {
         graphManager = graphScope.getGraphManager();
     }
+
 
     /**
      *
@@ -59,8 +62,26 @@ public class SolverViewModel implements ViewModel {
      */
     public void start(Boolean preferColor, Color preferredColor, Boolean similarColoring,
                       Boolean currentColors, Boolean useServer, String IP, String Port){
+        if(!solverThread.isAlive()){
+            notificationCenter.publish(MainViewModel.TASK_STARTED, "Calculating Coloration");
+            solverThread = new Thread(() -> calculateColoration(preferColor, preferredColor, similarColoring, currentColors, useServer, IP, Port));
+            solverThread.start();
+        }
+    }
 
-        notificationCenter.publish(MainViewModel.TASK_STARTED, "Calculating Coloration");
+    /**
+     * This method is used to stop the current coloration.
+     */
+    public void stop(){
+        if(solverThread.isAlive()){
+            solverThread.interrupt();
+            notificationCenter.publish(MainViewModel.TASK_FINISHED, "Coloration stopped");
+        }
+    }
+
+
+    private void calculateColoration(Boolean preferColor, Color preferredColor, Boolean similarColoring,
+                      Boolean currentColors, Boolean useServer, String IP, String Port){
 
         ILPType type = ILPType.MINCOLORS;
         Process startServer = null;
