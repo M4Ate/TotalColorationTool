@@ -8,6 +8,7 @@ import com.todense.model.EdgeList;
 import com.todense.model.graph.Edge;
 import com.todense.model.graph.Graph;
 import com.todense.model.graph.Node;
+import com.todense.viewmodel.comparison.CompareLogic;
 import com.todense.viewmodel.solver.ilpGeneration.*;
 import javafx.scene.paint.Color;
 
@@ -17,6 +18,9 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * GraphColorer class can be used to color a Graph with the result of an ILP-Problem
+ */
 public class GraphColorer {
 
     /**
@@ -65,8 +69,10 @@ public class GraphColorer {
                                           HashMap<Integer, Color> colorMap) {
         //configure ColorGenerator
         ColorGenerator cg = new ColorGenerator();
+        //exclude some already used colors
         cg.addUsedColor(Node.DEFAULT_COLOR);
         cg.addUsedColor(Edge.DEFAULT_COLOR);
+        cg.addUsedColor(CompareLogic.GREY_COLOR);
         for (Color c : colorMap.values()) {
             cg.addUsedColor(c);
         }
