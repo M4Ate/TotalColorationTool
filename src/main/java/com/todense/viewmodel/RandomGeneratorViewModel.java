@@ -1,5 +1,4 @@
 package com.todense.viewmodel;
-
 import com.todense.model.graph.Graph;
 import com.todense.viewmodel.random.Generator;
 import com.todense.viewmodel.random.GeneratorModel;
