@@ -55,11 +55,7 @@ public class ILPGenerator {
         ColorVar[] colors = getAndSetColorVars(ilp, maxColorNumber);
 
         //create Constraints
-        setNodeColorConstraint(ilp, vertexColors, nodes, null);
-        setEdgeColorConstraint(ilp, edgeColors, edges, null);
-        setConnectedVertexConstraint(ilp, vertexColors, nodes, edges, maxColorNumber);
-        setAdjacentEdgeConstraint(ilp, vertexColors, edgeColors, nodes, edges, maxColorNumber);
-        setSetColorConstraint(ilp, vertexColors, edgeColors, colors);
+        setConstraints(ilp, vertexColors, edgeColors, nodes, edges, colors, maxColorNumber, null);
 
         //create opt Function
         String optFunc = colors[0].getAsString(); //this entry exists, because maxColorNumber >= 2
@@ -76,7 +72,7 @@ public class ILPGenerator {
         // max amount of different colors
         int maxColorNumber = getMaxDegree(graph) + 2; // resulting from total coloring conjecture assumed to be true
         ILPProblem ilp = new ILPProblem();
-        HashMap<Color, Integer> colorMapping = new HashMap<Color, Integer>();
+        HashMap<Color, Integer> colorMapping = new HashMap<>();
 
         List<Node> nodes = graph.getNodes();
         EdgeList edges = graph.getEdges();
@@ -109,11 +105,7 @@ public class ILPGenerator {
         ColorVar[] colors = getAndSetColorVars(ilp, maxColorNumber);
 
         //create Constraints
-        setNodeColorConstraint(ilp, vertexColors, nodes, null);
-        setEdgeColorConstraint(ilp, edgeColors, edges, null);
-        setConnectedVertexConstraint(ilp, vertexColors, nodes, edges, maxColorNumber);
-        setAdjacentEdgeConstraint(ilp, vertexColors, edgeColors, nodes, edges, maxColorNumber);
-        setSetColorConstraint(ilp, vertexColors, edgeColors, colors);
+        setConstraints(ilp, vertexColors, edgeColors, nodes, edges, colors, maxColorNumber, null);
 
         //create opt Function
         int bigConstant = nodes.size() + edges.size() + 1;
@@ -147,7 +139,7 @@ public class ILPGenerator {
         // max amount of different colors
         int maxColorNumber = getMaxDegree(graph) + 2; // resulting from total coloring conjecture assumed to be true
         ILPProblem ilp = new ILPProblem();
-        HashMap<Color, Integer> colorMapping = new HashMap<Color, Integer>();
+        HashMap<Color, Integer> colorMapping = new HashMap<>();
 
         List<Node> nodes = graph.getNodes();
         EdgeList edges = graph.getEdges();
@@ -181,11 +173,7 @@ public class ILPGenerator {
         ColorVar[] colors = getAndSetColorVars(ilp, maxColorNumber);
 
         //create Constraints
-        setNodeColorConstraint(ilp, vertexColors, nodes, colorMapping);
-        setEdgeColorConstraint(ilp, edgeColors, edges, colorMapping);
-        setConnectedVertexConstraint(ilp, vertexColors, nodes, edges, maxColorNumber);
-        setAdjacentEdgeConstraint(ilp, vertexColors, edgeColors, nodes, edges, maxColorNumber);
-        setSetColorConstraint(ilp, vertexColors, edgeColors, colors);
+        setConstraints(ilp, vertexColors, edgeColors, nodes, edges, colors, maxColorNumber, colorMapping);
 
         //create opt Function
         String optFunc = colors[0].getAsString(); //this entry exists, because maxColorNumber >= 2
@@ -201,7 +189,7 @@ public class ILPGenerator {
     private static ILPProblem withLowColors(Graph graph, Color maximizeColor) {
         int maxColorNumber = getMaxDegree(graph) + 2; // resulting from total coloring conjecture assumed to be true
         ILPProblem ilp = new ILPProblem();
-        HashMap<Color, Integer> colorMapping = new HashMap<Color, Integer>();
+        HashMap<Color, Integer> colorMapping = new HashMap<>();
 
         List<Node> nodes = graph.getNodes();
         EdgeList edges = graph.getEdges();
@@ -215,11 +203,7 @@ public class ILPGenerator {
         ColorVar[] colors = getAndSetColorVars(ilp, maxColorNumber);
 
         //create Constraints
-        setNodeColorConstraint(ilp, vertexColors, nodes, null);
-        setEdgeColorConstraint(ilp, edgeColors, edges, null);
-        setConnectedVertexConstraint(ilp, vertexColors, nodes, edges, maxColorNumber);
-        setAdjacentEdgeConstraint(ilp, vertexColors, edgeColors, nodes, edges, maxColorNumber);
-        setSetColorConstraint(ilp, vertexColors, edgeColors, colors);
+        setConstraints(ilp, vertexColors, edgeColors, nodes, edges, colors, maxColorNumber, null);
 
         //create opt Function
         int bigConstant = nodes.size() + edges.size() + 1;
@@ -244,7 +228,7 @@ public class ILPGenerator {
         // max amount of different colors
         int maxColorNumber = getMaxDegree(graph) + 2; // resulting from total coloring conjecture assumed to be true
         ILPProblem ilp = new ILPProblem();
-        HashMap<Color, Integer> colorMapping = new HashMap<Color, Integer>();
+        HashMap<Color, Integer> colorMapping = new HashMap<>();
 
         List<Node> nodes = graph.getNodes();
         EdgeList edges = graph.getEdges();
@@ -279,11 +263,7 @@ public class ILPGenerator {
         ColorVar[] colors = getAndSetColorVars(ilp, maxColorNumber);
 
         //create Constraints
-        setNodeColorConstraint(ilp, vertexColors, nodes, colorMapping);
-        setEdgeColorConstraint(ilp, edgeColors, edges, colorMapping);
-        setConnectedVertexConstraint(ilp, vertexColors, nodes, edges, maxColorNumber);
-        setAdjacentEdgeConstraint(ilp, vertexColors, edgeColors, nodes, edges, maxColorNumber);
-        setSetColorConstraint(ilp, vertexColors, edgeColors, colors);
+        setConstraints(ilp, vertexColors, edgeColors, nodes, edges, colors, maxColorNumber, colorMapping);
 
         //create opt Function
         int bigConstant = nodes.size() + edges.size() + 1;
@@ -346,6 +326,16 @@ public class ILPGenerator {
             ilp.addVariable(colors[cNum]);
         }
         return colors;
+    }
+
+    private static void setConstraints(ILPProblem ilp, VertexColorVar[][] vertexColors, EdgeColorVar[][] edgeColors,
+                                       List<Node> nodes, EdgeList edges, ColorVar[] colors, int maxColorNumber,
+                                       HashMap<Color, Integer> colorMapping) {
+        setNodeColorConstraint(ilp, vertexColors, nodes, colorMapping);
+        setEdgeColorConstraint(ilp, edgeColors, edges, colorMapping);
+        setConnectedVertexConstraint(ilp, vertexColors, nodes, edges, maxColorNumber);
+        setAdjacentEdgeConstraint(ilp, vertexColors, edgeColors, nodes, edges, maxColorNumber);
+        setSetColorConstraint(ilp, vertexColors, edgeColors, colors);
     }
 
     private static void setNodeColorConstraint(ILPProblem ilp, VertexColorVar[][] vertexColors, List<Node> nodes,
