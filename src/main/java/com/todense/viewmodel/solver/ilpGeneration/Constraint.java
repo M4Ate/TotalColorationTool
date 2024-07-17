@@ -1,7 +1,8 @@
 package com.todense.viewmodel.solver.ilpGeneration;
 
-import java.util.List;
-
+/**
+ * Constraint represents a constraint in an ILP-Problem
+ */
 public abstract class Constraint {
 
     protected String constraint;

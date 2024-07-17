@@ -1,5 +1,8 @@
 package com.todense.viewmodel.solver.ilpGeneration;
 
+/**
+ * EdgeColorVar represents a variable in an ILP-Problem and is used to indicate the coloring of an edge
+ */
 public class EdgeColorVar extends Variable{
 
     private String edgeId;

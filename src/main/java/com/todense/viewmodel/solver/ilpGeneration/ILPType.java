@@ -32,19 +32,22 @@ public enum ILPType {
     private Color maximizeColor;
 
     ILPType() {
-        maximizeColor = null;
+        //standard color if no other Color is set
+        maximizeColor = Color.web("0xFF0000");
     }
 
     /**
-     * Sets maximizeColor (only necessary for WITHLOWCOLORS
-     * @param maximizeColor
+     * Sets maximizeColor (only necessary for WITHLOWCOLORS and WITHLOWSETCOLORS)
+     *
+     * @param maximizeColor the Color that should be used the most
      */
     public void setMaximizeColor(Color maximizeColor) {
         this.maximizeColor = maximizeColor;
     }
 
     /**
-     * gives the maximizeColor
+     * Gets the maximizeColor
+     *
      * @return maximizeColor
      */
     public Color getMaximizeColor() {

@@ -1,7 +1,9 @@
 package com.todense.viewmodel.solver.ilpGeneration;
 
-import java.util.List;
-
+/**
+ * EdgeColorConstraint represents a constraint in an ILP-Problem and is used to ensure that any given edge has exactly
+ * one color
+ */
 public class EdgeColorConstraint extends Constraint{
 
     public EdgeColorConstraint(String constraint) {

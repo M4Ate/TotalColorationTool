@@ -1,7 +1,9 @@
 package com.todense.viewmodel.solver.ilpGeneration;
 
-import java.util.List;
-
+/**
+ * AdjacentEdgeConstraint represents a constraint in an ILP-Problem and is used to ensure that any node/vertex and all
+ * of its adjacent edges have different colors
+ */
 public class AdjacentEdgeConstraint extends Constraint{
 
     public AdjacentEdgeConstraint(String constraint) {

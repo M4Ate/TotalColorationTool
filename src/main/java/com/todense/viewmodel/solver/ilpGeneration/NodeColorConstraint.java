@@ -1,7 +1,9 @@
 package com.todense.viewmodel.solver.ilpGeneration;
 
-import java.util.List;
-
+/**
+ * NodeColorConstraint represents a constraint in an ILP-Problem and is used to ensure that any given node has exactly
+ * one color
+ */
 public class NodeColorConstraint extends Constraint{
 
     public NodeColorConstraint(String constraint) {

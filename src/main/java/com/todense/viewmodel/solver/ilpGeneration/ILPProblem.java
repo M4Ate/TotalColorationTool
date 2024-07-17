@@ -1,7 +1,6 @@
 package com.todense.viewmodel.solver.ilpGeneration;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
@@ -9,6 +8,9 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+/**
+ * ILPProblem is a class that contains an integer linear program instance and is able to print itself as a json String
+ */
 public class ILPProblem {
 
     private List<Variable> variables;
@@ -91,7 +93,6 @@ public class ILPProblem {
             return new HashMap<Integer, Color>();
         }
         HashMap<Integer, Color> reverseMap = new HashMap<>();
-        colorMapping.keySet();
         for (Color c : colorMapping.keySet()) {
             reverseMap.put(colorMapping.get(c), c);
         }

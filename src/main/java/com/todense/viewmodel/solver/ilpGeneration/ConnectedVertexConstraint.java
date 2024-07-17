@@ -1,7 +1,9 @@
 package com.todense.viewmodel.solver.ilpGeneration;
 
-import java.util.List;
-
+/**
+ * ConnectedVertexConstraint represents a constraint in an ILP-Problem and is used to ensure that connected nodes/
+ * vertices have different colors
+ */
 public class ConnectedVertexConstraint extends Constraint{
 
     public ConnectedVertexConstraint(String constraint) {

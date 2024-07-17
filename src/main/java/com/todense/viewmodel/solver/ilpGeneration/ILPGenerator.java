@@ -5,7 +5,6 @@ import com.todense.model.graph.Edge;
 import com.todense.model.graph.Graph;
 import com.todense.model.graph.Node;
 import javafx.scene.paint.Color;
-import org.checkerframework.checker.units.qual.C;
 
 import java.util.*;
 

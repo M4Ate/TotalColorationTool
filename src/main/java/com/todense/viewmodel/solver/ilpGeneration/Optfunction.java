@@ -2,6 +2,9 @@ package com.todense.viewmodel.solver.ilpGeneration;
 
 import java.util.List;
 
+/**
+ * Optfunction represents the optimization function of an ILP-Problem
+ */
 public class Optfunction {
 
     private List<Variable> varlist;

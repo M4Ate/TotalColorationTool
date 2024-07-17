@@ -1,5 +1,8 @@
 package com.todense.viewmodel.solver.ilpGeneration;
 
+/**
+ * VertexColorVar represents a variable in an ILP-Problem and is used to indicate the coloring of a vertex/node
+ */
 public class VertexColorVar extends Variable{
 
     private int vertexId;

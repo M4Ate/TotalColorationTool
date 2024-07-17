@@ -1,5 +1,8 @@
 package com.todense.viewmodel.solver.ilpGeneration;
 
+/**
+ * Variable represents a variable in an ILP-Problem
+ */
 public abstract class Variable {
 
     protected String name;
