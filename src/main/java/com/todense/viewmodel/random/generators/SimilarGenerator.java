@@ -4,7 +4,6 @@ import com.todense.model.graph.Node;
 import com.todense.model.graph.Graph;
 import com.todense.viewmodel.random.RandomEdgeGenerator;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -37,46 +36,44 @@ public class SimilarGenerator extends RandomEdgeGenerator{
      */
     @Override
     protected void generate() throws IllegalStateException {
-        //get one random nodes
-
-        Edge edgeOne;
 
         List<Edge> graphEdgesList = new ArrayList<>(currentGraph.getEdges().getEdgeMap().values());
 
-        //get one edge random
-        int randomEdgeIndex = super.rnd.nextInt(graphEdgesList.size());
-        edgeOne = graphEdgesList.get(randomEdgeIndex);
-        graphEdgesList.remove(randomEdgeIndex);
+        for (int i = 0; i < graphEdgesList.size(); i++) {
+            //get one random nodes
+            Edge edgeOne;
 
-        //Shuffle the List of Edges
-        Collections.shuffle(graphEdgesList);
+            //get one edge random
+            int randomEdgeIndex = super.rnd.nextInt(graphEdgesList.size());
+            edgeOne = graphEdgesList.get(randomEdgeIndex);
+            graphEdgesList.remove(randomEdgeIndex);
 
-        for(Edge edgeTwo : graphEdgesList){
-            if(edgesAreDifferent(edgeOne, edgeTwo)) {
+            for (Edge edgeTwo : graphEdgesList) {
+                if (edgesAreDifferent(edgeOne, edgeTwo)) {
 
-                Node[] array = {edgeOne.getN1(), edgeOne.getN2(), edgeTwo.getN1(), edgeTwo.getN2()};
+                    Node[] array = {edgeOne.getN1(), edgeOne.getN2(), edgeTwo.getN1(), edgeTwo.getN2()};
 
-                if(!currentGraph.getEdges().isEdgeBetween(array[0], array[2])
-                        && !currentGraph.getEdges().isEdgeBetween(array[1], array[3])) {
+                    if (!currentGraph.getEdges().isEdgeBetween(array[0], array[2])
+                            && !currentGraph.getEdges().isEdgeBetween(array[1], array[3])) {
 
-                    currentGraph.removeEdge(edgeOne);
-                    currentGraph.removeEdge(edgeTwo);
+                        currentGraph.removeEdge(edgeOne);
+                        currentGraph.removeEdge(edgeTwo);
 
-                    addEdges(array[0], array[2], array[1], array[3]);
-                    return;
+                        addEdges(array[0], array[2], array[1], array[3]);
+                        return;
 
-                } else if(!currentGraph.getEdges().isEdgeBetween(array[0], array[3])
-                    && !currentGraph.getEdges().isEdgeBetween(array[1], array[2])) {
+                    } else if (!currentGraph.getEdges().isEdgeBetween(array[0], array[3])
+                            && !currentGraph.getEdges().isEdgeBetween(array[1], array[2])) {
 
-                    currentGraph.removeEdge(edgeOne);
-                    currentGraph.removeEdge(edgeTwo);
+                        currentGraph.removeEdge(edgeOne);
+                        currentGraph.removeEdge(edgeTwo);
 
-                    addEdges(array[0], array[3], array[1], array[2]);
-                    return;
+                        addEdges(array[0], array[3], array[1], array[2]);
+                        return;
+                    }
                 }
             }
         }
-
         //in case no fitting Edge is found the exception is thrown
         throw new IllegalStateException("none isomorphic similar Graph");
     }
