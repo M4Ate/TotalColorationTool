@@ -73,6 +73,8 @@ public class GraphColorer {
         cg.addUsedColor(Node.DEFAULT_COLOR);
         cg.addUsedColor(Edge.DEFAULT_COLOR);
         cg.addUsedColor(CompareLogic.GREY_COLOR);
+        //exclude background color
+        cg.addUsedColor(Color.hsb(.0, .0, .13));
         for (Color c : colorMap.values()) {
             cg.addUsedColor(c);
         }
