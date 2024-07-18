@@ -115,7 +115,7 @@ public class SolverViewModel implements ViewModel {
         if(!useServer){
             try{
 
-                startServer = Runtime.getRuntime().exec("java -jar ILP-Solver.jar");
+                startServer = Runtime.getRuntime().exec("java -jar ILP-Server.jar");
 
                 System.out.println("Started the server on localhost.");
 
