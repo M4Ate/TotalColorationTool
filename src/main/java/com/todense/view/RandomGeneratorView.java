@@ -29,7 +29,14 @@ public class RandomGeneratorView implements FxmlView<RandomGeneratorViewModel> {
                 "Nodes", viewModel.nodeCountProperty(),
                 0, 5, 1, Double.POSITIVE_INFINITY
         );
-        paramVBox.getChildren().add(nodeCountHBox);
+        //paramVBox.getChildren().add(nodeCountHBox);         // Remove from similar generator
+        setUpParameterHBox(nodeCountHBox,
+                GeneratorModel.MAX_DEG,
+                GeneratorModel.BARABASI_ALBERT,
+                GeneratorModel.ERDOS_RENYI,
+                GeneratorModel.GEOMETRIC,
+                GeneratorModel.GEOMETRIC_RANDOMIZED
+        );
 
         ParameterHBox edgeProbabilityHBox = new ParameterHBox(
                 "Probability", viewModel.edgeProbabilityProperty(),
@@ -57,7 +64,7 @@ public class RandomGeneratorView implements FxmlView<RandomGeneratorViewModel> {
 
         ParameterHBox maxDegHBox = new ParameterHBox(
                 "Max degree", viewModel.maxDegProperty(),
-                0, 2, 2, Double.POSITIVE_INFINITY
+                0, 3, 2, Double.POSITIVE_INFINITY
         );
 
         setUpParameterHBox(maxDegHBox, GeneratorModel.MAX_DEG);
