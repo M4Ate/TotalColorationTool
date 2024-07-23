@@ -7,7 +7,6 @@ public enum GeneratorModel {
     GEOMETRIC("Geometric"),
     GEOMETRIC_RANDOMIZED("Geometric Randomized"),
     MAX_DEG("Maximum degree "),
-    MIN_DIST("Minimum distance"),
     SIMILAR_GRAPH("Similar graph"),
     ;
 

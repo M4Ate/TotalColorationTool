@@ -26,13 +26,13 @@ public class RandomGeneratorViewModel implements ViewModel {
     private final ObjectProperty<GeneratorModel> generatorProperty = new SimpleObjectProperty<>();
     private final ObjectProperty<NodeArrangement> nodeArrangementProperty = new SimpleObjectProperty<>();
 
-    private final IntegerProperty nodeCountProperty = new SimpleIntegerProperty(50);
+    private final IntegerProperty nodeCountProperty = new SimpleIntegerProperty(5);
     private final DoubleProperty minNodeDistProperty = new SimpleDoubleProperty(0.1);
     private final DoubleProperty edgeProbabilityProperty = new SimpleDoubleProperty(0.1);
     private final DoubleProperty edgeThresholdProperty = new SimpleDoubleProperty(0.2);
     private final IntegerProperty barabasiInitialNodesProperty = new SimpleIntegerProperty(2);
     private final IntegerProperty barabasiConnectionsProperty = new SimpleIntegerProperty(2);
-    private final IntegerProperty maxDegProperty = new SimpleIntegerProperty(2);
+    private final IntegerProperty maxDegProperty = new SimpleIntegerProperty(3);
 
 
     private final BooleanProperty withMinDistProperty = new SimpleBooleanProperty(true);
