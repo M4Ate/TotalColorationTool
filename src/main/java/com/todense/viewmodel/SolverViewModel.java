@@ -228,8 +228,8 @@ public class SolverViewModel implements ViewModel {
      * @param Port - the Port of the server.
      * @param jsonString - the ILP-Problem as a JSON String
      * @return the JSON Response
-     * @throws IOException - TODO MAX??
-     * @throws InterruptedException TODO MAX??
+     * @throws IOException - If the request could not be sent.
+     * @throws InterruptedException - If the request was interrupted.
      */
     private String requestServer(String IP, String Port, String jsonString) throws IOException, InterruptedException{
         HttpClient client = HttpClient.newHttpClient();
