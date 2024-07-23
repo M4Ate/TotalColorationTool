@@ -2,12 +2,12 @@ package com.todense.viewmodel.random;
 
 public enum GeneratorModel {
 
+    MAX_DEG("Maximum degree "),
+    SIMILAR_GRAPH("Similar graph"),
     BARABASI_ALBERT("Barabási–Albert model"),
     ERDOS_RENYI("Erdős–Rényi model"),
     GEOMETRIC("Geometric"),
     GEOMETRIC_RANDOMIZED("Geometric Randomized"),
-    MAX_DEG("Maximum degree "),
-    SIMILAR_GRAPH("Similar graph"),
     ;
 
     private final String name;
