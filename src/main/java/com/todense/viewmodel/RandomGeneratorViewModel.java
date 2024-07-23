@@ -110,7 +110,7 @@ public class RandomGeneratorViewModel implements ViewModel {
                             " perform this action");
                     throw new IllegalStateException("No graph found");
                 } else {
-                    Graph graph = graphScope.getGraphManager().getGraph().copy();
+                    Graph graph = graphScope.getGraphManager().getGraph();
                     SimilarGenerator similarGenerator = new SimilarGenerator(graph);
                     edgeGenerator = similarGenerator;
                     try {
@@ -118,7 +118,7 @@ public class RandomGeneratorViewModel implements ViewModel {
                     } catch (IllegalStateException e){
                         if(e.getMessage().equals("none isomorphic similar Graph")){
                             notificationCenter.publish(MainViewModel.TASK_FINISHED,
-                                    "Could not find a none isomorphic similar Graph");
+                                    "Could not find a valid similar Graph");
                             return;
                         }
                         throw e;
