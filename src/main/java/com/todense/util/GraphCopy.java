@@ -25,6 +25,7 @@ public class GraphCopy {
         for (Node n : inputNodes) {
             Node newNode = outputGraph.addNode(n.getPos(), n.getID());
             newNode.setColor(n.getColor());
+            newNode.setLabelText(n.getLabelText());
         }
         EdgeList inputEdges = inputGraph.getEdges();
         for (Edge e : inputEdges) {
