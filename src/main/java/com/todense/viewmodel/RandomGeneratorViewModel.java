@@ -115,9 +115,9 @@ public class RandomGeneratorViewModel implements ViewModel {
                     try {
                         similarGenerator.generateConnections();
                     } catch (IllegalStateException e){
-                        if(e.getMessage().equals("none isomorphic similar Graph")){
+                        if(e.getMessage().equals("none isomorphic similar graph")){
                             notificationCenter.publish(MainViewModel.TASK_FINISHED,
-                                    "Could not find a valid similar Graph");
+                                    "Could not find a valid similar graph");
                             return;
                         }
                         throw e;

@@ -1,5 +1,7 @@
 package com.todense.viewmodel;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.google.inject.Inject;
 import com.todense.model.graph.Graph;
 import com.todense.util.GraphCopy;
@@ -109,7 +111,7 @@ public class SolverViewModel implements ViewModel {
 
         System.out.println(jsonString);
 
-        //Anfrage an Server machen eventuell anderer Thread oder async
+        //Server request on other Thread or async
         String responseString;
 
         if(!useServer){
@@ -129,8 +131,19 @@ public class SolverViewModel implements ViewModel {
             if (useServer) responseString = requestServer(IP, Port, jsonString);
             else responseString = requestServer(DEFAULT_IP, DEFAULT_PORT, jsonString);
 
+            JsonObject responseObject = JsonParser.parseString(responseString).getAsJsonObject();
+            boolean error = responseObject.get("error").getAsBoolean();
+
+            if(error) {
+                notificationCenter.publish(MainViewModel.TASK_FINISHED,
+                        "Server solver returned an error, error message: "
+                                + responseObject.get("errorMessage").getAsString());
+                System.out.println(responseObject.get("errorMessage").getAsString());
+                return;
+            }
+
         } catch (IOException e) {
-            notificationCenter.publish(MainViewModel.TASK_FINISHED, e.getMessage());
+            System.out.println(e.getMessage());
             return;
         } catch(InterruptedException e){
             return;
