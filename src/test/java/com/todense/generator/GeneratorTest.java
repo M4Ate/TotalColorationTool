@@ -65,12 +65,17 @@ public class GeneratorTest {
         Graph currentGraph = ogrReader.readGraph(new File(
                 "src/test/resources/SimilarGraphGenTesting/Similar_Graph_Gen_Test_Graph_1_N5_D3_E7.ogr"));
 
-        TestSimilarGenerator generator = new TestSimilarGenerator(currentGraph, new int[] {1, 2, 3, 4});
+        TestSimilarGenerator generator = new TestSimilarGenerator(currentGraph, new int[] {4,3});
         generator.testGenerate();
 
-        Graph compareGraph = ogrReader.readGraph(new File("src/test/resources/SimilarGraphGenTesting/Similar_Graph_Gen_Test_Graph_1_result_4_3.ogr"));
+        Graph compareGraphCorrect = ogrReader.readGraph(new File("src/test/resources/SimilarGraphGenTesting/Similar_Graph_Gen_Test_Graph_1_result_4_3.ogr"));
 
-        assert !ValidateGraphEquality.graphsEqual(compareGraph, currentGraph);
+        assert ValidateGraphEquality.graphsEqual(currentGraph, compareGraphCorrect);
+
+        Graph compareGraphError = ogrReader.readGraph(new File ("src/test/resources/SimilarGraphGenTesting/Similar_Graph_Gen_Test_Graph_1_result_0_5.ogr"));
+
+        assert !ValidateGraphEquality.graphsEqual(currentGraph, compareGraphError);
+
     }
 
 }

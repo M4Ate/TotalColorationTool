@@ -1,5 +1,6 @@
 package com.todense.TestUtil;
 
+import com.todense.model.EdgeList;
 import com.todense.model.graph.Edge;
 import com.todense.model.graph.Graph;
 import com.todense.model.graph.Node;
@@ -7,21 +8,29 @@ import com.todense.viewmodel.file.GraphReader;
 import com.todense.viewmodel.file.format.ogr.OgrReader;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ValidateGraphEquality {
 
     public static boolean graphsEqual(Graph graph1, Graph graph2) {
-        for(Node node1 : graph1.getNodes()){
-            for(Node node2 : graph2.getNodes()){
-                if(!nodesEqual(node1, node2)) return false;
-            }
+
+        if(graph1.getNodes().size() != graph2.getNodes().size()) return false;
+
+        ArrayList<Node> nodesOfGraph1 = new ArrayList<>(graph1.getNodes());
+        ArrayList<Node> nodesOfGraph2 = new ArrayList<>(graph2.getNodes());
+
+        for (int i = 0; i < nodesOfGraph1.size(); i++) {
+            if(!nodesEqual(nodesOfGraph1.get(i), nodesOfGraph2.get(i))) return false;
         }
 
-        for(Edge edge1 : graph1.getEdges()){
-            for(Edge edge2 : graph2.getEdges()){
-                if(edgesEqual(edge1, edge2)) return false;
-            }
+        EdgeList edgesOfGraph1 = graph1.getEdges();
+        EdgeList edgesOfGraph2 = graph2.getEdges();
+
+        for (int i = 0; i < graph1.getSize(); i++) {
+            if(edgesEqual(edgesOfGraph1.get(i), edgesOfGraph2.get(i))) return false;
         }
+
         return true;
     }
 
@@ -33,7 +42,7 @@ public class ValidateGraphEquality {
 
     private static boolean nodesEqual(Node node1, Node node2){
         if(node1.getID() != node2.getID()) return false;
-        if(node1.getColor() != node2.getColor()) return false;
+        if(!node1.getColor().equals(node2.getColor())) return false;
         return node1.getLabelText().equals(node2.getLabelText());
     }
 
