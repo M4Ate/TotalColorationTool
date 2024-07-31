@@ -44,7 +44,7 @@ public class SimilarGenerator extends RandomEdgeGenerator{
             Edge edgeOne;
 
             //get one edge random
-            int randomEdgeIndex = super.rnd.nextInt(graphEdgesList.size());
+            int randomEdgeIndex = getRandomEdgeIndex(graphEdgesList.size());
             edgeOne = graphEdgesList.get(randomEdgeIndex);
             graphEdgesList.remove(randomEdgeIndex);
 
@@ -91,5 +91,9 @@ public class SimilarGenerator extends RandomEdgeGenerator{
     private boolean edgesAreDifferent (Edge edgeOne, Edge edgeTwo) {
         return (edgeOne.getN1() != edgeTwo.getN1() && edgeOne.getN2() != edgeTwo.getN2()
                 && edgeOne.getN1() != edgeTwo.getN2() && edgeOne.getN2() != edgeTwo.getN1());
+    }
+
+    private int getRandomEdgeIndex(int max) {
+        return super.rnd.nextInt(max);
     }
 }
