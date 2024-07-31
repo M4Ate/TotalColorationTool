@@ -148,8 +148,6 @@ public class RandomGeneratorViewModel implements ViewModel {
         thread.start();
     }
 
-
-
     public ObjectProperty<GeneratorModel> generatorProperty() {
         return generatorProperty;
     }
