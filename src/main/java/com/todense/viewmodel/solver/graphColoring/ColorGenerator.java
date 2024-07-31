@@ -35,11 +35,12 @@ public class ColorGenerator {
 
     /**
      * crates a new ColorGenerator instance with a specified Color Palette
+     * @param palette color palette, that can not be empty
      */
     public ColorGenerator(List<Color> palette) {
-        usedColors = new ArrayList<Color>();
-        colorPalette = new ArrayList<Color>();
-        colorPalette.addAll(palette);
+        assert palette.size() >= 1;
+        usedColors = new ArrayList<>();
+        colorPalette = new ArrayList<>(palette);
     }
 
     /**
@@ -58,7 +59,9 @@ public class ColorGenerator {
      */
     public Color getUniqueColor(){
         if (usedColors.size() == 0) {
-            return colorPalette.get(0);
+            Color c = colorPalette.get(0);
+            addUsedColor(c);
+            return c;
         }
         double maxDistance = 0.0;
         Color maxDistanceColor = null;

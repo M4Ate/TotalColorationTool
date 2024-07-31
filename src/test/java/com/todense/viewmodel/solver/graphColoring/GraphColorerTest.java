@@ -46,4 +46,24 @@ class GraphColorerTest {
         assertEquals("0x00ff00ff", result.getEdges().get(1).getColor().toString());
         assertEquals("0xffe502ff", result.getEdges().get(2).getColor().toString());
     }
+
+    @Test
+    void getColoredGraphErrorTest() {
+        //K3 graph
+        Graph graph = new Graph();
+        graph.addNode();
+        graph.addNode();
+        graph.addNode();
+        graph.addEdge(graph.getNodes().get(0), graph.getNodes().get(1));
+        graph.addEdge(graph.getNodes().get(1), graph.getNodes().get(2));
+        graph.addEdge(graph.getNodes().get(2), graph.getNodes().get(0));
+        ILPType type = ILPType.MINCOLORS;
+        ILPProblem ilp = ILPGenerator.generateILP(graph, type);
+        //JsonString has an error and not all Variables have been set
+        String jsonResponse = "{\"error\":true,\"errorMessage\":\"something went wrong\"," +
+                "\"result\":[{\"variable\":\"x_v0_c0\",\"value\":1}]}";
+        Graph result = GraphColorer.getColoredGraph(graph, ilp, jsonResponse);
+        //result should be null according to the Javadoc
+        assertNull(result);
+    }
 }
