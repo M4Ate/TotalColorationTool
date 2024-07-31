@@ -13,6 +13,7 @@ import com.todense.viewmodel.random.generators.SimilarGenerator;
 import de.saxsys.mvvmfx.utils.notifications.NotificationCenter;
 import javafx.geometry.Point2D;
 import javafx.util.Pair;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import javax.inject.Inject;
@@ -21,6 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Stack;
+
+import static org.junit.Assert.assertTrue;
 
 public class GeneratorTest {
 
@@ -70,7 +73,9 @@ public class GeneratorTest {
 
         Graph compareGraphCorrect = ogrReader.readGraph(new File("src/test/resources/SimilarGraphGenTesting/Similar_Graph_Gen_Test_Graph_1_result_4_3.ogr"));
 
-        assert ValidateGraphEquality.graphsEqual(currentGraph, compareGraphCorrect);
+        //TODO Ask for preffernece
+
+        Assertions.assertTrue(ValidateGraphEquality.graphsEqual(currentGraph, compareGraphCorrect));
 
         Graph compareGraphError = ogrReader.readGraph(new File ("src/test/resources/SimilarGraphGenTesting/Similar_Graph_Gen_Test_Graph_1_result_0_5.ogr"));
 

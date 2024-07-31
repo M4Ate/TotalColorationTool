@@ -28,7 +28,7 @@ public class ValidateGraphEquality {
         EdgeList edgesOfGraph2 = graph2.getEdges();
 
         for (int i = 0; i < graph1.getSize(); i++) {
-            if(edgesEqual(edgesOfGraph1.get(i), edgesOfGraph2.get(i))) return false;
+            if(!edgesEqual(edgesOfGraph1.get(i), edgesOfGraph2.get(i))) return false;
         }
 
         return true;
@@ -47,8 +47,8 @@ public class ValidateGraphEquality {
     }
 
     private static boolean edgesEqual(Edge edge1, Edge edge2){
-        if(edge1.getId().equals(edge2.getId())) return false;
-        if(edge1.getColor() != edge2.getColor()) return false;
+        if(!edge1.getId().equals(edge2.getId())) return false;
+        if(!edge1.getColor().equals(edge2.getColor())) return false;
         if(edge1.getN1().getID() != edge2.getN1().getID()) return false;
         return edge1.getN2().getID() == edge2.getN2().getID();
     }
