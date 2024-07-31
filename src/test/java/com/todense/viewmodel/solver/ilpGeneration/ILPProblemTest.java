@@ -1,7 +1,9 @@
 package com.todense.viewmodel.solver.ilpGeneration;
 
+import javafx.scene.paint.Color;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -37,5 +39,24 @@ class ILPProblemTest {
                 "\"optimizationFunction\":\"z_c0 + z_c1\"," +
                 "\"minimize\":true}", jsonString);
 
+    }
+
+    @Test
+    void getReverseColorMappingTest() {
+        HashMap<Color, Integer> ciMap = new HashMap<>();
+        ciMap.put(Color.web("0xff0000"), 0);
+        ciMap.put(Color.web("0x00ff00"), 1);
+        ciMap.put(Color.web("0x0000ff"), 2);
+        ILPProblem ilpp = new ILPProblem();
+
+        //even with no Color Mapping set the reverse Color Map should not be null;
+        assertNotNull(ilpp.getReverseColorMapping());
+        assertEquals(ilpp.getReverseColorMapping().isEmpty(), true);
+
+        ilpp.setColorMapping(ciMap);
+        HashMap<Integer, Color> reverseMap = ilpp.getReverseColorMapping();
+        assertEquals(reverseMap.get(0).toString(), "0xff0000ff");
+        assertEquals(reverseMap.get(1).toString(), "0x00ff00ff");
+        assertEquals(reverseMap.get(2).toString(), "0x0000ffff");
     }
 }
