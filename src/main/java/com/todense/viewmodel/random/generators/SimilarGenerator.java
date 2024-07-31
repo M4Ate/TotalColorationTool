@@ -28,6 +28,8 @@ public class SimilarGenerator extends RandomEdgeGenerator{
     }
 
     /**
+     * TODO delete prints that help for creating test cases
+     *
      * This method changes the graph, that ist stored in the currentGraph attribute,
      * to a graph that is similar to the current graph.
      *
@@ -45,6 +47,7 @@ public class SimilarGenerator extends RandomEdgeGenerator{
 
             //get one edge random
             int randomEdgeIndex = getRandomEdgeIndex(graphEdgesList.size());
+            System.out.println("randomEdgeIndex: " + randomEdgeIndex);
             edgeOne = graphEdgesList.get(randomEdgeIndex);
             graphEdgesList.remove(randomEdgeIndex);
 
@@ -59,6 +62,11 @@ public class SimilarGenerator extends RandomEdgeGenerator{
                         currentGraph.removeEdge(edgeOne);
                         currentGraph.removeEdge(edgeTwo);
 
+                        System.out.println("Removed edge: " + graphEdgesList.indexOf(edgeTwo));
+
+                        System.out.println(edgeOne.getN1() + " " + edgeOne.getN2());
+                        System.out.println(edgeTwo.getN1() + " " + edgeTwo.getN2());
+
                         addEdges(array[0], array[2], array[1], array[3]);
                         return;
 
@@ -67,6 +75,11 @@ public class SimilarGenerator extends RandomEdgeGenerator{
 
                         currentGraph.removeEdge(edgeOne);
                         currentGraph.removeEdge(edgeTwo);
+
+                        System.out.println("Removed edge: " + graphEdgesList.indexOf(edgeTwo));
+
+                        System.out.println(edgeOne.getN1() + " " + edgeOne.getN2());
+                        System.out.println(edgeTwo.getN1() + " " + edgeTwo.getN2());
 
                         addEdges(array[0], array[3], array[1], array[2]);
                         return;
@@ -93,7 +106,9 @@ public class SimilarGenerator extends RandomEdgeGenerator{
                 && edgeOne.getN1() != edgeTwo.getN2() && edgeOne.getN2() != edgeTwo.getN1());
     }
 
-    private int getRandomEdgeIndex(int max) {
+    //this method generates a random number between 0 and max.
+    // it will be Override in a test case variant which is the reason for it to be protected
+    protected int getRandomEdgeIndex(int max) {
         return super.rnd.nextInt(max);
     }
 }
