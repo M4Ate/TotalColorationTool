@@ -9,13 +9,11 @@ import com.todense.viewmodel.RandomGeneratorViewModel;
 import com.todense.viewmodel.file.format.ogr.OgrReader;
 import com.todense.viewmodel.random.RandomEdgeGenerator;
 import com.todense.viewmodel.random.generators.MaxDegGenerator;
-import com.todense.viewmodel.random.generators.SimilarGenerator;
 import de.saxsys.mvvmfx.utils.notifications.NotificationCenter;
 import javafx.geometry.Point2D;
 import javafx.util.Pair;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
+import static org.junit.jupiter.api.Assertions.*;
 import javax.inject.Inject;
 import java.io.File;
 import java.util.ArrayList;
@@ -23,14 +21,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Stack;
 
-import static org.junit.Assert.assertTrue;
-
 public class GeneratorTest {
-
-    @Inject
-    NotificationCenter notificationCenter;
-
-    RandomGeneratorViewModel randomGeneratorViewModel = new RandomGeneratorViewModel();
 
     @Test
     void testGenerateMaxDegGenerator() {
@@ -44,14 +35,11 @@ public class GeneratorTest {
         Stack<Integer> keys = connections.getKey();
         Stack<Integer> values = connections.getValue();
 
-
-
         assert !connections.getKey().isEmpty();
         assert !Objects.equals(keys.get(0), values.get(0));
         assert keys.size() == 1;
         assert values.size() == 1;
     }
-
 
     private List<Node> getTestNodes(){
         List<Node> nodes = new ArrayList<>();
@@ -73,14 +61,11 @@ public class GeneratorTest {
 
         Graph compareGraphCorrect = ogrReader.readGraph(new File("src/test/resources/SimilarGraphGenTesting/Similar_Graph_Gen_Test_Graph_1_result_4_3.ogr"));
 
-        //TODO Ask for preffernece
-
-        Assertions.assertTrue(ValidateGraphEquality.graphsEqual(currentGraph, compareGraphCorrect));
+        assertTrue(ValidateGraphEquality.graphsEqual(currentGraph, compareGraphCorrect));
 
         Graph compareGraphError = ogrReader.readGraph(new File ("src/test/resources/SimilarGraphGenTesting/Similar_Graph_Gen_Test_Graph_1_result_0_5.ogr"));
 
-        assert !ValidateGraphEquality.graphsEqual(currentGraph, compareGraphError);
+        assertFalse(ValidateGraphEquality.graphsEqual(currentGraph, compareGraphError)) ;
 
     }
-
 }
