@@ -6,10 +6,8 @@ import com.todense.model.graph.Graph;
 import com.todense.model.graph.Node;
 import com.todense.viewmodel.file.GraphReader;
 import com.todense.viewmodel.file.format.ogr.OgrReader;
-
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ValidateGraphEquality {
 
