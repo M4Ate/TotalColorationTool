@@ -107,6 +107,10 @@ public class SolverViewModel implements ViewModel {
         Graph currentGraph = GraphCopy.copyGraphWithColorsAndID(graphManager.getGraph());
 
         ILPProblem problem = ILPGenerator.generateILP(currentGraph, type);
+        if(problem == null) {
+            notificationCenter.publish(MainViewModel.TASK_FINISHED, "too many unique colors used");
+            return;
+        }
         String jsonString = problem.getILPAsJsonString();
 
         System.out.println(jsonString);
