@@ -48,13 +48,13 @@
          </VBox.margin>
       </HBox>
 
-      <ToggleSwitch fx:id="similarColoringToggleSwitch" alignment="CENTER" maxWidth="10000.0" selected="false" text="Similiar Coloring">
+      <ToggleSwitch fx:id="similarColoringToggleSwitch" alignment="CENTER" maxWidth="10000.0" selected="false" text="Try keeping current coloring">
          <font>
             <Font size="16.0" />
          </font>
       </ToggleSwitch>
 
-      <ToggleSwitch fx:id="currentColorsToggleSwitch" alignment="CENTER" maxWidth="10000.0" selected="false" text="Use current Colors">
+      <ToggleSwitch fx:id="currentColorsToggleSwitch" alignment="CENTER" maxWidth="10000.0" selected="false" text="Force current coloring">
          <font>
             <Font size="16.0" />
          </font>
