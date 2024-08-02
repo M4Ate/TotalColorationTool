@@ -9,6 +9,7 @@ import com.todense.viewmodel.RandomGeneratorViewModel;
 import com.todense.viewmodel.file.format.ogr.OgrReader;
 import com.todense.viewmodel.random.RandomEdgeGenerator;
 import com.todense.viewmodel.random.generators.MaxDegGenerator;
+import com.todense.viewmodel.random.generators.SimilarGenerator;
 import de.saxsys.mvvmfx.utils.notifications.NotificationCenter;
 import javafx.geometry.Point2D;
 import javafx.util.Pair;
@@ -51,7 +52,7 @@ public class GeneratorTest {
     @Test
     //Attention: This Test ist related to specific files located in the repo
     //If These Files are incorrectly placed or do contain not monitored values the test case will not be meaningful
-    void testSimilarGraphGenerator() {
+    void testSimilarGraphGeneratorDefault() {
         OgrReader ogrReader = new OgrReader();
         Graph currentGraph = ogrReader.readGraph(new File(
                 "src/test/resources/SimilarGraphGenTesting/Similar_Graph_Gen_Test_Graph_1_N5_D3_E7.ogr"));
@@ -67,5 +68,17 @@ public class GeneratorTest {
 
         assertFalse(ValidateGraphEquality.graphsEqual(currentGraph, compareGraphError)) ;
 
+    }
+
+    @Test
+    void testSimilarGraphGeneratorNoGraphLoaded() {
+        OgrReader ogrReader = new OgrReader();
+        Graph currentGraph = ogrReader.readGraph(new File("src/test/resources/SimilarGraphGenTesting/Empty_Graph.ogr"));
+
+        TestSimilarGenerator testSimilarGenerator = new TestSimilarGenerator(currentGraph);
+
+        Exception e = assertThrows(IllegalStateException.class, testSimilarGenerator::testGenerate);
+
+        assertEquals(e.getMessage(), "no valid similar graph");
     }
 }
