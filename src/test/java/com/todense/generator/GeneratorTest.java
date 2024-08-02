@@ -81,4 +81,7 @@ public class GeneratorTest {
 
         assertEquals(e.getMessage(), "no valid similar graph");
     }
+
+    
+
 }

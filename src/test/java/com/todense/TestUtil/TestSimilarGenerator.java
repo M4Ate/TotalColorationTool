@@ -28,7 +28,9 @@ public class TestSimilarGenerator extends SimilarGenerator {
         if(this.pseudoRandomNumbers == null){
             return super.getRandomEdgeIndex(max);
         } else {
-            return pseudoRandomNumbers[callCounter];
+            int returnValue = pseudoRandomNumbers[callCounter];
+            callCounter++;
+            return returnValue;
         }
     }
 }
