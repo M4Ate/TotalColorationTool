@@ -3,9 +3,9 @@ package com.todense.TestUtil;
 import com.todense.model.graph.Node;
 import javafx.geometry.Point2D;
 
-public class TestNodes extends Node {
+public class TestNode extends Node {
 
-    public TestNodes(Point2D pos, int index, int id) {
+    public TestNode(Point2D pos, int index, int id) {
         super(pos, index, id);
     }
 }
