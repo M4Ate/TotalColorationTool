@@ -88,7 +88,7 @@ public class SimilarGenerator extends RandomEdgeGenerator{
             }
         }
         //in case no fitting Edge is found the exception is thrown
-        throw new IllegalStateException("none isomorphic similar Graph");
+        throw new IllegalStateException("no valid similar graph");
     }
 
     //this method adds two new Edges between the first two Nodes and the second two Nodes
