@@ -104,31 +104,12 @@ public class RandomGeneratorViewModel implements ViewModel {
 
             case SIMILAR_GRAPH:
                 //Case to call the similar graph generator
-                if(graphScope.getGraphManager().getGraph().getOrder() == 0) {
-                    notificationCenter.publish(MainViewModel.TASK_FINISHED, "A Graph needs to be loaded to" +
-                            " perform this action");
-                    return;
-                } else {
-                    Graph graph = graphScope.getGraphManager().getGraph();
-                    SimilarGenerator similarGenerator = new SimilarGenerator(graph);
-                    edgeGenerator = similarGenerator;
-                    try {
-                        similarGenerator.generateConnections();
-                    } catch (IllegalStateException e){
-                        if(e.getMessage().equals("no valid similar graph")){
-                            notificationCenter.publish(MainViewModel.TASK_FINISHED,
-                                    "Could not find a valid similar graph");
-                            return;
-                        }
-                        throw e;
-                    }
 
-                    notificationCenter.publish(GraphViewModel.NEW_GRAPH_REQUEST, graph);
-                    notificationCenter.publish(MainViewModel.TASK_FINISHED, "Similar graph generated");
+                Graph temp = generateAndPublishASimilarGraph(notificationCenter, graphScope.getGraphManager().getGraph());
 
-                    return;
-                 }
+                graphScope.getGraphManager().setGraph(temp);
 
+                return;
             default:
                 throw new IllegalStateException("Unexpected value: " + generatorProperty.get());
         }
@@ -214,5 +195,30 @@ public class RandomGeneratorViewModel implements ViewModel {
 
     public IntegerProperty maxDegProperty() {
         return maxDegProperty;
+    }
+
+    protected Graph generateAndPublishASimilarGraph(NotificationCenter notificationCenter, Graph currentGraph){
+
+        if(currentGraph.getOrder() == 0) {
+            //no Graph loaded Error Case
+            notificationCenter.publish(MainViewModel.TASK_FINISHED, "A Graph needs to be loaded to" +
+                    " perform this action");
+        } else {
+            SimilarGenerator similarGenerator = new SimilarGenerator(currentGraph);
+            try {
+                similarGenerator.generateConnections();
+            } catch (IllegalStateException e){
+                if(e.getMessage().equals("no valid similar graph")){
+                    notificationCenter.publish(MainViewModel.TASK_FINISHED,
+                            "Could not find a valid similar graph");
+                    return currentGraph;
+                }
+                throw e;
+            }
+
+            notificationCenter.publish(GraphViewModel.NEW_GRAPH_REQUEST, currentGraph);
+            notificationCenter.publish(MainViewModel.TASK_FINISHED, "Similar graph generated");
+        }
+        return currentGraph;
     }
 }
