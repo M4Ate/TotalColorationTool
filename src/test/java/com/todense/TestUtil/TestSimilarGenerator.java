@@ -14,12 +14,21 @@ public class TestSimilarGenerator extends SimilarGenerator {
         this.pseudoRandomNumbers = pseudoRandomNumbers;
     }
 
+    public TestSimilarGenerator(Graph currentGraph) {
+        super(currentGraph);
+        this.pseudoRandomNumbers = null;
+    }
+
     public void testGenerate() {
         super.generate();
     }
 
     @Override
     protected int getRandomEdgeIndex(int max) {
-        return pseudoRandomNumbers[callCounter];
+        if(this.pseudoRandomNumbers == null){
+            return super.getRandomEdgeIndex(max);
+        } else {
+            return pseudoRandomNumbers[callCounter];
+        }
     }
 }
