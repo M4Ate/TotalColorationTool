@@ -5,24 +5,21 @@ import com.todense.TestUtil.ValidateGraphEquality;
 import com.todense.model.graph.Graph;
 import com.todense.model.graph.Node;
 import com.todense.TestUtil.TestNodes;
-import com.todense.viewmodel.RandomGeneratorViewModel;
 import com.todense.viewmodel.file.format.ogr.OgrReader;
 import com.todense.viewmodel.random.RandomEdgeGenerator;
 import com.todense.viewmodel.random.generators.MaxDegGenerator;
-import com.todense.viewmodel.random.generators.SimilarGenerator;
-import de.saxsys.mvvmfx.utils.notifications.NotificationCenter;
 import javafx.geometry.Point2D;
 import javafx.util.Pair;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import javax.inject.Inject;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Stack;
 
-public class GeneratorTest {
+public class TestSimilarGraphGenerator {
 
     @Test
     void testGenerateMaxDegGenerator() {

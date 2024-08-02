@@ -3,7 +3,7 @@ package com.todense.TestUtil;
 import de.saxsys.mvvmfx.utils.notifications.NotificationCenter;
 import de.saxsys.mvvmfx.utils.notifications.NotificationObserver;
 
-public class NotiTest implements NotificationCenter {
+public class TestNotificationCenterDummy implements NotificationCenter {
     @Override
     public void subscribe(String s, NotificationObserver notificationObserver) {
 
