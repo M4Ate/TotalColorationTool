@@ -105,9 +105,9 @@ public class RandomGeneratorViewModel implements ViewModel {
             case SIMILAR_GRAPH:
                 //Case to call the similar graph generator
                 if(graphScope.getGraphManager().getGraph().getOrder() == 0) {
-                    notificationCenter.publish(MainViewModel.RESET, "A Graph needs to be loaded to" +
+                    notificationCenter.publish(MainViewModel.TASK_FINISHED, "A Graph needs to be loaded to" +
                             " perform this action");
-                    throw new IllegalStateException("No graph found");
+                    return;
                 } else {
                     Graph graph = graphScope.getGraphManager().getGraph();
                     SimilarGenerator similarGenerator = new SimilarGenerator(graph);
