@@ -11,6 +11,7 @@ import javafx.scene.paint.Color;
 public class CompareLogic {
 
     public static Color GREY_COLOR = Color.rgb(105, 105, 105);
+    public static Color ONLY_IN_ONE_GRAPH_COLOR = Color.rgb(252, 15, 192);
 
     /**
      * Compares two graphs and uncolors all nodes and edges that are the same in both graphs
@@ -30,13 +31,25 @@ public class CompareLogic {
      * @param comparisonGraph the graph to compare with
      */
     private static void compareAndUncolorEdges(Graph currentGraph, Graph comparisonGraph) {
+        for (Edge currentEdge : currentGraph.getEdges().getEdgeMap().values()) {
+            Node node1Comp = comparisonGraph.getNodeById(currentEdge.getN1().getID());
+            Node node2Comp = comparisonGraph.getNodeById(currentEdge.getN2().getID());
+            if(node1Comp == null ||
+                    node2Comp == null ||
+                    comparisonGraph.getEdges().getEdge(node1Comp, node2Comp) == null)
+            {
+                currentEdge.setColor(ONLY_IN_ONE_GRAPH_COLOR);
+            }
+        }
+
         for (Edge compEdge : comparisonGraph.getEdges().getEdgeMap().values()) {
+            Edge currentEdge;
             Node node1Current = currentGraph.getNodeById(compEdge.getN1().getID());
             Node node2Current = currentGraph.getNodeById(compEdge.getN2().getID());
-            Edge currentEdge = currentGraph.getEdges().getEdge(node1Current, node2Current);
+            currentEdge = currentGraph.getEdges().getEdge(node1Current, node2Current);
 
             if (currentEdge == null) {
-                currentGraph.addEdge(node1Current, node2Current, compEdge.getColor());
+                currentGraph.addEdge(node1Current, node2Current, ONLY_IN_ONE_GRAPH_COLOR);
                 node1Current.getNeighbours().add(node2Current);
                 node2Current.getNeighbours().add(node1Current);
             } else if (currentEdge.getColor().equals(compEdge.getColor())) {
@@ -47,12 +60,18 @@ public class CompareLogic {
     }
 
     private static void compareAndUncolorNodes(Graph currentGraph, Graph comparisonGraph) {
+        for (Node currentNode: currentGraph.getNodes()) {
+            if (comparisonGraph.getNodeById(currentNode.getID()) == null) {
+                currentNode.setColor(ONLY_IN_ONE_GRAPH_COLOR);
+            }
+        }
+
         for (Node compNode : comparisonGraph.getNodes()) {
             Node currentNode = currentGraph.getNodeById(compNode.getID());
 
             if (currentNode == null) {
                 Node node = currentGraph.addNode(compNode.getPos() ,compNode.getID());
-                node.setColor(compNode.getColor());
+                node.setColor(ONLY_IN_ONE_GRAPH_COLOR);
             } else {
                 // Set color to gray if colors are the same
                 if (currentNode.getColor().equals(compNode.getColor())) {

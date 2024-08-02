@@ -57,7 +57,7 @@ public class CompareLogicTest {
         CompareLogic.compareAndUncolor(currentGraph, compareGraph);
 
         assertEquals(currentGraph.getNodes().size(), 2);
-        assertEquals(currentGraph.getNodeById(1).getColor(), testColor);
+        assertEquals(currentGraph.getNodeById(1).getColor(), CompareLogic.ONLY_IN_ONE_GRAPH_COLOR);
     }
 
     @Test
@@ -74,7 +74,7 @@ public class CompareLogicTest {
         CompareLogic.compareAndUncolor(currentGraph, compareGraph);
 
         assertTrue(currentGraph.getEdges().isEdgeBetween(currentNode, currentNode2));
-        assertEquals(currentGraph.getEdge(0, 1).getColor(), testColor);
+        assertEquals(currentGraph.getEdge(0, 1).getColor(), CompareLogic.ONLY_IN_ONE_GRAPH_COLOR);
     }
 
     @Test
@@ -92,8 +92,8 @@ public class CompareLogicTest {
 
         assertEquals(currentGraph.getEdges().size(), 1);
         assertEquals(currentGraph.getNodes().size(), 2);
-        assertEquals(currentGraph.getEdge(0, 1).getColor(), testColor);
-        assertEquals(currentGraph.getNodeById(1).getColor(), testColor);
+        assertEquals(currentGraph.getEdge(0, 1).getColor(), CompareLogic.ONLY_IN_ONE_GRAPH_COLOR);
+        assertEquals(currentGraph.getNodeById(1).getColor(), CompareLogic.ONLY_IN_ONE_GRAPH_COLOR);
     }
 
     @Test
@@ -125,6 +125,56 @@ public class CompareLogicTest {
 
         assertEquals(currentEdge.getColor(), testColor);
 
+    }
+
+    @Test
+    void testNodeAndEdgeOnlyInCurrentGraph1() {
+        Graph currentGraph = new Graph();
+        Graph compareGraph = new Graph();
+        Node currentNode = currentGraph.addNode();
+        Node currentNode2 = currentGraph.addNode();
+        currentNode.setColor(testColor);
+        Node compareNode = compareGraph.addNode();
+        Edge currentEdge = currentGraph.addEdge(currentNode, currentNode2);
+        currentEdge.setColor(testColor);
+
+        CompareLogic.compareAndUncolor(currentGraph, compareGraph);
+
+        assertEquals(currentNode2.getColor(), CompareLogic.ONLY_IN_ONE_GRAPH_COLOR);
+        assertEquals(currentEdge.getColor(), CompareLogic.ONLY_IN_ONE_GRAPH_COLOR);
+    }
+
+    @Test
+    void testNodeAndEdgeOnlyInCurrentGraph2() {
+        Graph currentGraph = new Graph();
+        Graph compareGraph = new Graph();
+        Node currentNode = currentGraph.addNode();
+        Node currentNode2 = currentGraph.addNode();
+        currentNode.setColor(testColor);
+        Edge currentEdge = currentGraph.addEdge(currentNode, currentNode2);
+        currentEdge.setColor(testColor);
+
+        CompareLogic.compareAndUncolor(currentGraph, compareGraph);
+
+        assertEquals(currentNode2.getColor(), CompareLogic.ONLY_IN_ONE_GRAPH_COLOR);
+        assertEquals(currentEdge.getColor(), CompareLogic.ONLY_IN_ONE_GRAPH_COLOR);
+    }
+
+    @Test
+    void testNodeAndEdgeOnlyInCurrentGraph3() {
+        Graph currentGraph = new Graph();
+        Graph compareGraph = new Graph();
+        Node currentNode = currentGraph.addNode();
+        Node currentNode2 = currentGraph.addNode();
+        currentNode.setColor(testColor);
+        Node compareNode = compareGraph.addNode();
+        Node compareNode2 = compareGraph.addNode();
+        Edge currentEdge = currentGraph.addEdge(currentNode, currentNode2);
+        currentEdge.setColor(testColor);
+
+        CompareLogic.compareAndUncolor(currentGraph, compareGraph);
+
+        assertEquals(currentEdge.getColor(), CompareLogic.ONLY_IN_ONE_GRAPH_COLOR);
     }
 
 }
