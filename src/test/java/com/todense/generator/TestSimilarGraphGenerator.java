@@ -33,7 +33,7 @@ public class TestSimilarGraphGenerator {
 
     @Test
     void testSimilarGraphGeneratorNoGraphLoaded() {
-        OgrReader ogrReader = new OgrReader();
+
         Graph currentGraph =  ValidateGraphEquality.loadGraphFile("src/test/resources/SimilarGraphGenTesting/Empty_Graph.ogr");
 
         TestSimilarGenerator testSimilarGraphGenerator = new TestSimilarGenerator(currentGraph);
