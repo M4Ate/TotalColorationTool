@@ -5,6 +5,7 @@ import com.todense.TestUtil.TestRandomGeneratorViewModelDummy;
 import com.todense.TestUtil.TestSimilarGenerator;
 import com.todense.TestUtil.ValidateGraphEquality;
 import com.todense.model.graph.Graph;
+import com.todense.viewmodel.RandomGeneratorViewModel;
 import com.todense.viewmodel.file.format.ogr.OgrReader;
 import com.todense.viewmodel.random.generators.SimilarGenerator;
 import org.junit.jupiter.api.Test;
@@ -56,6 +57,20 @@ public class TestRandomGeneratorViewModel {
         viewModelDummy.callGenerateAndPublishASimilarGraph(testNotificationCenterDummy, new SimilarGenerator(currentGraph), currentGraph);
 
         assertEquals(testNotificationCenterDummy.getMessagesToPublish().get(1), "A Graph needs to be loaded to perform this action");
+    }
+
+    @Test
+    void testSimilarGraphGeneratorNoSimilarGraphFound() {
+        Graph currentGraph = ValidateGraphEquality.loadGraphFile("src/test/resources/SimilarGraphGenTesting/Similar_Graph_Gen_Test_Graph_3_3N_D2_E3.ogr");
+
+        TestNotificationCenterDummy testNotificationCenterDummy = new TestNotificationCenterDummy();
+
+        TestRandomGeneratorViewModelDummy viewModelDummy = new TestRandomGeneratorViewModelDummy();
+
+        viewModelDummy.callGenerateAndPublishASimilarGraph(testNotificationCenterDummy, new SimilarGenerator(currentGraph), currentGraph);
+
+        assertEquals(testNotificationCenterDummy.getMessagesToPublish().get(1), "Could not find a valid similar graph");
+
     }
 
 }
