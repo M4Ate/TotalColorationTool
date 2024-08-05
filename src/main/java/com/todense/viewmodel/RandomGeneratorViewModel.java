@@ -105,7 +105,9 @@ public class RandomGeneratorViewModel implements ViewModel {
             case SIMILAR_GRAPH:
                 //Case to call the similar graph generator
 
-                Graph temp = generateAndPublishASimilarGraph(notificationCenter, graphScope.getGraphManager().getGraph());
+                Graph temp = generateAndPublishASimilarGraph(notificationCenter,
+                        new SimilarGenerator(graphScope.getGraphManager().getGraph()),
+                        graphScope.getGraphManager().getGraph());
 
                 graphScope.getGraphManager().setGraph(temp);
 
@@ -197,14 +199,14 @@ public class RandomGeneratorViewModel implements ViewModel {
         return maxDegProperty;
     }
 
-    protected Graph generateAndPublishASimilarGraph(NotificationCenter notificationCenter, Graph currentGraph){
+    protected Graph generateAndPublishASimilarGraph(NotificationCenter notificationCenter,
+                                                    SimilarGenerator similarGenerator, Graph currentGraph){
 
         if(currentGraph.getOrder() == 0) {
             //no Graph loaded Error Case
             notificationCenter.publish(MainViewModel.TASK_FINISHED, "A Graph needs to be loaded to" +
                     " perform this action");
         } else {
-            SimilarGenerator similarGenerator = new SimilarGenerator(currentGraph);
             try {
                 similarGenerator.generateConnections();
             } catch (IllegalStateException e){
