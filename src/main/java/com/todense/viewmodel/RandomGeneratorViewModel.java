@@ -19,6 +19,8 @@ import javafx.geometry.Point2D;
 
 import javax.inject.Inject;
 
+import static java.lang.StrictMath.min;
+
 public class RandomGeneratorViewModel implements ViewModel {
 
     public final static String RANDOM_GRAPH_REQUEST = "RANDOM_GRAPH_REQUEST";
@@ -99,7 +101,7 @@ public class RandomGeneratorViewModel implements ViewModel {
                 break;
             case MAX_DEG:
                 edgeGenerator = new MaxDegGenerator(
-                        maxDegProperty.get());
+                        min(maxDegProperty.get(), nodeCountProperty.get() - 1));
                 break;
 
             case SIMILAR_GRAPH:
