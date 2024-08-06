@@ -73,6 +73,22 @@
             </font>
          </TextField>
       </HBox>
+
+
+      <HBox alignment="CENTER_LEFT" prefHeight="20.0">
+         <Label prefHeight="17.0" prefWidth="165.0" text="Colors">
+            <font>
+               <Font size="11.0" />
+            </font>
+         </Label>
+         <TextField fx:id="colorCountTextField" alignment="CENTER" disable="true" editable="false" minHeight="-Infinity" prefHeight="18.0" prefWidth="70.0" promptText="?" style="-fx-opacity: 1;" text="0" HBox.hgrow="ALWAYS">
+            <font>
+               <Font size="11.0" />
+            </font>
+         </TextField>
+      </HBox>
+
+
    </VBox>
    <Label alignment="CENTER" styleClass="darkLabel" text="Node Degrees">
       <VBox.margin>

@@ -3,6 +3,7 @@ package com.todense.view;
 import com.todense.viewmodel.PropertiesViewModel;
 import de.saxsys.mvvmfx.FxmlView;
 import de.saxsys.mvvmfx.InjectViewModel;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
@@ -18,6 +19,7 @@ public class PropertiesView implements FxmlView<PropertiesViewModel> {
     @FXML private TextField radiusTextField;
     @FXML private TextField clusterCoeffTextField;
     @FXML private TextField densityTextField;
+    @FXML private TextField colorCountTextField;
 
     @InjectViewModel
     PropertiesViewModel viewModel;
@@ -33,6 +35,7 @@ public class PropertiesView implements FxmlView<PropertiesViewModel> {
         radiusTextField.textProperty().bindBidirectional(viewModel.radiusProperty());
         clusterCoeffTextField.textProperty().bindBidirectional(viewModel.clusterCoeffProperty());
         densityTextField.textProperty().bindBidirectional(viewModel.densityProperty());
+        colorCountTextField.textProperty().bindBidirectional(viewModel.colorCountProperty());
     }
 
     @FXML

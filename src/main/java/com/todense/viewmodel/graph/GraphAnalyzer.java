@@ -6,6 +6,7 @@ import com.todense.model.graph.Node;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Stack;
 
@@ -253,5 +254,26 @@ public class GraphAnalyzer {
             if(y > yMax) yMax = y;
         }
         return new Rectangle2D(xMin, yMin, xMax-xMin, yMax-yMin);
+    }
+
+    public static int getColorCount(Graph graph) {
+        HashMap<String, Boolean> colorMapping = new HashMap<>();
+
+        int colorCount = 0;
+
+        for (Node node : graph.getNodes()) {
+            if(!colorMapping.containsKey(node.getColor().toString())) {
+                colorMapping.put(node.getColor().toString(), true);
+                colorCount++;
+            }
+        }
+
+        for (Edge edge : graph.getEdges()) {
+            if(!colorMapping.containsKey(edge.getColor().toString())) {
+                colorMapping.put(edge.getColor().toString(), true);
+                colorCount++;
+            }
+        }
+        return colorCount;
     }
 }

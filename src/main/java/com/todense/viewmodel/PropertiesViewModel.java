@@ -25,6 +25,7 @@ public class PropertiesViewModel implements ViewModel {
     private final StringProperty radiusProperty = new SimpleStringProperty();
     private final StringProperty clusterCoeffProperty = new SimpleStringProperty();
     private final StringProperty densityProperty = new SimpleStringProperty();
+    private final StringProperty colorCountProperty = new SimpleStringProperty();
 
     @InjectScope
     GraphScope graphScope;
@@ -48,6 +49,7 @@ public class PropertiesViewModel implements ViewModel {
         double clusterCoeff = GraphAnalyzer.calculateClusteringCoefficient(graph);
         double density = GraphAnalyzer.getDensity(graph);
         int[] eccentricityBounds = GraphAnalyzer.calculateEccentricities(graph);
+        int colorCount = GraphAnalyzer.getColorCount(graph);
 
         Platform.runLater(() -> {
             sizeProperty.setValue(validText(size));
@@ -60,6 +62,7 @@ public class PropertiesViewModel implements ViewModel {
             avgDegreeProperty.setValue(validText(avgDegree));
             radiusProperty.setValue(validText(eccentricityBounds[0]));
             diameterProperty.setValue(validText(eccentricityBounds[1]));
+            colorCountProperty.setValue(validText(colorCount));
         });
     }
 
@@ -132,5 +135,9 @@ public class PropertiesViewModel implements ViewModel {
 
     public StringProperty densityProperty() {
         return densityProperty;
+    }
+
+    public StringProperty colorCountProperty() {
+        return colorCountProperty;
     }
 }
