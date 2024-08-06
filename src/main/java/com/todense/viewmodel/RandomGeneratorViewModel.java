@@ -201,6 +201,8 @@ public class RandomGeneratorViewModel implements ViewModel {
         return maxDegProperty;
     }
 
+    //This method performs the actions if the users want to generate a Similar Graph
+    //It is protected and takes the Notification Center as a parameter to be easier to test and to be more modular
     protected Graph generateAndPublishASimilarGraph(NotificationCenter notificationCenter,
                                                     SimilarGenerator similarGenerator, Graph currentGraph){
 
@@ -212,7 +214,7 @@ public class RandomGeneratorViewModel implements ViewModel {
             try {
                 similarGenerator.generateConnections();
             } catch (IllegalStateException e){
-                if(e.getMessage().equals("no valid similar graph")){
+                if (e.getMessage().equals("no valid similar graph")){
                     notificationCenter.publish(MainViewModel.TASK_FINISHED,
                             "Could not find a valid similar graph");
                     return currentGraph;
