@@ -7,7 +7,6 @@ import javafx.geometry.Point2D;
 import javafx.util.Pair;
 import org.junit.jupiter.api.Test;
 import com.todense.TestUtil.TestNode;
-
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;

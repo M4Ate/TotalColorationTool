@@ -3,7 +3,6 @@ package com.todense.generator;
 import com.todense.TestUtil.TestSimilarGenerator;
 import com.todense.TestUtil.ValidateGraphEquality;
 import com.todense.model.graph.Graph;
-import com.todense.viewmodel.file.format.ogr.OgrReader;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,8 +10,6 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TestSimilarGraphGenerator {
 
     @Test
-    //Attention: This Test ist related to specific files located in the repo
-    //If These Files are incorrectly placed or do contain not monitored values the test case will not be meaningful
     void testSimilarGraphGeneratorDefault() {
         Graph currentGraph = ValidateGraphEquality.loadGraphFile(
                 "src/test/resources/SimilarGraphGenTesting/Similar_Graph_Gen_Test_Graph_1_N5_D3_E7.ogr");
