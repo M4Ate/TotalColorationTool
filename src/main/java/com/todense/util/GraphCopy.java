@@ -21,6 +21,7 @@ public class GraphCopy {
      */
     public static Graph copyGraphWithColorsAndID(Graph inputGraph){
         Graph outputGraph = new Graph(inputGraph.name);
+        outputGraph.setIdCounter(inputGraph.getIdCounter());
         List<Node> inputNodes = inputGraph.getNodes();
         for (Node n : inputNodes) {
             Node newNode = outputGraph.addNode(n.getPos(), n.getID());
@@ -29,9 +30,9 @@ public class GraphCopy {
         }
         EdgeList inputEdges = inputGraph.getEdges();
         for (Edge e : inputEdges) {
-            int i = e.getN1().getIndex();
-            int j = e.getN2().getIndex();
-            outputGraph.addEdge(outputGraph.getNodes().get(i), outputGraph.getNodes().get(j), e.getColor());
+            int i = e.getN1().getID();
+            int j = e.getN2().getID();
+            outputGraph.addEdge(outputGraph.getNodeById(i), outputGraph.getNodeById(j), e.getColor());
         }
 
         return outputGraph;

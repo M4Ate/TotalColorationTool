@@ -30,5 +30,6 @@ class GraphCopyTest {
         assertEquals(graph.getNodes().get(1).getLabelText(), copyGraph.getNodes().get(1).getLabelText());
         assertEquals(graph.getEdges().get(0).getId(), copyGraph.getEdges().get(0).getId());
         assertEquals(graph.getEdges().get(0).getColor().toString(), copyGraph.getEdges().get(0).getColor().toString());
+        assertEquals(graph.getIdCounter(), copyGraph.getIdCounter());
     }
 }

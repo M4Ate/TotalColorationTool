@@ -179,4 +179,12 @@ public class Graph {
     public String toString() {
         return name;
     }
+
+    public int getIdCounter() {
+        return idCounter;
+    }
+
+    public void setIdCounter(int idCounter) {
+        this.idCounter = idCounter;
+    }
 }
