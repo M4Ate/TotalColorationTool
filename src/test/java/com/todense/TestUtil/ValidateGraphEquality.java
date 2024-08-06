@@ -4,9 +4,6 @@ import com.todense.model.EdgeList;
 import com.todense.model.graph.Edge;
 import com.todense.model.graph.Graph;
 import com.todense.model.graph.Node;
-import com.todense.viewmodel.file.GraphReader;
-import com.todense.viewmodel.file.format.ogr.OgrReader;
-import java.io.File;
 import java.util.ArrayList;
 
 public class ValidateGraphEquality {
@@ -30,12 +27,6 @@ public class ValidateGraphEquality {
         }
 
         return true;
-    }
-
-    public static Graph loadGraphFile(String path){
-        File file = new File(path);
-        GraphReader graphReader = new OgrReader();
-        return graphReader.readGraph(file);
     }
 
     private static boolean nodesEqual(Node node1, Node node2){

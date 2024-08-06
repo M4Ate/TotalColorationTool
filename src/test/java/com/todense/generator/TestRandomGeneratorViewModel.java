@@ -1,27 +1,20 @@
 package com.todense.generator;
 
-import com.todense.TestUtil.TestNotificationCenterDummy;
-import com.todense.TestUtil.TestRandomGeneratorViewModelDummy;
-import com.todense.TestUtil.TestSimilarGenerator;
-import com.todense.TestUtil.ValidateGraphEquality;
+import com.todense.TestUtil.*;
 import com.todense.model.graph.Graph;
-import com.todense.viewmodel.RandomGeneratorViewModel;
-import com.todense.viewmodel.file.format.ogr.OgrReader;
 import com.todense.viewmodel.random.generators.SimilarGenerator;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class TestRandomGeneratorViewModel {
 
-
     @Test
     public void similarGraphCallTest() {
 
-        Graph currentGraph = ValidateGraphEquality.loadGraphFile(
+        Graph currentGraph = LoadUtil.loadGraphFile(
                 "src/test/resources/SimilarGraphGenTesting/Similar_Graph_Gen_Test_Graph_2_N7_D5_E14.ogr");
 
         TestNotificationCenterDummy notificationCenter = new TestNotificationCenterDummy();
@@ -32,7 +25,7 @@ public class TestRandomGeneratorViewModel {
 
         viewModelDummy.callGenerateAndPublishASimilarGraph(notificationCenter, similarGenerator, currentGraph);
 
-        Graph resultGraph = ValidateGraphEquality.loadGraphFile(
+        Graph resultGraph = LoadUtil.loadGraphFile(
                 "src/test/resources/SimilarGraphGenTesting/Similar_Graph_Gen_Test_Graph_2_result_0_10.ogr");
 
         assertTrue(ValidateGraphEquality.graphsEqual(resultGraph, notificationCenter.getGraphToPublish()));
@@ -48,7 +41,7 @@ public class TestRandomGeneratorViewModel {
     @Test
     void testSimilarGraphGeneratorNoGraphLoaded() {
 
-        Graph currentGraph = ValidateGraphEquality.loadGraphFile("src/test/resources/SimilarGraphGenTesting/Empty_Graph.ogr");
+        Graph currentGraph = LoadUtil.loadGraphFile("src/test/resources/SimilarGraphGenTesting/Empty_Graph.ogr");
 
         TestNotificationCenterDummy testNotificationCenterDummy = new TestNotificationCenterDummy();
 
@@ -61,7 +54,7 @@ public class TestRandomGeneratorViewModel {
 
     @Test
     void testSimilarGraphGeneratorNoSimilarGraphFound() {
-        Graph currentGraph = ValidateGraphEquality.loadGraphFile("src/test/resources/SimilarGraphGenTesting/Similar_Graph_Gen_Test_Graph_3_3N_D2_E3.ogr");
+        Graph currentGraph = LoadUtil.loadGraphFile("src/test/resources/SimilarGraphGenTesting/Similar_Graph_Gen_Test_Graph_3_3N_D2_E3.ogr");
 
         TestNotificationCenterDummy testNotificationCenterDummy = new TestNotificationCenterDummy();
 
