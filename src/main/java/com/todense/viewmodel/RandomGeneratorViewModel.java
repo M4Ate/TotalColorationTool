@@ -107,7 +107,7 @@ public class RandomGeneratorViewModel implements ViewModel {
             case SIMILAR_GRAPH:
                 //Case to call the similar graph generator
 
-                Graph temp = generateAndPublishASimilarGraph(notificationCenter,
+                Graph temp = publishsimilarGraph(notificationCenter,
                         new SimilarGenerator(graphScope.getGraphManager().getGraph()),
                         graphScope.getGraphManager().getGraph());
 
@@ -203,8 +203,8 @@ public class RandomGeneratorViewModel implements ViewModel {
 
     //This method performs the actions if the users want to generate a Similar Graph
     //It is protected and takes the Notification Center as a parameter to be easier to test and to be more modular
-    protected Graph generateAndPublishASimilarGraph(NotificationCenter notificationCenter,
-                                                    SimilarGenerator similarGenerator, Graph currentGraph){
+    protected Graph publishsimilarGraph(NotificationCenter notificationCenter,
+                                        SimilarGenerator similarGenerator, Graph currentGraph){
 
         if(currentGraph.getOrder() == 0) {
             //no Graph loaded Error Case

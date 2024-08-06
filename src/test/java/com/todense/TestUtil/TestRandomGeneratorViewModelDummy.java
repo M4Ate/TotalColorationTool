@@ -9,7 +9,7 @@ public class TestRandomGeneratorViewModelDummy extends RandomGeneratorViewModel 
 
     public void callGenerateAndPublishASimilarGraph(NotificationCenter notificationCenter,
                                                     SimilarGenerator similarGenerator, Graph currentgraph) {
-        super.generateAndPublishASimilarGraph(notificationCenter, similarGenerator, currentgraph);
+        super.publishsimilarGraph(notificationCenter, similarGenerator, currentgraph);
     }
 
 }
