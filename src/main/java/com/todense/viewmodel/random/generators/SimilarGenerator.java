@@ -70,19 +70,6 @@ public class SimilarGenerator extends RandomEdgeGenerator{
                         addEdges(array[0], array[2], array[1], array[3]);
                         return;
 
-                    } else if (!currentGraph.getEdges().isEdgeBetween(array[0], array[3])
-                            && !currentGraph.getEdges().isEdgeBetween(array[1], array[2])) {
-
-                        currentGraph.removeEdge(edgeOne);
-                        currentGraph.removeEdge(edgeTwo);
-
-                        System.out.println("Removed edge: " + graphEdgesList.indexOf(edgeTwo));
-
-                        System.out.println(edgeOne.getN1() + " " + edgeOne.getN2());
-                        System.out.println(edgeTwo.getN1() + " " + edgeTwo.getN2());
-
-                        addEdges(array[0], array[3], array[1], array[2]);
-                        return;
                     }
                 }
             }
