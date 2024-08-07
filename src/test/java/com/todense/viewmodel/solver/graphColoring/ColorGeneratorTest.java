@@ -35,4 +35,16 @@ class ColorGeneratorTest {
         Color c3 = cg.getUniqueColor();
         assertEquals(c3.toString(), "0xff0000ff");
     }
+
+    @Test
+    void getUniqueColorWithEmptyPalletTest() {
+        List<Color> cl = new ArrayList<>();
+        ColorGenerator emptyListGenerator = new ColorGenerator(cl);
+        ColorGenerator defaultGenerator = new ColorGenerator();
+        assertEquals(defaultGenerator.getUniqueColor().toString(), emptyListGenerator.getUniqueColor().toString());
+        assertEquals(defaultGenerator.getUniqueColor().toString(), emptyListGenerator.getUniqueColor().toString());
+        emptyListGenerator.addUsedColor(Color.web("0x123456"));
+        defaultGenerator.addUsedColor(Color.web("0x123456"));
+        assertEquals(defaultGenerator.getUniqueColor().toString(), emptyListGenerator.getUniqueColor().toString());
+    }
 }

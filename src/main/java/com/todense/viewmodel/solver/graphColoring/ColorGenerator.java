@@ -35,12 +35,19 @@ public class ColorGenerator {
 
     /**
      * crates a new ColorGenerator instance with a specified Color Palette
-     * @param palette color palette, that can not be empty
+     * @param palette color palette, if it is empty the default palette is used
      */
     public ColorGenerator(List<Color> palette) {
-        assert palette.size() >= 1;
         usedColors = new ArrayList<>();
-        colorPalette = new ArrayList<>(palette);
+        if (palette.size() >= 1) {
+            colorPalette = new ArrayList<>(palette);
+        } else {
+            colorPalette = new ArrayList<Color>();
+            for (String c : DEFAULT_COLOR_PALETTE) {
+                colorPalette.add(Color.web(c));
+            }
+        }
+
     }
 
     /**

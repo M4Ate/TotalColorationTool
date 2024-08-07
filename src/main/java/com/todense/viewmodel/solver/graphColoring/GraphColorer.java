@@ -116,11 +116,8 @@ public class GraphColorer {
         //pattern that matches the last integer of the String, which is the Color number
         Pattern pattern = Pattern.compile("(\\d+)$");
         Matcher matcher = pattern.matcher(varName);
-        if (matcher.find()) {
-            return Integer.parseInt(matcher.group(1));
-        } else {
-            return -1;
-        }
+        matcher.find();
+        return Integer.parseInt(matcher.group(1));
     }
 
 
