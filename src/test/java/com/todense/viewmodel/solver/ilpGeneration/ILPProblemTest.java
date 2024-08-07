@@ -32,6 +32,10 @@ class ILPProblemTest {
         ilpp.addConstraint(ncc);
         ilpp.addConstraint(scc);
 
+        List<Constraint> actualConstraints  = ilpp.getConstraintList();
+        assertEquals(actualConstraints.get(0).getAsString(), ncc.getAsString());
+        assertEquals(actualConstraints.get(1).getAsString(), scc.getAsString());
+
         String jsonString = ilpp.getILPAsJsonString();
 
         assertEquals("{\"variables\":[\"x_v0_c0\",\"x_v1_c0\",\"z_c0\",\"z_c1\"]," +
