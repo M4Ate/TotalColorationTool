@@ -3,7 +3,9 @@ package com.todense.viewmodel;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.inject.Inject;
+import com.todense.model.graph.Edge;
 import com.todense.model.graph.Graph;
+import com.todense.model.graph.Node;
 import com.todense.util.GraphCopy;
 import com.todense.viewmodel.graph.GraphManager;
 
@@ -33,7 +35,6 @@ public class SolverViewModel implements ViewModel {
     private static final String DEFAULT_PORT = "1337";
 
     private GraphManager graphManager;
-
 
     @InjectScope
     GraphScope graphScope;
@@ -66,10 +67,21 @@ public class SolverViewModel implements ViewModel {
     public void start(Boolean preferColor, Color preferredColor, Boolean similarColoring,
                       Boolean currentColors, Boolean useServer, String IP, String Port){
 
+        System.out.println("Klick me");
+
+        for(Node node : graphScope.getGraphManager().getGraph().getNodes()) {
+            System.out.println(node.getIndex()+"");
+        }
+
+        for(Edge edge : graphScope.getGraphManager().getGraph().getEdges()) {
+            System.out.println(edge.toString());
+        }
+
         if(!solverThread.isAlive()){
             notificationCenter.publish(MainViewModel.TASK_STARTED, "Calculating Coloration");
             solverThread = new Thread(() -> calculateColoration(preferColor, preferredColor, similarColoring, currentColors, useServer, IP, Port));
-            solverThread.start();
+            Graph graph =  solverThread.start();
+
         }
     }
 
@@ -84,7 +96,7 @@ public class SolverViewModel implements ViewModel {
     }
 
 
-    private void calculateColoration(Boolean preferColor, Color preferredColor, Boolean similarColoring,
+    private Graph calculateColoration(Boolean preferColor, Color preferredColor, Boolean similarColoring,
                       Boolean currentColors, Boolean useServer, String IP, String Port){
 
         ILPType type = ILPType.MINCOLORS;
@@ -164,6 +176,8 @@ public class SolverViewModel implements ViewModel {
         } catch (RuntimeException e){
             notificationCenter.publish(MainViewModel.TASK_FINISHED, e.getMessage());
         }
+
+        return graphManager.getGraph();
     }
 
     /**
