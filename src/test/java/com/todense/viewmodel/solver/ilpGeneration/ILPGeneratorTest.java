@@ -28,7 +28,7 @@ class ILPGeneratorTest {
 
     @Test
     void testAllTestFiles(){
-        File testFolder = new File("src\\test\\resources\\ILPGenerationTests\\TestCases");
+        File testFolder = new File("src/test/resources/ILPGenerationTests/TestCases");
         File[] testCases = testFolder.listFiles();
         assertNotNull(testCases, "No test folder");
         for (File file : testCases) {
@@ -54,7 +54,7 @@ class ILPGeneratorTest {
                         type = ILPType.WITHSETCOLORS;
                     }
                     //get the test graph
-                    File graphFile = new File("src\\test\\resources\\ILPGenerationTests\\TestGraphs\\" +
+                    File graphFile = new File("src/test/resources/ILPGenerationTests/TestGraphs/" +
                             testCase.testGraph);
                     OgrReader graphReader = new OgrReader();
                     Graph testGraph = graphReader.readGraph(graphFile);
