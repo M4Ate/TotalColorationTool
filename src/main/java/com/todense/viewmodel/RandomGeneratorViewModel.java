@@ -219,7 +219,6 @@ public class RandomGeneratorViewModel implements ViewModel {
                             "Could not find a valid similar graph");
                     return currentGraph;
                 }
-                throw e;
             }
 
             notificationCenter.publish(GraphViewModel.NEW_GRAPH_REQUEST, currentGraph);

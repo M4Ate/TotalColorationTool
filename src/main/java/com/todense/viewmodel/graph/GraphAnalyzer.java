@@ -5,6 +5,7 @@ import com.todense.model.graph.Graph;
 import com.todense.model.graph.Node;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.paint.Color;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -258,18 +259,22 @@ public class GraphAnalyzer {
 
     public static int getColorCount(Graph graph) {
         HashMap<String, Boolean> colorMapping = new HashMap<>();
+        Color standardNodeColor = Node.DEFAULT_COLOR;
+        Color standardEdgeColor = Edge.DEFAULT_COLOR;
 
         int colorCount = 0;
 
         for (Node node : graph.getNodes()) {
-            if(!colorMapping.containsKey(node.getColor().toString())) {
+            if(!node.getColor().equals(standardNodeColor)
+                    && !colorMapping.containsKey(node.getColor().toString())) {
                 colorMapping.put(node.getColor().toString(), true);
                 colorCount++;
             }
         }
 
         for (Edge edge : graph.getEdges()) {
-            if(!colorMapping.containsKey(edge.getColor().toString())) {
+            if(!edge.getColor().equals(standardEdgeColor)
+                    && !colorMapping.containsKey(edge.getColor().toString())) {
                 colorMapping.put(edge.getColor().toString(), true);
                 colorCount++;
             }
