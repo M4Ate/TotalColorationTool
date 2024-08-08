@@ -142,7 +142,7 @@ public class SolverViewModel implements ViewModel {
             JsonObject responseObject = JsonParser.parseString(responseString).getAsJsonObject();
             boolean error = responseObject.get("error").getAsBoolean();
 
-            if(error) {
+            if (error) {
                 notificationCenter.publish(MainViewModel.TASK_FINISHED,
                         "Server solver returned an error, error message: "
                                 + responseObject.get("errorMessage").getAsString());
@@ -150,7 +150,18 @@ public class SolverViewModel implements ViewModel {
                 return;
             }
 
+        } catch (IllegalArgumentException e) {
+            notificationCenter.publish(MainViewModel.TASK_FINISHED,
+                    "Invalid IP or Port. Please check the server settings. Error: "
+                            + e.getMessage());
+            System.out.println(e.getMessage());
+            return;
         } catch (IOException e) {
+            if (e.getMessage() == null) {
+                notificationCenter.publish(MainViewModel.TASK_FINISHED,
+                            "Couldn't properly connect to server.");
+                return;
+            }
             System.out.println(e.getMessage());
             return;
         } catch(InterruptedException e){
