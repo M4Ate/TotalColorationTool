@@ -31,7 +31,9 @@ public class GraphColorer {
      * @param jsonResponse the String of the json Response
      * @return the colored Graph or null if the jsonResponse has an error
      */
-    public static Graph getColoredGraph(Graph graph, ILPProblem ilp, String jsonResponse) {
+    public static Graph getColoredGraph(Graph graph, ILPProblem ilp, String jsonResponse, Color backgroundColor) {
+
+        System.out.println(backgroundColor);
 
         // unpack jsonResponse
         JsonObject responseObject = JsonParser.parseString(jsonResponse).getAsJsonObject();

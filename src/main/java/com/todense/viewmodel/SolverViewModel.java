@@ -6,6 +6,7 @@ import com.google.inject.Inject;
 import com.todense.model.graph.Graph;
 import com.todense.util.GraphCopy;
 import com.todense.viewmodel.graph.GraphManager;
+import com.todense.viewmodel.scope.BackgroundScope;
 
 import java.io.*;
 import java.net.URI;
@@ -37,6 +38,9 @@ public class SolverViewModel implements ViewModel {
 
     @InjectScope
     GraphScope graphScope;
+
+    @InjectScope
+    BackgroundScope backgroundScope;
 
     @Inject
     NotificationCenter notificationCenter;
@@ -155,7 +159,7 @@ public class SolverViewModel implements ViewModel {
 
         if(!useServer && startServer != null){startServer.destroyForcibly();}
 
-        Graph newGraph = GraphColorer.getColoredGraph(currentGraph, problem, responseString); //Graph, ILP Problem und Type
+        Graph newGraph = GraphColorer.getColoredGraph(currentGraph, problem, responseString, getBackgroundColor()); //Graph, ILP Problem und Type
 
         //Set the now colored graph as the new graph.
         try{
@@ -164,6 +168,10 @@ public class SolverViewModel implements ViewModel {
         } catch (RuntimeException e){
             notificationCenter.publish(MainViewModel.TASK_FINISHED, e.getMessage());
         }
+    }
+
+    private Color getBackgroundColor(){
+        return backgroundScope.getBackgroundColor();
     }
 
     /**
