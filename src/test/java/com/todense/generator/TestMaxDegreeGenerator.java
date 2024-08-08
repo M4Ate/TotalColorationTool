@@ -25,6 +25,8 @@ public class TestMaxDegreeGenerator {
         nodes.add(new TestNode(new Point2D(1, 2) ,1, 1));
         nodes.add(new TestNode(new Point2D(1, 3) ,2, 2));
 
+
+
         generator.setNodes(nodes);
         Pair<Stack<Integer>, Stack<Integer>> connections = generator.generateConnections();
 

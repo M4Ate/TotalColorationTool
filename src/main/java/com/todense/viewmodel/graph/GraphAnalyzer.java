@@ -259,13 +259,13 @@ public class GraphAnalyzer {
 
     public static int getColorCount(Graph graph) {
         HashMap<String, Boolean> colorMapping = new HashMap<>();
-        Color standardNodeColor = Node.DEFAULT_COLOR;
-        Color standardEdgeColor = Edge.DEFAULT_COLOR;
+        Color defaultNodeColor = Node.DEFAULT_COLOR;
+        Color defaultEdgeColor = Edge.DEFAULT_COLOR;
 
         int colorCount = 0;
 
         for (Node node : graph.getNodes()) {
-            if(!node.getColor().equals(standardNodeColor)
+            if(!node.getColor().equals(defaultNodeColor)
                     && !colorMapping.containsKey(node.getColor().toString())) {
                 colorMapping.put(node.getColor().toString(), true);
                 colorCount++;
@@ -273,7 +273,7 @@ public class GraphAnalyzer {
         }
 
         for (Edge edge : graph.getEdges()) {
-            if(!edge.getColor().equals(standardEdgeColor)
+            if(!edge.getColor().equals(defaultEdgeColor)
                     && !colorMapping.containsKey(edge.getColor().toString())) {
                 colorMapping.put(edge.getColor().toString(), true);
                 colorCount++;
