@@ -38,7 +38,7 @@ class GraphColorerTest {
                 "\"value\":0},{\"variable\":\"y_e2_c3\",\"value\":1},{\"variable\":\"z_c0\",\"value\":1}," +
                 "{\"variable\":\"z_c1\",\"value\":1},{\"variable\":\"z_c2\",\"value\":1},{\"variable\":\"z_c3\"," +
                 "\"value\":0}]}";
-        Graph result = GraphColorer.getColoredGraph(graph, ilp, jsonResponse);
+        Graph result = GraphColorer.getColoredGraph(graph, ilp, jsonResponse, Color.web("0x212121ff"));
         assertEquals("0x00ff00ff", result.getNodes().get(0).getColor().toString());
         assertEquals("0xffe502ff", result.getNodes().get(1).getColor().toString());
         assertEquals("0xff0000ff", result.getNodes().get(2).getColor().toString());
@@ -64,7 +64,7 @@ class GraphColorerTest {
         //JsonString has an error and not all Variables have been set
         String jsonResponse = "{\"error\":true,\"errorMessage\":\"something went wrong\"," +
                 "\"result\":[{\"variable\":\"x_v0_c0\",\"value\":1}]}";
-        Graph result = GraphColorer.getColoredGraph(graph, ilp, jsonResponse);
+        Graph result = GraphColorer.getColoredGraph(graph, ilp, jsonResponse, Color.web("0x212121ff"));
         //result should be null according to the Javadoc
         assertNull(result);
     }
