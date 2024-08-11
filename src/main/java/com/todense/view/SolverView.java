@@ -3,6 +3,7 @@ package com.todense.view;
 import com.todense.viewmodel.SolverViewModel;
 import de.saxsys.mvvmfx.FxmlView;
 import de.saxsys.mvvmfx.InjectViewModel;
+import de.saxsys.mvvmfx.utils.notifications.NotificationCenter;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -10,6 +11,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import org.controlsfx.control.ToggleSwitch;
 import javafx.scene.paint.Color;
+
+import javax.inject.Inject;
 
 /**
  * View for the ILP Solver.
@@ -23,6 +26,9 @@ public class SolverView implements FxmlView<SolverViewModel> {
 
     @InjectViewModel
     SolverViewModel viewModel;
+
+    @Inject
+    NotificationCenter notificationCenter;
 
     /**
      * This method is used to initialize the ILP-Solver View
@@ -108,7 +114,7 @@ public class SolverView implements FxmlView<SolverViewModel> {
     @FXML
     private void saveServer(){
 
-        boolean savedServer = viewModel.saveServerConfig(serverIP.getText(), serverPort.getText());
+        boolean savedServer = viewModel.saveServerConfig(notificationCenter, serverIP.getText(), serverPort.getText());
 
         System.out.println(savedServer);
     }

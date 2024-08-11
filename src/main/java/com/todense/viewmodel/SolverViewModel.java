@@ -227,7 +227,7 @@ public class SolverViewModel implements ViewModel {
      * @param Port - the port on which the server is listening.
      * @return the boolean value if the save was successful
      */
-    public boolean saveServerConfig(String IP, String Port) {
+    public boolean saveServerConfig(NotificationCenter notificationCenter, String IP, String Port) {
         boolean saveSuccess = true;
 
         try {
@@ -258,7 +258,7 @@ public class SolverViewModel implements ViewModel {
     }
 
     /**
-     * This method TODO MAX??s
+     * This method returns the request string for the http request to be send to the server.
      *
      * @param IP - the IP of the server.
      * @param Port - the Port of the server.
