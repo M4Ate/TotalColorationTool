@@ -51,18 +51,12 @@ public class SolverViewModelTest {
         viewModel = new SolverViewModel(graphScope, backgroundScope, notificationCenter);
         viewModel.initialize();
         */
-
     }
 
     @After
     public void tearDown() {
-        viewModel.stop();
-        notificationCenter.getGraphToPublish(null);
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            System.out.println("Thread sleep interrupted");
-        }
+        //viewModel.stop();
+        //notificationCenter.getGraphToPublish(null);
     }
 
 
@@ -72,7 +66,53 @@ public class SolverViewModelTest {
         viewModel.start(false, null, false, false, false, DEFAULT_IP, DEFAULT_PORT);
         waitFor(viewModel);
         assertNotNull(notificationCenter.getGraphToPublish());
+        notificationCenter.getGraphToPublish(null);
 
+
+        viewModel.start(false, null, false, false, false, DEFAULT_IP, DEFAULT_PORT);
+        viewModel.start(false, null, false, false, false, DEFAULT_IP, DEFAULT_PORT);
+        waitFor(viewModel);
+        assertNotNull(notificationCenter.getGraphToPublish());
+        notificationCenter.getGraphToPublish(null);
+
+
+        viewModel.start(true, Color.rgb(230,150,80), false, false, false, DEFAULT_IP, DEFAULT_PORT);
+        waitFor(viewModel);
+        assertNotNull(notificationCenter.getGraphToPublish());
+        notificationCenter.getGraphToPublish(null);
+
+
+        viewModel.start(false, null, true, false, false, DEFAULT_IP, DEFAULT_PORT);
+        waitFor(viewModel);
+        assertNotNull(notificationCenter.getGraphToPublish());
+        notificationCenter.getGraphToPublish(null);
+
+
+
+        viewModel.start(false, null, false, true, false, DEFAULT_IP, DEFAULT_PORT);
+        waitFor(viewModel);
+        assertNotNull(notificationCenter.getGraphToPublish());
+        notificationCenter.getGraphToPublish(null);
+
+
+        viewModel.start(true, Color.rgb(230,150,80), false, true, false, DEFAULT_IP, DEFAULT_PORT);
+        waitFor(viewModel);
+        assertNotNull(notificationCenter.getGraphToPublish());
+
+
+        int port = getRandomOpenPort();
+        try{
+            ProcessBuilder pb = new ProcessBuilder("java", "-jar", "ILP-Server.jar", "-s", "any", "-p", String.valueOf(port));
+            Process serverProcess = pb.start();
+
+        } catch (IOException e) {
+            fail("Server could not be started");
+        }
+
+
+        viewModel.start(false, null, false, false, true, DEFAULT_IP, String.valueOf(port));
+        waitFor(viewModel);
+        assertNotNull(notificationCenter.getGraphToPublish());
     }
 
     @Test
@@ -85,6 +125,7 @@ public class SolverViewModelTest {
         assertEquals("Coloration stopped", notificationCenter.getMessagesToPublish().get(3));
     }
 
+    /*
     @Test
     public void useServer(){
 
@@ -107,8 +148,6 @@ public class SolverViewModelTest {
 
     @Test
     public void testMultipleThreads(){
-
-
         viewModel.start(false, null, false, false, false, DEFAULT_IP, DEFAULT_PORT);
         viewModel.start(false, null, false, false, false, DEFAULT_IP, DEFAULT_PORT);
 
@@ -152,7 +191,7 @@ public class SolverViewModelTest {
         waitFor(viewModel);
         assertNotNull(notificationCenter.getGraphToPublish());
     }
-
+    */
     @Test
     public void loadServerValuesNoFile(){
 

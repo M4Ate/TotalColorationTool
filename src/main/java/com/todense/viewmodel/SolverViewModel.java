@@ -50,9 +50,19 @@ public class SolverViewModel implements ViewModel {
 
     private static int openPort;
 
+    /*
+     * Default Constructor
+     */
     SolverViewModel() {
     }
 
+    /**
+     * Constructor for the ILP-Solver ViewModel.
+     *
+     * @param graphScope - the graphScope of the current graph.
+     * @param backgroundScope - the backgroundScope of the current background.
+     * @param notificationCenter - the notificationCenter for the current application.
+     */
     SolverViewModel(GraphScope graphScope, BackgroundScope backgroundScope, NotificationCenter notificationCenter) {
         this.graphScope = graphScope;
         this.backgroundScope = backgroundScope;
@@ -116,6 +126,7 @@ public class SolverViewModel implements ViewModel {
     public void stop(){
         if(solverThread != null && solverThread.isAlive()){
             solverThread.interrupt();
+            solverThread = null;
             notificationCenter.publish(MainViewModel.TASK_FINISHED, "Coloration stopped");
         }
     }
