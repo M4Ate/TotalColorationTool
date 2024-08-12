@@ -7,12 +7,14 @@ import de.saxsys.mvvmfx.ViewModel;
 import javafx.scene.paint.Color;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.runners.MethodSorters;
 
 import javax.swing.text.View;
 import java.io.File;
@@ -24,6 +26,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import static org.junit.Assert.*;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SolverViewModelTest {
 
 
@@ -34,34 +37,42 @@ public class SolverViewModelTest {
     TestGraphScopeDummy graphScope = new TestGraphScopeDummy();
     TestBackgroundScopeDummy backgroundScope = new TestBackgroundScopeDummy();
 
-    SolverViewModel viewModel;
+    SolverViewModel viewModel = new SolverViewModel(graphScope, backgroundScope, notificationCenter);
+
+
 
     @Before
     public void setUp() {
+        /*
         notificationCenter = new TestNotificationCenterDummy();
         graphScope = new TestGraphScopeDummy();
         backgroundScope = new TestBackgroundScopeDummy();
         
         viewModel = new SolverViewModel(graphScope, backgroundScope, notificationCenter);
         viewModel.initialize();
+        */
+
+    }
+
+    @After
+    public void tearDown() {
+        viewModel.stop();
+        notificationCenter.getGraphToPublish(null);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            System.out.println("Thread sleep interrupted");
+        }
     }
 
 
     @Test
     public void defaultBehavior(){
 
-        SolverViewModel viewModel;
-        notificationCenter = new TestNotificationCenterDummy();
-        graphScope = new TestGraphScopeDummy();
-        backgroundScope = new TestBackgroundScopeDummy();
-
-        viewModel = new SolverViewModel(graphScope, backgroundScope, notificationCenter);
-        viewModel.initialize();
-
-
         viewModel.start(false, null, false, false, false, DEFAULT_IP, DEFAULT_PORT);
         waitFor(viewModel);
         assertNotNull(notificationCenter.getGraphToPublish());
+
     }
 
     @Test

@@ -57,6 +57,7 @@ public class SolverViewModel implements ViewModel {
         this.graphScope = graphScope;
         this.backgroundScope = backgroundScope;
         this.notificationCenter = notificationCenter;
+        initialize();
     }
 
 
