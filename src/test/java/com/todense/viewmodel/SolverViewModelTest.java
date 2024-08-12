@@ -41,7 +41,7 @@ public class SolverViewModelTest {
         try {
             File file = new File("ServerConfig.cfg");
             FileWriter configWriter = new FileWriter(file.getName());
-            configWriter.write("Server_IP: 128.0.2.3Server_Port:1332");
+            configWriter.write("Server_IP:128.0.2.3Server_Port:1332");
             configWriter.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -118,7 +118,5 @@ public class SolverViewModelTest {
 
         assertTrue(viewModel.saveServerConfig(notificationCenter, DEFAULT_IP, DEFAULT_PORT));
     }
-
-
 
 }
