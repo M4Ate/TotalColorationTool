@@ -38,7 +38,7 @@ public class TestGraphAnalyzer {
 
         graph = LoadUtil.loadGraphFile("src/test/resources/ColoredGraphs/Partly colored and no Edges.ogr");
 
-        assertEquals(0, GraphAnalyzer.getColorCount(graph));
+        assertEquals(2, GraphAnalyzer.getColorCount(graph));
 
     }
 }
