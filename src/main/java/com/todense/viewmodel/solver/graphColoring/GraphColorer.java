@@ -63,12 +63,12 @@ public class GraphColorer {
         //color Graph
         HashMap<Integer, Color> colorMap;
         colorMap = ilp.getReverseColorMapping();
-        return minColorsColorer(graph, vertexVars, edgeVars, resultMap, colorMap);
+        return minColorsColorer(graph, vertexVars, edgeVars, resultMap, colorMap, backgroundColor);
     }
 
     private static Graph minColorsColorer(Graph graph, ArrayList<VertexColorVar> vertexVars,
                                           ArrayList<EdgeColorVar> edgeVars, HashMap<String, Integer> resultMap,
-                                          HashMap<Integer, Color> colorMap) {
+                                          HashMap<Integer, Color> colorMap, Color backgroundColor) {
         //configure ColorGenerator
         ColorGenerator cg = new ColorGenerator();
         //exclude some already used colors
@@ -77,7 +77,7 @@ public class GraphColorer {
         cg.addUsedColor(CompareLogic.GREY_COLOR);
         cg.addUsedColor(CompareLogic.ONLY_IN_ONE_GRAPH_COLOR);
         //exclude background color
-        cg.addUsedColor(Color.hsb(.0, .0, .13));
+        cg.addUsedColor(backgroundColor);
         for (Color c : colorMap.values()) {
             cg.addUsedColor(c);
         }
