@@ -50,25 +50,15 @@ public class SolverViewModel implements ViewModel {
 
     private static int openPort;
 
-    /**
-     * Constructor for the SolverViewModel.
-     */
-    public SolverViewModel() {
+    SolverViewModel() {
     }
 
-    /**
-     * Constructor for the SolverViewModel to allow setting custom NotificationCenter.
-     *
-     * @param notificationCenter - the notification center.
-     */
-    public SolverViewModel(NotificationCenter notificationCenter) {
-        this.notificationCenter = notificationCenter;
-    }
-
-    public SolverViewModel(NotificationCenter notificationCenter, GraphScope graphScope) {
+    SolverViewModel(GraphScope graphScope, BackgroundScope backgroundScope, NotificationCenter notificationCenter) {
         this.graphScope = graphScope;
+        this.backgroundScope = backgroundScope;
         this.notificationCenter = notificationCenter;
     }
+
 
     /**
      * This method is used to initialize the ILP-Solver ViewModel.
@@ -128,6 +118,16 @@ public class SolverViewModel implements ViewModel {
             notificationCenter.publish(MainViewModel.TASK_FINISHED, "Coloration stopped");
         }
     }
+
+    /**
+     * This method is used to check if the solver is currently running.
+     *
+     * @return true if the solver is running, false otherwise.
+     */
+    public boolean isRunning(){
+        return solverThread != null && solverThread.isAlive();
+    }
+
 
 
     private void calculateColoration(Boolean preferColor, Color preferredColor, Boolean similarColoring,

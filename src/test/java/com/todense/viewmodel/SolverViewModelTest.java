@@ -1,72 +1,145 @@
 package com.todense.viewmodel;
 
+import com.todense.TestUtil.TestBackgroundScopeDummy;
 import com.todense.TestUtil.TestGraphScopeDummy;
 import com.todense.TestUtil.TestNotificationCenterDummy;
+import de.saxsys.mvvmfx.ViewModel;
 import javafx.scene.paint.Color;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
+import javax.swing.text.View;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.ServerSocket;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import static org.junit.Assert.*;
 
 public class SolverViewModelTest {
+
 
     private static final String DEFAULT_IP = "127.0.0.1";
     private static final String DEFAULT_PORT = "1337";
 
     TestNotificationCenterDummy notificationCenter = new TestNotificationCenterDummy();
     TestGraphScopeDummy graphScope = new TestGraphScopeDummy();
+    TestBackgroundScopeDummy backgroundScope = new TestBackgroundScopeDummy();
+
+    SolverViewModel viewModel;
+
+    @Before
+    public void setUp() {
+        notificationCenter = new TestNotificationCenterDummy();
+        graphScope = new TestGraphScopeDummy();
+        backgroundScope = new TestBackgroundScopeDummy();
+        
+        viewModel = new SolverViewModel(graphScope, backgroundScope, notificationCenter);
+        viewModel.initialize();
+    }
 
 
     @Test
     public void defaultBehavior(){
-        SolverViewModel viewModel = new SolverViewModel(notificationCenter, graphScope);
+
+        SolverViewModel viewModel;
+        notificationCenter = new TestNotificationCenterDummy();
+        graphScope = new TestGraphScopeDummy();
+        backgroundScope = new TestBackgroundScopeDummy();
+
+        viewModel = new SolverViewModel(graphScope, backgroundScope, notificationCenter);
         viewModel.initialize();
+
+
+        viewModel.start(false, null, false, false, false, DEFAULT_IP, DEFAULT_PORT);
+        waitFor(viewModel);
+        assertNotNull(notificationCenter.getGraphToPublish());
+    }
+
+    @Test
+    public void stop(){
+
+
         viewModel.start(false, null, false, false, false, DEFAULT_IP, DEFAULT_PORT);
         viewModel.stop();
+
+        assertEquals("Coloration stopped", notificationCenter.getMessagesToPublish().get(3));
     }
+
+    @Test
+    public void useServer(){
+
+
+        int port = getRandomOpenPort();
+        try{
+            ProcessBuilder pb = new ProcessBuilder("java", "-jar", "ILP-Server.jar", "-s", "any", "-p", String.valueOf(port));
+            Process serverProcess = pb.start();
+
+        } catch (IOException e) {
+            fail("Server could not be started");
+        }
+
+
+        viewModel.start(false, null, false, false, true, DEFAULT_IP, String.valueOf(port));
+        waitFor(viewModel);
+        assertNotNull(notificationCenter.getGraphToPublish());
+    }
+
 
     @Test
     public void testMultipleThreads(){
-        SolverViewModel viewModel = new SolverViewModel(notificationCenter, graphScope);
-        viewModel.initialize();
+
+
         viewModel.start(false, null, false, false, false, DEFAULT_IP, DEFAULT_PORT);
         viewModel.start(false, null, false, false, false, DEFAULT_IP, DEFAULT_PORT);
 
+        waitFor(viewModel);
+        assertNotNull(notificationCenter.getGraphToPublish());
     }
+
 
     @Test
     public void testPreferColorConstraint(){
-        SolverViewModel viewModel = new SolverViewModel(notificationCenter, graphScope);
-        viewModel.initialize();
+
+
         viewModel.start(true, Color.rgb(230,150,80), false, false, false, DEFAULT_IP, DEFAULT_PORT);
-        viewModel.stop();
+        waitFor(viewModel);
+        assertNotNull(notificationCenter.getGraphToPublish());
     }
 
     @Test
     public void testSimilarColoringConstraint(){
-        SolverViewModel viewModel = new SolverViewModel(notificationCenter, graphScope);
-        viewModel.initialize();
+
+
         viewModel.start(false, null, true, false, false, DEFAULT_IP, DEFAULT_PORT);
-        viewModel.stop();
+        waitFor(viewModel);
+        assertNotNull(notificationCenter.getGraphToPublish());
     }
 
     @Test
     public void testCurrentColorsConstraint(){
-        SolverViewModel viewModel = new SolverViewModel(notificationCenter, graphScope);
-        viewModel.initialize();
+
+
         viewModel.start(false, null, false, true, false, DEFAULT_IP, DEFAULT_PORT);
-        viewModel.stop();
+        waitFor(viewModel);
+        assertNotNull(notificationCenter.getGraphToPublish());
     }
 
     @Test
     public void testPreferWithCurrentColors(){
-        SolverViewModel viewModel = new SolverViewModel(notificationCenter, graphScope);
-        viewModel.initialize();
+
+
         viewModel.start(true, Color.rgb(230,150,80), false, true, false, DEFAULT_IP, DEFAULT_PORT);
-        viewModel.stop();
+        waitFor(viewModel);
+        assertNotNull(notificationCenter.getGraphToPublish());
     }
 
     @Test
@@ -153,9 +226,9 @@ public class SolverViewModelTest {
             throw new RuntimeException(e);
         }
 
-        TestNotificationCenterDummy notificationCenter = new TestNotificationCenterDummy();
 
-        SolverViewModel viewModel = new SolverViewModel(notificationCenter);
+
+
 
         assertTrue(viewModel.saveServerConfig(DEFAULT_IP, DEFAULT_PORT));
     }
@@ -166,11 +239,32 @@ public class SolverViewModelTest {
         File readConfig = new File("ServerConfig.cfg");
         readConfig.delete();
 
-        TestNotificationCenterDummy notificationCenter = new TestNotificationCenterDummy();
 
-        SolverViewModel viewModel = new SolverViewModel(notificationCenter);
+
 
         assertTrue(viewModel.saveServerConfig(DEFAULT_IP, DEFAULT_PORT));
     }
+
+
+
+     private int getRandomOpenPort() {
+        try (ServerSocket socket = new ServerSocket(0)) {
+            return socket.getLocalPort();
+        } catch (IOException e) {
+            throw new RuntimeException("Unable to find an open port", e);
+        }
+    }
+
+    private void waitFor(SolverViewModel viewModel){
+        while (viewModel.isRunning()){
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                fail("Thread sleep interrupted");
+            }
+        }
+    }
+
+
 
 }
