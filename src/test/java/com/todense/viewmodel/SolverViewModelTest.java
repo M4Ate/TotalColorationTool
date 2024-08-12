@@ -2,6 +2,7 @@ package com.todense.viewmodel;
 
 import com.todense.TestUtil.TestGraphScopeDummy;
 import com.todense.TestUtil.TestNotificationCenterDummy;
+import javafx.scene.paint.Color;
 import org.junit.Test;
 
 import java.io.File;
@@ -27,8 +28,46 @@ public class SolverViewModelTest {
         viewModel.stop();
     }
 
+    @Test
+    public void testMultipleThreads(){
+        SolverViewModel viewModel = new SolverViewModel(notificationCenter, graphScope);
+        viewModel.initialize();
+        viewModel.start(false, null, false, false, false, DEFAULT_IP, DEFAULT_PORT);
+        viewModel.start(false, null, false, false, false, DEFAULT_IP, DEFAULT_PORT);
 
+    }
 
+    @Test
+    public void testPreferColorConstraint(){
+        SolverViewModel viewModel = new SolverViewModel(notificationCenter, graphScope);
+        viewModel.initialize();
+        viewModel.start(true, Color.rgb(230,150,80), false, false, false, DEFAULT_IP, DEFAULT_PORT);
+        viewModel.stop();
+    }
+
+    @Test
+    public void testSimilarColoringConstraint(){
+        SolverViewModel viewModel = new SolverViewModel(notificationCenter, graphScope);
+        viewModel.initialize();
+        viewModel.start(false, null, true, false, false, DEFAULT_IP, DEFAULT_PORT);
+        viewModel.stop();
+    }
+
+    @Test
+    public void testCurrentColorsConstraint(){
+        SolverViewModel viewModel = new SolverViewModel(notificationCenter, graphScope);
+        viewModel.initialize();
+        viewModel.start(false, null, false, true, false, DEFAULT_IP, DEFAULT_PORT);
+        viewModel.stop();
+    }
+
+    @Test
+    public void testPreferWithCurrentColors(){
+        SolverViewModel viewModel = new SolverViewModel(notificationCenter, graphScope);
+        viewModel.initialize();
+        viewModel.start(true, Color.rgb(230,150,80), false, true, false, DEFAULT_IP, DEFAULT_PORT);
+        viewModel.stop();
+    }
 
     @Test
     public void loadServerValuesNoFile(){
