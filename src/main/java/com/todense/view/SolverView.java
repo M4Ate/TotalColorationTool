@@ -114,7 +114,7 @@ public class SolverView implements FxmlView<SolverViewModel> {
     @FXML
     private void saveServer(){
 
-        boolean savedServer = viewModel.saveServerConfig(notificationCenter, serverIP.getText(), serverPort.getText());
+        boolean savedServer = viewModel.saveServerConfig(serverIP.getText(), serverPort.getText());
 
         System.out.println(savedServer);
     }

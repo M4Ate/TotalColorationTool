@@ -1,5 +1,6 @@
 package com.todense.viewmodel;
 
+import com.todense.TestUtil.TestGraphScopeDummy;
 import com.todense.TestUtil.TestNotificationCenterDummy;
 import org.junit.Test;
 
@@ -13,6 +14,20 @@ public class SolverViewModelTest {
 
     private static final String DEFAULT_IP = "127.0.0.1";
     private static final String DEFAULT_PORT = "1337";
+
+    TestNotificationCenterDummy notificationCenter = new TestNotificationCenterDummy();
+    TestGraphScopeDummy graphScope = new TestGraphScopeDummy();
+
+
+    @Test
+    public void defaultBehavior(){
+        SolverViewModel viewModel = new SolverViewModel(notificationCenter, graphScope);
+        viewModel.initialize();
+        viewModel.start(false, null, false, false, false, DEFAULT_IP, DEFAULT_PORT);
+        viewModel.stop();
+    }
+
+
 
 
     @Test
@@ -101,9 +116,9 @@ public class SolverViewModelTest {
 
         TestNotificationCenterDummy notificationCenter = new TestNotificationCenterDummy();
 
-        SolverViewModel viewModel = new SolverViewModel();
+        SolverViewModel viewModel = new SolverViewModel(notificationCenter);
 
-        assertTrue(viewModel.saveServerConfig(notificationCenter, DEFAULT_IP, DEFAULT_PORT));
+        assertTrue(viewModel.saveServerConfig(DEFAULT_IP, DEFAULT_PORT));
     }
 
     @Test
@@ -114,9 +129,9 @@ public class SolverViewModelTest {
 
         TestNotificationCenterDummy notificationCenter = new TestNotificationCenterDummy();
 
-        SolverViewModel viewModel = new SolverViewModel();
+        SolverViewModel viewModel = new SolverViewModel(notificationCenter);
 
-        assertTrue(viewModel.saveServerConfig(notificationCenter, DEFAULT_IP, DEFAULT_PORT));
+        assertTrue(viewModel.saveServerConfig(DEFAULT_IP, DEFAULT_PORT));
     }
 
 }

@@ -9,6 +9,7 @@ import com.todense.viewmodel.graph.GraphManager;
 import com.todense.viewmodel.scope.BackgroundScope;
 
 import java.io.*;
+import java.net.ServerSocket;
 import java.net.URI;
 import java.net.http.HttpClient;
 import com.todense.viewmodel.scope.GraphScope;
@@ -45,10 +46,51 @@ public class SolverViewModel implements ViewModel {
     @Inject
     NotificationCenter notificationCenter;
 
-    private Thread solverThread = new Thread();
+    private Thread solverThread;
 
+    private static int openPort;
+
+    /**
+     * Constructor for the SolverViewModel.
+     */
+    public SolverViewModel() {
+    }
+
+    /**
+     * Constructor for the SolverViewModel to allow setting custom NotificationCenter.
+     *
+     * @param notificationCenter - the notification center.
+     */
+    public SolverViewModel(NotificationCenter notificationCenter) {
+        this.notificationCenter = notificationCenter;
+    }
+
+    public SolverViewModel(NotificationCenter notificationCenter, GraphScope graphScope) {
+        this.graphScope = graphScope;
+        this.notificationCenter = notificationCenter;
+    }
+
+    /**
+     * This method is used to initialize the ILP-Solver ViewModel.
+     */
     public void initialize() {
         graphManager = graphScope.getGraphManager();
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            if (solverThread != null && solverThread.isAlive()) {
+                solverThread.interrupt();
+            }
+        }));
+
+        openPort = getRandomOpenPort();
+
+        try{
+            ProcessBuilder pb = new ProcessBuilder("java", "-jar", "ILP-Server.jar", "-s", "any", "-p", String.valueOf(openPort));
+            Process serverProcess = pb.start();
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
 
@@ -70,7 +112,7 @@ public class SolverViewModel implements ViewModel {
     public void start(Boolean preferColor, Color preferredColor, Boolean similarColoring,
                       Boolean currentColors, Boolean useServer, String IP, String Port){
 
-        if(!solverThread.isAlive()){
+        if(solverThread == null || !solverThread.isAlive()){
             notificationCenter.publish(MainViewModel.TASK_STARTED, "Calculating Coloration");
             solverThread = new Thread(() -> calculateColoration(preferColor, preferredColor, similarColoring, currentColors, useServer, IP, Port));
             solverThread.start();
@@ -81,7 +123,7 @@ public class SolverViewModel implements ViewModel {
      * This method is used to stop the current coloration.
      */
     public void stop(){
-        if(solverThread.isAlive()){
+        if(solverThread != null && solverThread.isAlive()){
             solverThread.interrupt();
             notificationCenter.publish(MainViewModel.TASK_FINISHED, "Coloration stopped");
         }
@@ -92,7 +134,6 @@ public class SolverViewModel implements ViewModel {
                       Boolean currentColors, Boolean useServer, String IP, String Port){
 
         ILPType type = ILPType.MINCOLORS;
-        Process startServer = null;
 
         //Decide on the type of ILP-Problem we have.
         if(similarColoring){
@@ -122,29 +163,18 @@ public class SolverViewModel implements ViewModel {
         //Server request on other Thread or async
         String responseString;
 
-        if(!useServer){
-            try{
 
-                startServer = Runtime.getRuntime().exec("java -jar ILP-Server.jar");
-
-                System.out.println("Started the server on localhost.");
-
-
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-            }
-        }
 
         try {
             if (useServer) responseString = requestServer(IP, Port, jsonString);
-            else responseString = requestServer(DEFAULT_IP, DEFAULT_PORT, jsonString);
+            else responseString = requestServer(DEFAULT_IP, String.valueOf(openPort), jsonString);
 
             JsonObject responseObject = JsonParser.parseString(responseString).getAsJsonObject();
             boolean error = responseObject.get("error").getAsBoolean();
 
             if (error) {
                 notificationCenter.publish(MainViewModel.TASK_FINISHED,
-                        "Server solver returned an error, error message: "
+                        "Server returned an error: "
                                 + responseObject.get("errorMessage").getAsString());
                 System.out.println(responseObject.get("errorMessage").getAsString());
                 return;
@@ -155,6 +185,7 @@ public class SolverViewModel implements ViewModel {
                     "Invalid IP or Port. Please check the server settings. Error: "
                             + e.getMessage());
             System.out.println(e.getMessage());
+            
             return;
         } catch (IOException e) {
             if (e.getMessage() == null) {
@@ -168,8 +199,6 @@ public class SolverViewModel implements ViewModel {
             return;
         }
 
-        if(!useServer && startServer != null){startServer.destroyForcibly();}
-
         Graph newGraph = GraphColorer.getColoredGraph(currentGraph, problem, responseString, getBackgroundColor()); //Graph, ILP Problem und Type
 
         //Set the now colored graph as the new graph.
@@ -179,7 +208,9 @@ public class SolverViewModel implements ViewModel {
         } catch (RuntimeException e){
             notificationCenter.publish(MainViewModel.TASK_FINISHED, e.getMessage());
         }
+
     }
+
 
     private Color getBackgroundColor(){
         return backgroundScope.getBackgroundColor();
@@ -227,7 +258,7 @@ public class SolverViewModel implements ViewModel {
      * @param Port - the port on which the server is listening.
      * @return the boolean value if the save was successful
      */
-    public boolean saveServerConfig(NotificationCenter notificationCenter, String IP, String Port) {
+    public boolean saveServerConfig(String IP, String Port) {
         boolean saveSuccess = true;
 
         try {
@@ -258,7 +289,7 @@ public class SolverViewModel implements ViewModel {
     }
 
     /**
-     * This method returns the request string for the http request to be send to the server.
+     * Method to send a request to the server.
      *
      * @param IP - the IP of the server.
      * @param Port - the Port of the server.
@@ -277,4 +308,12 @@ public class SolverViewModel implements ViewModel {
         return client.send(request, HttpResponse.BodyHandlers.ofString()).body();
     }
 
+
+    private static int getRandomOpenPort() {
+        try (ServerSocket socket = new ServerSocket(0)) {
+            return socket.getLocalPort();
+        } catch (IOException e) {
+            throw new RuntimeException("Unable to find an open port", e);
+        }
+    }
 }
