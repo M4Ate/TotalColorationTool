@@ -39,14 +39,5 @@ public class TestMaxDegreeGenerator {
         assertEquals(1, values.size());
     }
 
-    /* TODO evaluate
-    private List<Node> getTestNodes(){
-        List<Node> nodes = new ArrayList<>();
-        nodes.add(new TestNodes(new Point2D(1, 2) ,1, 1));
-        nodes.add(new TestNodes(new Point2D(1, 3) ,2, 2));
-        return nodes;
-    }
-    */
-
 }
 

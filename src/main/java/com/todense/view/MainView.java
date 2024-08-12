@@ -133,11 +133,8 @@ public class MainView implements FxmlView<MainViewModel> {
                 true, operationsView);
         setUpSideMenuButton(propertiesMenuButton, "Graph Properties",
                 true, propertiesView);
-
-        //TODO this is the new Button
-        setUpSideMenuButton(solveGraphMenuButton, "Solve Graph",
+        setUpSideMenuButton(solveGraphMenuButton, "Color Graph",
                 true, solverView);
-
         setUpSideMenuButton(generateGraphMenuButton, "Generate Graph",
                 true, randomGeneratorView, presetGeneratorView);
 
