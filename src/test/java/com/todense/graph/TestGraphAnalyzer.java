@@ -32,7 +32,7 @@ public class TestGraphAnalyzer {
 
         assertEquals(0, GraphAnalyzer.getColorCount(graph));
 
-        graph = LoadUtil.loadGraphFile("src/test/resources/ColoredGraphs/Uncolored and not Edges.ogr");
+        graph = LoadUtil.loadGraphFile("src/test/resources/ColoredGraphs/Uncolored and no Edges.ogr");
 
         assertEquals(0, GraphAnalyzer.getColorCount(graph));
 
