@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.ObjectInputFilter;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -23,7 +24,14 @@ class ILPGeneratorTest {
         public boolean tryKeepCurrentColors;
         public boolean forceCurrentColors;
         public String testGraph;
-        public String expectedResult;
+        public Result expectedResult;
+    }
+
+    private class Result {
+        public List<String> variables;
+        public List<String> constraints;
+        public String optimizationFunction;
+        public boolean minimize;
     }
 
     @Test
@@ -60,11 +68,28 @@ class ILPGeneratorTest {
                     Graph testGraph = graphReader.readGraph(graphFile);
                     ILPProblem ilpProblem = ILPGenerator.generateILP(testGraph, type);
                     String result = ilpProblem.getILPAsJsonString();
-                    assertEquals(testCase.expectedResult, result, "failed at: " + file.getName());
+                    Gson gson2 = new Gson();
+                    Result actaulResult = gson2.fromJson(result, Result.class);
+                    isResultExpected(testCase.expectedResult, actaulResult, file.getName());
                 } catch (FileNotFoundException e) {
                     throw new RuntimeException(e);
                 }
             }
+        }
+    }
+
+    private void isResultExpected(Result expected, Result actual, String filename) {
+        assertEquals(expected.minimize, actual.minimize, "failed at: " + filename);
+        assertEquals(expected.optimizationFunction, actual.optimizationFunction, "failed at: " + filename);
+        //check constraints
+        assertEquals(expected.constraints.size(), actual.constraints.size(), "failed at: " + filename);
+        for (String e : expected.constraints) {
+            assertTrue(actual.constraints.contains(e), "failed at: " + filename);
+        }
+        //check variables
+        assertEquals(expected.variables.size(), actual.variables.size(), "failed at: " + filename);
+        for (String e : expected.variables) {
+            assertTrue(actual.variables.contains(e), "failed at: " + filename);
         }
     }
 
