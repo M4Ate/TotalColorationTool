@@ -67,7 +67,7 @@
       <VBox.margin>
          <Insets bottom="5.0" top="5.0" />
       </VBox.margin>
-      <Button mnemonicParsing="false" onAction="#ilpAction" prefHeight="25.0" prefWidth="104.0" text="Solve">
+      <Button mnemonicParsing="false" onAction="#ilpAction" prefHeight="25.0" prefWidth="104.0" text="Color">
          <graphic>
             <FontIcon iconColor="#08ae34" iconLiteral="fas-play" styleClass="start-icon" />
          </graphic>
