@@ -3,6 +3,7 @@ package com.todense.viewmodel;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.inject.Inject;
+import com.todense.application.StarterInvoker;
 import com.todense.model.graph.Graph;
 import com.todense.util.GraphCopy;
 import com.todense.viewmodel.graph.GraphManager;
@@ -11,7 +12,10 @@ import com.todense.viewmodel.scope.BackgroundScope;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.http.HttpClient;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import com.todense.viewmodel.scope.GraphScope;
 import com.todense.viewmodel.solver.graphColoring.GraphColorer;
 import com.todense.viewmodel.solver.ilpGeneration.ILPGenerator;
@@ -25,6 +29,7 @@ import javafx.scene.paint.Color;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.Scanner;
+import java.util.Objects;
 
 /**
  * ViewModel for the ILP Solver.
@@ -83,6 +88,13 @@ public class SolverViewModel implements ViewModel {
         }));
 
         openPort = getRandomOpenPort();
+
+        File serverJar = new File("ILP-Server.jar");
+        if (!serverJar.exists()) {
+            if (!extractServer()) {
+                notificationCenter.publish(MainViewModel.TASK_FINISHED, "Couldn't extract server.");
+            }
+        }
 
         try{
             ProcessBuilder pb = new ProcessBuilder("java", "-jar", "ILP-Server.jar", "-s", "any", "-p", String.valueOf(openPort));
@@ -326,6 +338,33 @@ public class SolverViewModel implements ViewModel {
             return socket.getLocalPort();
         } catch (IOException e) {
             throw new RuntimeException("Unable to find an open port", e);
+        }
+    }
+
+    private boolean extractServer() {
+        String innerJarName = "ILP-Server.jar";
+
+        try {
+            // Get the directory where the outer JAR is located
+            File outerJarDir = new File(
+                StarterInvoker.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath()).getParentFile();
+
+            // Create a file object for the inner JAR
+            File innerJarFile = new File(outerJarDir, innerJarName);
+
+            // Get the resource stream of the inner JAR
+            try (InputStream is = StarterInvoker.class.getResourceAsStream("/" + innerJarName)) {
+                Objects.requireNonNull(is, "Inner JAR not found in resources.");
+
+                // Copy the inner JAR resource to the target file
+                Files.copy(is, innerJarFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            }
+
+            System.out.println("Extracted " + innerJarName + " to " + innerJarFile.getAbsolutePath());
+            return true;
+
+        } catch (URISyntaxException | IOException e) {
+            return false;
         }
     }
 }
