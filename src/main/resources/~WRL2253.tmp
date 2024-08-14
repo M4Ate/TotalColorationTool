@@ -1,0 +1,49 @@
+OmniGraph
+
+1. Basic mouse controls
+
+- Add node: left click on background
+- Add edge: right click on first node and drag mouse to second node
+- Remove node/edge: middle click on node/edge or right click on node -> delete
+- Open node/edge context menu: right click on node/edge
+- Select nodes: right click on background and drag mouse to create selection area
+- Select/deselect node/edge: CTRL + left click on node/edge
+- Drag one node or all selected nodes: left click on node + drag mouse
+- Zoom in\out: mouse scroll
+- Move camera: left mouse click on background + drag mouse
+
+2. Keyboard shortcuts
+
+Ctrl+S 		    - Save Graph As...
+Ctrl+O 		    - Open Graph...
+Ctrl+Del  	    - Delete graph
+Ctrl+R  	    - Reset graph
+Ctrl+J 		    - Adjust camera to graph
+
+Ctrl+C		    - Copy selected subgraph
+Ctrl+V+LMB	    - Paste copied subgraph on clicked position
+
+Ctrl+Q 		    - Generate random graph
+Ctrl+E 		    - Create preset
+Ctrl+L 		    - Start layout algorithm
+Ctrl+Shift+L    - Toggle continuous layout
+Ctrl+F		    - Toggle erase mode
+
+Ctrl+F11	    - Toggle fullscreen
+
+Ctrl+Space 	    - Toggle Pause
+Ctrl+Right	    - Take the next step of the algorithm (when paused)
+Ctrl+Backspace	- Stop current algorithm
+
+
+3. Algorithms
+
+Default start and goal nodes are the first and the last node of a graph. Start and goal nodes can be set in node context menu.
+
+There are two weight function options for algorithms with weighted edges:
+a) length - weight of an edge is set to its length (used when edge weight option in graph appearance menu is set to 'None' or 'Distance')
+b) custom - weight of an edge is set to its custom weight specified by user (used when edge weight option in graph appearance menu is set to 'Custom')
+
+
+
+

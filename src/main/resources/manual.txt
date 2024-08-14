@@ -1,4 +1,10 @@
-OmniGraph
+Total-Coloration-Tool
+
+Hello this is the Total-Coloration-Tool user guide.
+In the following, this document will explain to you, how to use the core features of the Tool and how are some functionalities implemented.
+This should prevent unexpected results and an irritating user experience.
+
+At first these are the basic controls to build or load a Graph and customize it as you wish.
 
 1. Basic mouse controls
 
@@ -6,13 +12,31 @@ OmniGraph
 - Add edge: right click on first node and drag mouse to second node
 - Remove node/edge: middle click on node/edge or right click on node -> delete
 - Open node/edge context menu: right click on node/edge
+- Color/Lable: in the context menu of a node/edge you can choose a color or a Lable(only nodes) for each node/edge
 - Select nodes: right click on background and drag mouse to create selection area
 - Select/deselect node/edge: CTRL + left click on node/edge
 - Drag one node or all selected nodes: left click on node + drag mouse
 - Zoom in\out: mouse scroll
 - Move camera: left mouse click on background + drag mouse
 
-2. Keyboard shortcuts
+2. Load and save graphs
+
+- Open graph: open the File menu in the upper left corner and klick on “Open Graph”. Then select the graph file in your file system and klick on open.
+
+- Save graph: open the File menu in the upper left corner and klick on Save Graph As. Select your preferred format, enter a name, then choose a location to save the graph into.
+
+3. Interesting features:
+
+- Appearance: the first icon in the left bar is a menu regarding the appearance of the graphs. Here you can change the default colors of nods/edges and the background color. Furthermore, you can turn on some more features like displaying the labels on nodes.
+
+- Generate Graph: the second icon in the left bar is a menu that can help you generating graphs without building them by hand. There are multiple generators available which generate graphs with matching properties. Some of the generators require extra input which can be set in the menu as well.
+
+- Color Graph: the third icon in the left bar is a menu to color a Graph. The coloration is calculated by an ILP-Solver that can be run on an external server or local. Be aware that you need to install the solver on your device to use it, further guidance is therefor provided in the README file. There are multiple ways to color a graph. 
+
+- Graph Properties: the last icon in the left bar leads to a menu that can display multiple properties of the loaded graph. Klick on the Calculate button an the properties will be displayed.
+- Compare Graph: to see differences between tow graphs you can navigate to the Compare to button on the top. Select a Graph from the file system and the tool will set all equally colored and placed nodes/edges to a grey color. Only the differences will be displayed further. Please be aware that this feature uses the node ids (internally supervised while adding new nodes and edges) to compare graphs. This leads to the problem that nodes/edges that are isomorph will not be seen as equal.
+
+4. Keyboard shortcuts
 
 Ctrl+S 		    - Save Graph As...
 Ctrl+O 		    - Open Graph...
@@ -34,16 +58,5 @@ Ctrl+F11	    - Toggle fullscreen
 Ctrl+Space 	    - Toggle Pause
 Ctrl+Right	    - Take the next step of the algorithm (when paused)
 Ctrl+Backspace	- Stop current algorithm
-
-
-3. Algorithms
-
-Default start and goal nodes are the first and the last node of a graph. Start and goal nodes can be set in node context menu.
-
-There are two weight function options for algorithms with weighted edges:
-a) length - weight of an edge is set to its length (used when edge weight option in graph appearance menu is set to 'None' or 'Distance')
-b) custom - weight of an edge is set to its custom weight specified by user (used when edge weight option in graph appearance menu is set to 'Custom')
-
-
 
 
