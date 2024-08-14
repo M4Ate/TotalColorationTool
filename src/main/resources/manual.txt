@@ -31,7 +31,10 @@ At first these are the basic controls to build or load a Graph and customize it 
 
 - Generate Graph: the second icon in the left bar is a menu that can help you generating graphs without building them by hand. There are multiple generators available which generate graphs with matching properties. Some of the generators require extra input which can be set in the menu as well.
 
-- Color Graph: the third icon in the left bar is a menu to color a Graph. The coloration is calculated by an ILP-Solver that can be run on an external server or local. Be aware that you need to install the solver on your device to use it, further guidance is therefor provided in the README file. There are multiple ways to color a graph. 
+- Color Graph: the third icon in the left bar is a menu to color a Graph. The coloration is calculated by an ILP-Solver that can be run on an external server or local. Be aware that you need to install the solver on your device to use it, further guidance is therefor provided in the README file. There are multiple ways to color a graph.
+	-Prefer Color: while coloring the graph with the minimal possible colors, the tool will try to maximize the use of the specified Color. (This can be used in combination with "Force current coloring")
+	-Try keep current coloring: the tool will try to use as many predefined, non-default colors as possible while still using the minimal possible amount of different colors. (This can't be combined with the other two modes)
+	-Force current coloring: the tool will definitely use all predefined, non-default colors, however this may result in the graph not being colorable (This can be used in combination with "Prefer Color")
 
 - Graph Properties: the last icon in the left bar leads to a menu that can display multiple properties of the loaded graph. Klick on the Calculate button an the properties will be displayed.
 
