@@ -21,7 +21,7 @@ At first these are the basic controls to build or load a Graph and customize it 
 
 2. Load and save graphs
 
-- Open graph: open the File menu in the upper left corner and klick on “Open Graph”. Then select the graph file in your file system and klick on open.
+- Open graph: open the File menu in the upper left corner and klick on Open Graph. Then select the graph file in your file system and klick on open.
 
 - Save graph: open the File menu in the upper left corner and klick on Save Graph As. Select your preferred format, enter a name, then choose a location to save the graph into.
 
@@ -34,6 +34,7 @@ At first these are the basic controls to build or load a Graph and customize it 
 - Color Graph: the third icon in the left bar is a menu to color a Graph. The coloration is calculated by an ILP-Solver that can be run on an external server or local. Be aware that you need to install the solver on your device to use it, further guidance is therefor provided in the README file. There are multiple ways to color a graph. 
 
 - Graph Properties: the last icon in the left bar leads to a menu that can display multiple properties of the loaded graph. Klick on the Calculate button an the properties will be displayed.
+
 - Compare Graph: to see differences between tow graphs you can navigate to the Compare to button on the top. Select a Graph from the file system and the tool will set all equally colored and placed nodes/edges to a grey color. Only the differences will be displayed further. Please be aware that this feature uses the node ids (internally supervised while adding new nodes and edges) to compare graphs. This leads to the problem that nodes/edges that are isomorph will not be seen as equal.
 
 4. Keyboard shortcuts
