@@ -21,8 +21,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.ServerSocket;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 
 import static org.junit.Assert.*;
 
@@ -41,27 +41,11 @@ public class SolverViewModelTest {
 
 
 
-    @Before
-    public void setUp() {
-        /*
-        notificationCenter = new TestNotificationCenterDummy();
-        graphScope = new TestGraphScopeDummy();
-        backgroundScope = new TestBackgroundScopeDummy();
-        
-        viewModel = new SolverViewModel(graphScope, backgroundScope, notificationCenter);
-        viewModel.initialize();
-        */
-    }
-
-    @After
-    public void tearDown() {
-        //viewModel.stop();
-        //notificationCenter.getGraphToPublish(null);
-    }
-
 
     @Test
     public void defaultBehavior(){
+
+        extractServerJar();
 
         viewModel.start(false, null, false, false, false, DEFAULT_IP, DEFAULT_PORT);
         waitFor(viewModel);
@@ -293,6 +277,26 @@ public class SolverViewModelTest {
 
 
         assertTrue(viewModel.saveServerConfig(DEFAULT_IP, DEFAULT_PORT));
+    }
+
+    public void extractServerJar() {
+        File jar = new File("ILP-Server.jar");
+        if (jar.exists()) {
+            assertTrue(jar.delete());
+        }
+
+        viewModel.initialize();
+
+        File jarOut = new File("target/ILP-Server.jar");
+        assertTrue(jarOut.exists());
+
+        // Move jarOut to the location of jar
+        File newJarLocation = new File(jar.getParent(), jarOut.getName());
+        try {
+            Files.move(jarOut.toPath(), newJarLocation.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            fail("Failed to move the extracted JAR to the desired location");
+        }
     }
 
 

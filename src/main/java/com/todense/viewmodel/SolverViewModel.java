@@ -82,7 +82,7 @@ public class SolverViewModel implements ViewModel {
     public void initialize() {
         graphManager = graphScope.getGraphManager();
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            if (solverThread != null && solverThread.isAlive()) {
+            if (solverThread != null) {
                 solverThread.interrupt();
             }
         }));
@@ -96,13 +96,22 @@ public class SolverViewModel implements ViewModel {
             }
         }
 
+
         try{
+
             ProcessBuilder pb = new ProcessBuilder("java", "-jar", "ILP-Server.jar", "-s", "any", "-p", String.valueOf(openPort));
             Process serverProcess = pb.start();
+
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                if (serverProcess.isAlive()) {
+                    serverProcess.destroy();
+                }
+            }));
 
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+
 
     }
 
