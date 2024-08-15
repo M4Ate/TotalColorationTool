@@ -9,7 +9,7 @@ To run the provided JAR files, you need to have Java version 17 installed. Addit
 ### Installing HiGHS (recommended)
 
 - Installation instructions for HiGHS can be found [here](https://ergo-code.github.io/HiGHS/dev/interfaces/cpp/).
-- HiGHS can only be built from source, so you will need CMake as well as a C-Compiler like MSVC.
+- HiGHS can only be built from source, so you will need CMake as well as a C-Compiler like MSVC (on Windows).
 - After installation, the `highs` executable must be added to your PATH. See instructions [here](https://helpdeskgeek.com/windows-10/add-windows-path-environment-variable/).
 
 ### Installing GLPK
