@@ -33,8 +33,6 @@ public class GraphColorer {
      */
     public static Graph getColoredGraph(Graph graph, ILPProblem ilp, String jsonResponse, Color backgroundColor) {
 
-        System.out.println(backgroundColor);
-
         // unpack jsonResponse
         JsonObject responseObject = JsonParser.parseString(jsonResponse).getAsJsonObject();
         boolean error = responseObject.get("error").getAsBoolean();
