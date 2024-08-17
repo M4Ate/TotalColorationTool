@@ -25,3 +25,4 @@ out/
 *.iws
 options
 HiGHS.log
+ServerConfig.cfg
