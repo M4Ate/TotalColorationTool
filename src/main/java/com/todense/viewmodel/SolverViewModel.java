@@ -244,7 +244,6 @@ public class SolverViewModel implements ViewModel {
 
     }
 
-
     private Color getBackgroundColor(){
         return backgroundScope.getBackgroundColor();
     }

@@ -58,6 +58,11 @@ public class EdgeList extends ArrayList<Edge> {
         return n.getNeighbours().contains(m);
     }
 
+    /**
+     * This method is a getter, which returns the HashMap that stores the edges
+     *
+     * @return the current HashMap (the original Object) that contains the edges
+     */
     public HashMap<String, Edge> getEdgeMap() {
         return edgeMap;
     }
