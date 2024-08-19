@@ -42,25 +42,17 @@ At first these are the basic controls to build or load a Graph and customize it 
 
 4. Keyboard shortcuts
 
-Ctrl+S 		    - Save Graph As...
-Ctrl+O 		    - Open Graph...
-Ctrl+Del  	    - Delete graph
-Ctrl+R  	    - Reset graph
-Ctrl+J 		    - Adjust camera to graph
+Ctrl+S		- Save Graph As...
+Ctrl+O		- Open Graph...
+Ctrl+Del		- Delete graph
+Ctrl+R		- Reset graph
+Ctrl+J		- Adjust camera to graph
 
-Ctrl+C		    - Copy selected subgraph
-Ctrl+V+LMB	    - Paste copied subgraph on clicked position
+Ctrl+C		- Copy selected subgraph
+Ctrl+V+LMB		- Paste copied subgraph on clicked position
 
-Ctrl+Q 		    - Generate random graph
-Ctrl+E 		    - Create preset
-Ctrl+L 		    - Start layout algorithm
-Ctrl+Shift+L    - Toggle continuous layout
-Ctrl+F		    - Toggle erase mode
+Ctrl+Q		- Generate random graph
+Ctrl+E		- Create preset
+Ctrl+F		- Toggle erase mode
 
-Ctrl+F11	    - Toggle fullscreen
-
-Ctrl+Space 	    - Toggle Pause
-Ctrl+Right	    - Take the next step of the algorithm (when paused)
-Ctrl+Backspace	- Stop current algorithm
-
-
+Ctrl+F11		- Toggle fullscreen
