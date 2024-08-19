@@ -191,8 +191,6 @@ public class SolverViewModel implements ViewModel {
         }
         String jsonString = problem.getILPAsJsonString();
 
-        System.out.println(jsonString);
-
         //Server request on other Thread or async
         String responseString;
 
