@@ -56,3 +56,10 @@ Ctrl+E		- Create preset
 Ctrl+F		- Toggle erase mode
 
 Ctrl+F11		- Toggle fullscreen
+
+Pleas Note:
+    The functionality of the Pin, Start node, Goal node and Rotation are disabled.
+    However, they are visible in order to keep the necessary changes,
+    for a new OmniGraph version,down to a minimum.
+    Furthermore, this way the reintegration from deleted functions,
+    in case a user wants to, is way less complicated.
